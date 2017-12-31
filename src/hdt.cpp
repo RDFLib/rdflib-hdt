@@ -1,5 +1,7 @@
 #include <pybind11/pybind11.h>
 
+#include <hdt_document.hpp>
+
 namespace py = pybind11;
 
 struct Pet {
@@ -18,6 +20,9 @@ PYBIND11_MODULE(hdt, m) {
     m.doc() = "pybind11 example plugin"; // optional module docstring
 
     m.def("add", &add, "A function which adds two numbers");
+
+    py::class_<HDTDocument>(m, "HDTDocument")
+      .def(py::init(&HDTDocument::create));
 
     py::class_<Pet>(m, "Pet")
         .def(py::init<const std::string &>())

@@ -1,0 +1,16 @@
+language: python
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+install:
+  - if [ $TRAVIS_OS_NAME == linux ]; then
+      export CXX=g++-4.8;
+    fi
+  - git submodule update --init --recursive
+  - pip install -r requirements.txt
+  - python setup.py install
+script:
+  - python -m unittest discover -p "*_test.py"

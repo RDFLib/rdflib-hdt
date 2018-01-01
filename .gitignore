@@ -137,3 +137,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# HDT
+*.hdt.index.v*

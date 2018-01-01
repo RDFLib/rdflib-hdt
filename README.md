@@ -4,7 +4,7 @@ Read and query HDT document with ease in Python
 # Installation
 
 ```
-git clone https://github.com/Callidon/pyHDT
+git clone --recursive https://github.com/Callidon/pyHDT
 cd pyHDT/
 pip install -r requirements.txt
 python setup.py install

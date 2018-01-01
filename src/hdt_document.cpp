@@ -49,22 +49,24 @@ std::string HDTDocument::python_repr() {
  */
 search_results HDTDocument::search(std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset) {
   std::list<triple> results;
+  bool noLimit = limit == 0;
   // Search for triples
   IteratorTripleString *it = hdt->search(subject.c_str(), predicate.c_str(), object.c_str());
 
-  // Compute estimated cardinality
   size_t cardinality = it->estimatedNumResults();
 
+  // apply offset
+  if (offset > 0) {
+    it->skip(offset);
+  }
+
   // Gather results
-  // TODO implement limit & offset
-  while(it->hasNext()) {
+  while(it->hasNext() && (noLimit || limit > results.size())) {
     TripleString *ts = it->next();
     triple t = std::make_tuple(ts->getSubject(), ts->getPredicate(), ts->getObject());
     results.push_back(t);
   }
 
-  // Clean resources
   delete it;
-
   return std::make_tuple(results, cardinality);
 }

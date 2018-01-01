@@ -10,10 +10,28 @@ class TestHDTDocument(unittest.TestCase):
         document = HDTDocument("tests/test.hdt")
         (triples, cardinality) = document.search_triples("", "", "")
         self.assertEqual(cardinality, 132)
-        nbResults = 0
+        self.assertEqual(len(triples), cardinality)
         for subj, pred, obj in triples:
             self.assertNotEqual(subj, None)
             self.assertNotEqual(pred, None)
             self.assertNotEqual(obj, None)
-            nbResults += 1
-        self.assertEqual(nbResults, cardinality)
+
+    def test_read_document_limit(self):
+        document = HDTDocument("tests/test.hdt")
+        (triples, cardinality) = document.search_triples("", "", "", limit=10)
+        self.assertEqual(cardinality, 132)
+        self.assertEqual(len(triples), 10)
+        for subj, pred, obj in triples:
+            self.assertNotEqual(subj, None)
+            self.assertNotEqual(pred, None)
+            self.assertNotEqual(obj, None)
+
+    def test_read_document_offset(self):
+        document = HDTDocument("tests/test.hdt")
+        (triples, cardinality) = document.search_triples("", "", "", offset=10)
+        self.assertEqual(cardinality, 132)
+        self.assertEqual(len(triples), cardinality - 10)
+        for subj, pred, obj in triples:
+            self.assertNotEqual(subj, None)
+            self.assertNotEqual(pred, None)
+            self.assertNotEqual(obj, None)

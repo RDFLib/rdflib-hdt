@@ -8,6 +8,12 @@ class TestHDTDocument(unittest.TestCase):
 
     def test_read_document(self):
         document = HDTDocument("tests/test.hdt")
-        for triple, cardinality, exactCount in document.search_triples(None, None, None, limit=-1, offset=0):
-            print("triple: %s" % str(triple))
-            print("cardinality: %b (exact count: %b)" % (cardinality, triple))
+        (triples, cardinality) = document.search_triples("", "", "")
+        self.assertEqual(cardinality, 132)
+        nbResults = 0
+        for subj, pred, obj in triples:
+            self.assertNotEqual(subj, None)
+            self.assertNotEqual(pred, None)
+            self.assertNotEqual(obj, None)
+            nbResults += 1
+        self.assertEqual(nbResults, cardinality)

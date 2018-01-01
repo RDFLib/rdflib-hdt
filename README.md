@@ -1,4 +1,5 @@
-# pyHDT
+# pyHDT [![Build Status](https://travis-ci.org/Callidon/pyHDT.svg?branch=master)](https://travis-ci.org/Callidon/pyHDT)
+
 Read and query HDT document with ease in Python
 
 # Requirements

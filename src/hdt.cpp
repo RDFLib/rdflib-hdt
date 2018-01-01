@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
-#include <hdt_document.hpp>
+#include "hdt_document.hpp"
 
 namespace py = pybind11;
 
@@ -17,21 +18,14 @@ int add(int i, int j) {
 }
 
 PYBIND11_MODULE(hdt, m) {
-    m.doc() = "pybind11 example plugin"; // optional module docstring
+    m.doc() = "pyHDT module enables to load and query HDT files with ease";
 
-    m.def("add", &add, "A function which adds two numbers");
-
-    py::class_<HDTDocument>(m, "HDTDocument")
-      .def(py::init(&HDTDocument::create));
-
-    py::class_<Pet>(m, "Pet")
-        .def(py::init<const std::string &>())
-        .def("setName", &Pet::setName)
-        .def("getName", &Pet::getName)
-        .def("__repr__",
-        [](const Pet &a) {
-            return "<example.Pet named '" + a.name + "'>";
-        }
-    );
+    py::class_<HDTDocument>(m, "HDTDocument", "An HDTDocument enables to load an query and HDT file with ease. Indexes are automatically generated if missing.")
+      .def(py::init(&HDTDocument::create))
+      .def("get_file_path", &HDTDocument::getFilePath, "Get the path to the HDT file currently loaded")
+      .def("search_triples", &HDTDocument::search,
+          "Search for RDF triples matching the triple pattern { subject predicate object }, with an optional limit and offset.\nUse empty strings (\"\") to indicate variables.",
+          py::arg("subject"), py::arg("predicate"), py::arg("object"), py::arg("limit") = 0, py::arg("offset") = 0)
+      .def("__repr__", &HDTDocument::python_repr);
 
 }

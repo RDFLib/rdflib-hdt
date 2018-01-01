@@ -43,6 +43,36 @@ public:
   std::string python_repr();
 
   /*!
+   * Get the total number of triples in the HDT document
+   * @return [description]
+   */
+  unsigned int getNbTriples();
+
+  /*!
+   * Get the number of subjects in the HDT document
+   * @return [description]
+   */
+  unsigned int getNbSubjects();
+
+  /*!
+   * Get the number of predicates in the HDT document
+   * @return [description]
+   */
+  unsigned int getNbPredicates();
+
+  /*!
+   * Get the number of objects in the HDT document
+   * @return [description]
+   */
+  unsigned int getNbObjects();
+
+  /*!
+   * Get the number of shared subjects-objects in the HDT document
+   * @return [description]
+   */
+  unsigned int getNbShared();
+
+  /*!
    * Static factory method used to create a new HDT Document
    * @param  file
    */

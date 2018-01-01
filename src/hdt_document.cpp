@@ -70,3 +70,43 @@ search_results HDTDocument::search(std::string subject, std::string predicate, s
   delete it;
   return std::make_tuple(results, cardinality);
 }
+
+/*!
+ * Get the total number of triples in the HDT document
+ * @return [description]
+ */
+unsigned int HDTDocument::getNbTriples() {
+  return hdt->getTriples()->getNumberOfElements();
+}
+
+/*!
+ * Get the number of subjects in the HDT document
+ * @return [description]
+ */
+unsigned int HDTDocument::getNbSubjects() {
+  return hdt->getDictionary()->getNsubjects();
+}
+
+/*!
+ * Get the number of predicates in the HDT document
+ * @return [description]
+ */
+unsigned int HDTDocument::getNbPredicates() {
+  return hdt->getDictionary()->getNpredicates();
+}
+
+/*!
+ * Get the number of objects in the HDT document
+ * @return [description]
+ */
+unsigned int HDTDocument::getNbObjects() {
+  return hdt->getDictionary()->getNobjects();
+}
+
+/*!
+ * Get the number of shared subjects-objects in the HDT document
+ * @return [description]
+ */
+unsigned int HDTDocument::getNbShared() {
+  return hdt->getDictionary()->getNshared();
+}

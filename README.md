@@ -1,7 +1,15 @@
 # pyHDT
 Read and query HDT document with ease in Python
 
+# Requirements
+
+* [git](https://git-scm.com/)
+* [pip](https://pip.pypa.io/en/stable/)
+* gcc with c++11 support
+
 # Installation
+
+Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is strongly advised!
 
 ```
 git clone --recursive https://github.com/Callidon/pyHDT

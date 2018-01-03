@@ -5,18 +5,6 @@
 
 namespace py = pybind11;
 
-struct Pet {
-    Pet(const std::string &name) : name(name) { }
-    void setName(const std::string &name_) { name = name_; }
-    const std::string &getName() const { return name; }
-
-    std::string name;
-};
-
-int add(int i, int j) {
-    return i + j;
-}
-
 PYBIND11_MODULE(hdt, m) {
     m.doc() = "pyHDT module enables to load and query HDT files with ease";
 

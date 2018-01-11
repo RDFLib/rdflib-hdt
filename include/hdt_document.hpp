@@ -7,13 +7,9 @@
 #define PYHDT_DOCUMENT_HPP
 
 #include <string>
-#include "HDT.hpp"
 #include <list>
-#include <tuple>
-
-typedef std::tuple<std::string, std::string, std::string> triple;
-typedef std::list<triple> triple_list;
-typedef std::tuple<triple_list, size_t> search_results;
+#include "HDT.hpp"
+#include "pyhdt_types.hpp"
 
 /*!
  * HDTDocument is the main entry to manage an hdt document

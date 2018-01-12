@@ -1,14 +1,14 @@
 /**
- * docstrings.hpp
+ * s.hpp
  * Author: Thomas MINIER - MIT License 2017-2018
  */
 
-#ifndef DOCSTRINGS_HPP
-#define DOCSTRINGS_HPP
+#ifndef S_HPP
+#define S_HPP
 
 #include <string>
 
-std::string MODULE = R"docstring(
+const std::string MODULE_DOC = R"(
   The hdt module enables to load and query HDT files with ease.
 
   Example:
@@ -24,9 +24,9 @@ std::string MODULE = R"docstring(
   print("cardinality of { ?s ?p ?o }: %i" % cardinality)
   for triple in triples:
     print(triple)
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_CLASS = R"docstring(
+const std::string HDT_DOCUMENT_CLASS_DOC = R"(
   An HDTDocument enables to load and query a HDT file.
   Indexes are automatically generated if missing.
 
@@ -55,33 +55,33 @@ std::string HDT_DOCUMENT_CLASS = R"docstring(
   # Search also support limit and offset
   (triples, cardinality) = document.search_triples("", "", "", limit=10, offset=100)
   # etc ...
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_GETFILEPATH = R"docstring(
+const std::string HDT_DOCUMENT_GETFILEPATH_DOC = R"(
   Return the path to the HDT file currently loaded
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_GETNBTRIPLES = R"docstring(
+const std::string HDT_DOCUMENT_GETNBTRIPLES_DOC = R"(
   Return the total number of triples in the HDT document
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_GETNBSUBJECTS = R"docstring(
+const std::string HDT_DOCUMENT_GETNBSUBJECTS_DOC = R"(
   Return the number of subjects in the HDT document
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_GETNBPREDICATES = R"docstring(
+const std::string HDT_DOCUMENT_GETNBPREDICATES_DOC = R"(
   Return the number of predicates in the HDT document
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_GETNBOBJECTS = R"docstring(
+const std::string HDT_DOCUMENT_GETNBOBJECTS_DOC = R"(
   Return the number of objects in the HDT document
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_GETNBSHARED = R"docstring(
+const std::string HDT_DOCUMENT_GETNBSHARED_DOC = R"(
   Return the number of shared subject-object in the HDT document
-)docstring";
+)";
 
-std::string HDT_DOCUMENT_SEARCH_TRIPLES = R"docstring(
+const std::string HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
   Search for RDF triples matching the triple pattern { subject predicate object }, with an optional limit and offset.
   Use empty strings ("") to indicate variables.
 
@@ -106,6 +106,6 @@ std::string HDT_DOCUMENT_SEARCH_TRIPLES = R"docstring(
   print("cardinality of { ?s ?p ?o }: %i" % cardinality)
   for triple in triples:
     print(triple)
-)docstring";
+)";
 
-#endif /* DOCSTRINGS_HPP */
+#endif /* S_HPP */

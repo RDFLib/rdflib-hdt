@@ -87,6 +87,12 @@ public:
    */
   bool accurateEstimation();
 
+  /*!
+   * Return true if the iterator still has items available, False otherwise.
+   * @return [description]
+   */
+  bool hasNext();
+
   /**
    * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended
    * @return [description]

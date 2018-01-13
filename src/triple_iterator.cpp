@@ -95,6 +95,15 @@ bool TripleIterator::accurateEstimation() {
   return iterator->numResultEstimation() == hdt::EXACT;
 }
 
+/*!
+ * Return true if the iterator still has items available, False otherwise.
+ * @return [description]
+ */
+bool TripleIterator::hasNext() {
+  bool noLimit = limit == 0;
+  return iterator->hasNext() && (noLimit || limit > resultsRead);
+}
+
 /**
  * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended
  * @return [description]
@@ -106,6 +115,5 @@ triple TripleIterator::next() {
     hdt::TripleString *ts = iterator->next();
     return std::make_tuple(ts->getSubject(), ts->getPredicate(), ts->getObject());
   }
-  // raise StopIteration to stop iteration
-  throw pybind11::stop_iteration();
+  return std::make_tuple("", "", "");
 }

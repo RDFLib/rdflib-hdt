@@ -37,6 +37,19 @@ class TestHDTDocument(unittest.TestCase):
             self.assertNotEqual(pred, None)
             self.assertNotEqual(obj, None)
 
+    def test_read_document_iter(self):
+        nbItems = 0
+        it = document.search_triples_iter("", "", "")
+        self.assertEqual(it.get_nb_results(), nbTotalTriples)
+        self.assertTrue(it.accurate_estimation())
+        while it.has_next():
+            subj, pred, obj = it.next()
+            nbItems += 1
+            self.assertNotEqual(subj, None)
+            self.assertNotEqual(pred, None)
+            self.assertNotEqual(obj, None)
+        self.assertEqual(nbItems, nbTotalTriples)
+
     def test_read_document_limit(self):
         (triples, cardinality) = document.search_triples("", "", "", limit=10)
         self.assertEqual(cardinality, nbTotalTriples)
@@ -46,6 +59,17 @@ class TestHDTDocument(unittest.TestCase):
             self.assertNotEqual(pred, None)
             self.assertNotEqual(obj, None)
 
+    def test_read_document_iter_limit(self):
+        nbItems = 0
+        it = document.search_triples_iter("", "", "", limit=10)
+        while it.has_next():
+            subj, pred, obj = it.next()
+            nbItems += 1
+            self.assertNotEqual(subj, None)
+            self.assertNotEqual(pred, None)
+            self.assertNotEqual(obj, None)
+        self.assertEqual(nbItems, 10)
+
     def test_read_document_offset(self):
         (triples, cardinality) = document.search_triples("", "", "", offset=10)
         self.assertEqual(cardinality, nbTotalTriples)
@@ -54,3 +78,14 @@ class TestHDTDocument(unittest.TestCase):
             self.assertNotEqual(subj, None)
             self.assertNotEqual(pred, None)
             self.assertNotEqual(obj, None)
+
+    def test_read_document_iter_offset(self):
+        nbItems = 0
+        it = document.search_triples_iter("", "", "", offset=10)
+        while it.has_next():
+            subj, pred, obj = it.next()
+            nbItems += 1
+            self.assertNotEqual(subj, None)
+            self.assertNotEqual(pred, None)
+            self.assertNotEqual(obj, None)
+        self.assertEqual(nbItems, nbTotalTriples - 10)

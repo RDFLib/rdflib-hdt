@@ -12,8 +12,6 @@
 #include "triple_iterator.hpp"
 #include "pyhdt_types.hpp"
 
-typedef std::tuple<TripleIterator*, size_t> search_results;
-
 /*!
  * HDTDocument is the main entry to manage an hdt document
  * \author Thomas Minier
@@ -89,6 +87,16 @@ public:
    * @param offset    [description]
    */
   search_results search(std::string subject, std::string predicate, std::string object, unsigned int limit = 0, unsigned int offset = 0);
+
+  /*!
+   * Same as search, but returns a TripleIterator instead.
+   * @param subject   [description]
+   * @param predicate [description]
+   * @param object    [description]
+   * @param limit     [description]
+   * @param offset    [description]
+   */
+  TripleIterator* searchIter(std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset);
 };
 
 #endif /* PYHDT_DOCUMENT_HPP */

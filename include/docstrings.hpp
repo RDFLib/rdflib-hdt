@@ -3,19 +3,19 @@
  * Author: Thomas MINIER - MIT License 2017-2018
  */
 
-#ifndef S_HPP
-#define S_HPP
+#ifndef PYHDT_DOCSTRINGS_HPP
+#define PYHDT_DOCSTRINGS_HPP
 
 #include <string>
 
-const std::string MODULE_DOC = R"(
+const char * MODULE_DOC = R"(
   The hdt module enables to load and query HDT files with ease.
 
   Example:
 
   from hdt import HDTDocument
 
-  # Load HDT file. Missing indexes are generated automatically
+  # Load an HDT file. Missing indexes are generated automatically
   document = HDTDocument("test.hdt")
 
   # Fetch all triples that matches { ?s ?p ?o }
@@ -26,7 +26,7 @@ const std::string MODULE_DOC = R"(
     print(triple)
 )";
 
-const std::string HDT_DOCUMENT_CLASS_DOC = R"(
+const char * HDT_DOCUMENT_CLASS_DOC = R"(
   An HDTDocument enables to load and query a HDT file.
   Indexes are automatically generated if missing.
 
@@ -34,7 +34,7 @@ const std::string HDT_DOCUMENT_CLASS_DOC = R"(
 
   from hdt import HDTDocument
 
-  # Load HDT file. Missing indexes are generated automatically
+  # Load an HDT file. Missing indexes are generated automatically
   document = HDTDocument("test.hdt")
 
   # Display some metadata about the HDT document itself
@@ -57,31 +57,31 @@ const std::string HDT_DOCUMENT_CLASS_DOC = R"(
   # etc ...
 )";
 
-const std::string HDT_DOCUMENT_GETFILEPATH_DOC = R"(
+const char * HDT_DOCUMENT_GETFILEPATH_DOC = R"(
   Return the path to the HDT file currently loaded
 )";
 
-const std::string HDT_DOCUMENT_GETNBTRIPLES_DOC = R"(
+const char * HDT_DOCUMENT_GETNBTRIPLES_DOC = R"(
   Return the total number of triples in the HDT document
 )";
 
-const std::string HDT_DOCUMENT_GETNBSUBJECTS_DOC = R"(
+const char * HDT_DOCUMENT_GETNBSUBJECTS_DOC = R"(
   Return the number of subjects in the HDT document
 )";
 
-const std::string HDT_DOCUMENT_GETNBPREDICATES_DOC = R"(
+const char * HDT_DOCUMENT_GETNBPREDICATES_DOC = R"(
   Return the number of predicates in the HDT document
 )";
 
-const std::string HDT_DOCUMENT_GETNBOBJECTS_DOC = R"(
+const char * HDT_DOCUMENT_GETNBOBJECTS_DOC = R"(
   Return the number of objects in the HDT document
 )";
 
-const std::string HDT_DOCUMENT_GETNBSHARED_DOC = R"(
+const char * HDT_DOCUMENT_GETNBSHARED_DOC = R"(
   Return the number of shared subject-object in the HDT document
 )";
 
-const std::string HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
+const char * HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
   Search for RDF triples matching the triple pattern { subject predicate object }, with an optional limit and offset.
   Use empty strings ("") to indicate variables.
 
@@ -108,4 +108,4 @@ const std::string HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
     print(triple)
 )";
 
-#endif /* S_HPP */
+#endif /* PYHDT_DOCSTRINGS_HPP */

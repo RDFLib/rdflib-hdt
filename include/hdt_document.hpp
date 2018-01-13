@@ -9,7 +9,10 @@
 #include <string>
 #include <list>
 #include "HDT.hpp"
+#include "triple_iterator.hpp"
 #include "pyhdt_types.hpp"
+
+typedef std::tuple<TripleIterator*, size_t> search_results;
 
 /*!
  * HDTDocument is the main entry to manage an hdt document

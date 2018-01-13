@@ -8,9 +8,9 @@
 
 #include <string>
 #include <tuple>
+#include <list>
 
 typedef std::tuple<std::string, std::string, std::string> triple;
 typedef std::list<triple> triple_list;
-typedef std::tuple<triple_list, size_t> search_results;
 
 #endif /* PYHDT_TYPES_HPP */

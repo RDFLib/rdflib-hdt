@@ -22,12 +22,13 @@ private:
   std::string object;
   unsigned int limit;
   unsigned int offset;
+  unsigned int resultsRead = 0;
 public:
   /*!
    * Constructor
    * @param iterator [description]
    */
-  TripleIterator(hdt::IteratorTripleString *iterator, std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset);
+  TripleIterator(hdt::IteratorTripleString *_it, std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset);
 
   /*!
    * Destructor
@@ -52,14 +53,14 @@ public:
    * An empty string represents a variable
    * @return [description]
    */
-  std::string getObject();
+  std::string getPredicate();
 
   /*!
    * Get the object of the triple pattern currenlty evaluated.
    * An empty string represents a variable
    * @return [description]
    */
-  std::string getPredicate();
+  std::string getObject();
 
   /*!
    * Get the limit of the current iterator

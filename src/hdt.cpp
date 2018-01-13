@@ -3,11 +3,21 @@
 
 #include "docstrings.hpp"
 #include "hdt_document.hpp"
+#include "triple_iterator.hpp"
 
 namespace py = pybind11;
 
 PYBIND11_MODULE(hdt, m) {
     m.doc() = MODULE_DOC;
+
+    py::class_<TripleIterator>(m, "TripleIterator", "A TripleIterator iterates over triples in a HDT file matching a triple pattern")
+    .def("next", &TripleIterator::next)
+    .def("get_subject", &TripleIterator::getSubject)
+    .def("get_predicate", &TripleIterator::getPredicate)
+    .def("get_object", &TripleIterator::getObject)
+    .def("get_limit", &TripleIterator::getLimit)
+    .def("get_offset", &TripleIterator::getOffset)
+    .def("__repr__", &TripleIterator::python_repr);
 
     py::class_<HDTDocument>(m, "HDTDocument", HDT_DOCUMENT_CLASS_DOC)
       .def(py::init(&HDTDocument::create))
@@ -20,5 +30,4 @@ PYBIND11_MODULE(hdt, m) {
       .def("search_triples", &HDTDocument::search, HDT_DOCUMENT_SEARCH_TRIPLES_DOC,
           py::arg("subject"), py::arg("predicate"), py::arg("object"), py::arg("limit") = 0, py::arg("offset") = 0)
       .def("__repr__", &HDTDocument::python_repr);
-
 }

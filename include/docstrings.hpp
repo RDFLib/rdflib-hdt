@@ -22,9 +22,13 @@ const char * MODULE_DOC = R"(
   (triples, cardinality) = document.search_triples("", "", "")
 
   print("cardinality of { ?s ?p ?o }: %i" % cardinality)
-  for triple in triples:
-    print(triple)
+  for s, p, o in triples:
+    print(s, p, o)
 )";
+
+/**
+ * HDT Document docstrings
+ */
 
 const char * HDT_DOCUMENT_CLASS_DOC = R"(
   An HDTDocument enables to load and query a HDT file.
@@ -49,8 +53,8 @@ const char * HDT_DOCUMENT_CLASS_DOC = R"(
   (triples, cardinality) = document.search_triples("", "", "")
 
   print("cardinality of { ?s ?p ?o }: %i" % cardinality)
-  for triple in triples:
-    print(triple)
+  for s, p, o in triples:
+    print(s, p, o)
 
   # Search also support limit and offset
   (triples, cardinality) = document.search_triples("", "", "", limit=10, offset=100)
@@ -97,15 +101,57 @@ const char * HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
     A triple itself is a tuple (subject, predicate, object).
 
   Example:
-
-  from hdt import HDTDocument
-  document = HDTDocument("test.hdt")
-
   (triples, cardinality) = document.search_triples("", "", "")
-
   print("cardinality of { ?s ?p ?o }: %i" % cardinality)
-  for triple in triples:
-    print(triple)
+  for s, p, o in triples:
+    print(s, p, o)
 )";
 
+/**
+ * TripleIterator docstrings
+ */
+
+const char * TRIPLE_ITERATOR_CLASS_DOC = R"(
+  A TripleIterator iterates over triples in a HDT file matching a triple pattern, with an optional limit & offset.
+  Such iterator can be obtained by a call to HDTDocument#search_triples
+)";
+
+const char * TRIPLE_ITERATOR_NEXT_DOC = R"(
+  Return the next matching triple read by the iterator, or raise StopIterator if there is no more items to yield.
+)";
+
+const char * TRIPLE_ITERATOR_HASNEXT_DOC = R"(
+  Return true if the iterator still has items to yield, false otherwise.
+)";
+
+const char * TRIPLE_ITERATOR_GETSUBJECT_DOC = R"(
+  Return the subject of the triple pattern currently evaluated.
+)";
+
+const char * TRIPLE_ITERATOR_GETPREDICATE_DOC = R"(
+  Return the predicate of the triple pattern currently evaluated.
+)";
+
+const char * TRIPLE_ITERATOR_GETOBJECT_DOC = R"(
+  Return the object of the triple pattern currently evaluated.
+)";
+
+const char * TRIPLE_ITERATOR_GETLIMIT_DOC = R"(
+  Return the limit of the iterator, i.e., the maximum number of items the iterator will yield.
+  A limit of 0 indicates that the iterator limit is the cardinality of the triple pattern currently evaluated.
+)";
+
+const char * TRIPLE_ITERATOR_GETOFFSET_DOC = R"(
+  Return the offset of the iterator, i.e., the number of items the iterator will first skip before yielding.
+  An offset of 0 indicates that the iterator will not skip any items.
+)";
+
+const char * TRIPLE_ITERATOR_SIZE_DOC = R"(
+  Return the estimated cardinality of the triple pattern currently evaluated.
+  The iterator's limit and offset are not taken into account.
+)";
+
+const char * TRIPLE_ITERATOR_ACC_ESTIMATION_DOC = R"(
+  Return true if the iterator can accuratly estimate the cardinality of the triple pattern, false otherwise.
+)";
 #endif /* PYHDT_DOCSTRINGS_HPP */

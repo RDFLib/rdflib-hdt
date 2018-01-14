@@ -44,7 +44,7 @@ TripleIterator* TripleIterator::python_iter() {
 }
 
 /*!
- * Get the subject of the triple pattern currenlty evaluated.
+ * Get the subject of the triple pattern currently evaluated.
  * An empty string represents a variable
  * @return [description]
  */
@@ -53,7 +53,7 @@ std::string TripleIterator::getSubject() {
 }
 
 /*!
- * Get the predicate of the triple pattern currenlty evaluated.
+ * Get the predicate of the triple pattern currently evaluated.
  * An empty string represents a variable
  * @return [description]
  */
@@ -62,7 +62,7 @@ std::string TripleIterator::getPredicate() {
 }
 
 /*!
- * Get the object of the triple pattern currenlty evaluated.
+ * Get the object of the triple pattern currently evaluated.
  * An empty string represents a variable
  * @return [description]
  */

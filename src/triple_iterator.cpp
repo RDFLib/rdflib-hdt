@@ -14,9 +14,9 @@
  */
 TripleIterator::TripleIterator(hdt::IteratorTripleString *_it, std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset) :
   iterator(_it),
-  subject(_subj),
-  predicate(_pred),
-  object(_obj),
+  subject((_subj.compare("") == 0) ? "?s" : _subj),
+  predicate((_pred.compare("") == 0) ? "?p" : _pred),
+  object((_obj.compare("") == 0) ? "?o" : _obj),
   limit(_limit),
   offset(_offset) {};
 
@@ -32,7 +32,14 @@ TripleIterator::~TripleIterator() {
  * @return [description]
  */
 std::string TripleIterator::python_repr() {
-  return "<TripleIterator (" + subject + " " + predicate + " " + object + ")>";
+  if (limit != 0 && offset > 0) {
+    return "<TripleIterator {" + subject + " " + predicate + " " + object + "} LIMIT " + std::to_string(limit) + " OFFSET " + std::to_string(offset) + " >";
+  } else if (limit != 0) {
+    return "<TripleIterator {" + subject + " " + predicate + " " + object + "} LIMIT " + std::to_string(limit) + " >";
+  } else if (offset > 0) {
+    return "<TripleIterator {" + subject + " " + predicate + " " + object + "} OFFSET " + std::to_string(offset) + ">";
+  }
+  return "<TripleIterator {" + subject + " " + predicate + " " + object + "}>";
 }
 
 /*!

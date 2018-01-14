@@ -49,9 +49,6 @@ std::string HDTDocument::python_repr() {
  * @param offset    [description]
  */
 search_results HDTDocument::search(std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset) {
-  std::list<triple> results;
-  bool noLimit = limit == 0;
-  // Search for triples
   IteratorTripleString *it = hdt->search(subject.c_str(), predicate.c_str(), object.c_str());
   size_t cardinality = it->estimatedNumResults();
 
@@ -59,33 +56,8 @@ search_results HDTDocument::search(std::string subject, std::string predicate, s
   if (offset > 0) {
     it->skip(offset);
   }
-
-  // Gather results
-  while(it->hasNext() && (noLimit || limit > results.size())) {
-    TripleString *ts = it->next();
-    triple t = std::make_tuple(ts->getSubject(), ts->getPredicate(), ts->getObject());
-    results.push_back(t);
-  }
-
-  delete it;
-  return std::make_tuple(results, cardinality);
-}
-
-/*!
- * Same as search, but returns a TripleIterator instead
- * @param subject   [description]
- * @param predicate [description]
- * @param object    [description]
- * @param limit     [description]
- * @param offset    [description]
- */
-TripleIterator* HDTDocument::searchIter(std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset) {
-  IteratorTripleString *it = hdt->search(subject.c_str(), predicate.c_str(), object.c_str());
-  // apply offset
-  if (offset > 0) {
-    it->skip(offset);
-  }
-  return new TripleIterator(it, subject, predicate, object, limit, offset);
+  TripleIterator* resultIterator = new TripleIterator(it, subject, predicate, object, limit, offset);
+  return std::make_tuple(resultIterator, cardinality);
 }
 
 /*!

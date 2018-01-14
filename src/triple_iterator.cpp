@@ -36,6 +36,14 @@ std::string TripleIterator::python_repr() {
 }
 
 /*!
+ * Implementation for Python function "__iter__"
+ * @return [description]
+ */
+TripleIterator* TripleIterator::python_iter() {
+  return this;
+}
+
+/*!
  * Get the subject of the triple pattern currenlty evaluated.
  * An empty string represents a variable
  * @return [description]
@@ -79,7 +87,7 @@ unsigned int TripleIterator::getOffset() {
 }
 
 /*!
- * Get the estimated cardinality of the pattern currenlty evaluated.
+ * Get the estimated cardinality of the pattern currently evaluated.
  * Offset & limit are not taken into account.
  * @return [description]
  */
@@ -105,7 +113,8 @@ bool TripleIterator::hasNext() {
 }
 
 /**
- * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended
+ * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended.
+ * Used to implement Python Itertor protocol.
  * @return [description]
  */
 triple TripleIterator::next() {
@@ -115,5 +124,5 @@ triple TripleIterator::next() {
     hdt::TripleString *ts = iterator->next();
     return std::make_tuple(ts->getSubject(), ts->getPredicate(), ts->getObject());
   }
-  return std::make_tuple("", "", "");
+  throw pybind11::stop_iteration();
 }

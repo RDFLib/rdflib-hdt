@@ -42,6 +42,12 @@ public:
   std::string python_repr();
 
   /*!
+   * Implementation for Python function "__iter__"
+   * @return [description]
+   */
+  TripleIterator* python_iter();
+
+  /*!
    * Get the subject of the triple pattern currenlty evaluated.
    * An empty string represents a variable
    * @return [description]
@@ -75,7 +81,7 @@ public:
   unsigned int getOffset();
 
   /*!
-   * Get the estimated cardinality of the pattern currenlty evaluated.
+   * Get the estimated cardinality of the pattern currently evaluated.
    * Offset & limit are not taken into account.
    * @return [description]
    */

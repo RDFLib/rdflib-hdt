@@ -27,7 +27,7 @@ python setup.py install
 ```python
 from hdt import HDTDocument
 
- # Load HDT file. Missing indexes are generated automatically
+ # Load an HDT file. Missing indexes are generated automatically
 document = HDTDocument("test.hdt")
 
 # Display some metadata about the HDT document itself
@@ -44,7 +44,7 @@ print("nb shared subject-object: %i" % document.get_nb_shared())
 print("cardinality of { ?s ?p ?o }: %i" % cardinality)
 for triple in triples:
   print(triple)
-  
+
 # Search also support limit and offset
 (triples, cardinality) = document.search_triples("", "", "", limit=10, offset=100)
 # etc ...

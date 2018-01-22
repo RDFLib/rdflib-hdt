@@ -9,7 +9,12 @@
 #include <string>
 #include <list>
 #include "HDT.hpp"
+#include "triple_iterator.hpp"
 #include "pyhdt_types.hpp"
+
+// The result of a search for a triple pattern in a HDT document:
+// a tuple (matching RDF triples, nb of matching RDF triples)
+typedef std::tuple<TripleIterator*, size_t> search_results;
 
 /*!
  * HDTDocument is the main entry to manage an hdt document
@@ -78,7 +83,7 @@ public:
 
   /*!
    * Search all matching triples for a triple pattern, whith an optional limit and offset.
-   * Returns a tuple<vector<triples>, cardinality>
+   * Returns a tuple<TripleIterator*, cardinality>
    * @param subject   [description]
    * @param predicate [description]
    * @param object    [description]

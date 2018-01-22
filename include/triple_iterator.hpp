@@ -22,12 +22,13 @@ private:
   std::string object;
   unsigned int limit;
   unsigned int offset;
+  unsigned int resultsRead = 0;
 public:
   /*!
    * Constructor
    * @param iterator [description]
    */
-  TripleIterator(hdt::IteratorTripleString *iterator, std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset);
+  TripleIterator(hdt::IteratorTripleString *_it, std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset);
 
   /*!
    * Destructor
@@ -41,25 +42,31 @@ public:
   std::string python_repr();
 
   /*!
-   * Get the subject of the triple pattern currenlty evaluated.
+   * Implementation for Python function "__iter__"
+   * @return [description]
+   */
+  TripleIterator* python_iter();
+
+  /*!
+   * Get the subject of the triple pattern currently evaluated.
    * An empty string represents a variable
    * @return [description]
    */
   std::string getSubject();
 
   /*!
-   * Get the predicate of the triple pattern currenlty evaluated.
-   * An empty string represents a variable
-   * @return [description]
-   */
-  std::string getObject();
-
-  /*!
-   * Get the object of the triple pattern currenlty evaluated.
+   * Get the predicate of the triple pattern currently evaluated.
    * An empty string represents a variable
    * @return [description]
    */
   std::string getPredicate();
+
+  /*!
+   * Get the object of the triple pattern currently evaluated.
+   * An empty string represents a variable
+   * @return [description]
+   */
+  std::string getObject();
 
   /*!
    * Get the limit of the current iterator
@@ -74,7 +81,7 @@ public:
   unsigned int getOffset();
 
   /*!
-   * Get the estimated cardinality of the pattern currenlty evaluated.
+   * Get the estimated cardinality of the pattern currently evaluated.
    * Offset & limit are not taken into account.
    * @return [description]
    */
@@ -85,6 +92,12 @@ public:
    * @return [description]
    */
   bool accurateEstimation();
+
+  /*!
+   * Return true if the iterator still has items available, False otherwise.
+   * @return [description]
+   */
+  bool hasNext();
 
   /**
    * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended

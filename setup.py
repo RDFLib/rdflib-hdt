@@ -16,7 +16,8 @@ def list_files(path, extension=".cpp", exclude="-1"):
 # pyHDT source files
 sources = [
     "src/hdt.cpp",
-    "src/hdt_document.cpp"
+    "src/hdt_document.cpp",
+    "src/triple_iterator.cpp"
 ]
 
 # HDT source files

@@ -9,7 +9,7 @@ Requirements
 * **gcc/clang** with **c++11 support**
 * **Python Development headers**
 
-You sould have the `Python.h` header available on your system.
+You must have the `Python.h` header available on your system.
 For example, for Python 3.4, install the `python3.4-dev` package on Debian/Ubuntu systems.
 
 Installation using Git

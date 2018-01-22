@@ -1,6 +1,17 @@
 HDTDocument
 ===========
 
+Loading HDT files
+^^^^^^^^^^^^^^^^^
+
+The main class for manipulating HDT Dicument using pyHDT is `HDTDocument`.
+Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.
+
+For example, if you load a file */home/awesome-user/test.hdt*, HDTDocument will look for the index file
+*/home/awesome-user/test.hdt.index.v1-1*.
+
+Missing indexes are generated automatically, but be careful, as it requires to load all HDT triples in memory!
+
 .. code-block:: python
 
   from hdt import HDTDocument
@@ -14,6 +25,18 @@ HDTDocument
   print("nb predicates: %i" % document.get_nb_predicates())
   print("nb objects: %i" % document.get_nb_objets())
   print("nb shared subject-object: %i" % document.get_nb_shared())
+
+
+Searching for triples
+^^^^^^^^^^^^^^^^^^^^^^
+
+You can search for all RDF triples in the HDT file matching a triple pattern using `search_triples`.
+It returns a 2-element tuple, with an *iterator* over the matching RDF triples and the estimated triple pattern *cardinality*.
+
+.. code-block:: python
+
+  from hdt import HDTDocument
+  document = HDTDocument("test.hdt")
 
   # Fetch all triples that matches { ?s ?p ?o }
   # Use empty strings ("") to indicates variables

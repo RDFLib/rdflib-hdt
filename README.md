@@ -1,4 +1,4 @@
-# pyHDT [![Build Status](https://travis-ci.org/Callidon/pyHDT.svg?branch=master)](https://travis-ci.org/Callidon/pyHDT)
+# pyHDT [![Build Status](https://travis-ci.org/Callidon/pyHDT.svg?branch=master)](https://travis-ci.org/Callidon/pyHDT) [![Documentation Status](https://readthedocs.org/projects/pyhdt/badge/?version=latest)](http://pyhdt.readthedocs.io/en/latest/?badge=latest)
 
 Read and query HDT document with ease in Python
 

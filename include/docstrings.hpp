@@ -108,12 +108,18 @@ const char * HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
 )";
 
 /**
- * TripleIterator docstrings
+ * TripleIterator & TripleIDIterator docstrings
  */
 
 const char * TRIPLE_ITERATOR_CLASS_DOC = R"(
   A TripleIterator iterates over triples in a HDT file matching a triple pattern, with an optional limit & offset.
   Such iterator can be obtained by a call to HDTDocument#search_triples
+)";
+
+const char * TRIPLE_ID_ITERATOR_CLASS_DOC = R"(
+  A TripleIDIterator iterates over triples' IDs in a HDT file matching a triple pattern, with an optional limit & offset.
+  Such iterator can be obtained by a call to HDTDocument#search_triples_ids.
+  Conversion from a tuple of triple ids into a RDF triple is done using HDTDocument#ids_to_string()
 )";
 
 const char * TRIPLE_ITERATOR_NEXT_DOC = R"(

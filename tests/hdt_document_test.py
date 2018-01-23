@@ -7,7 +7,6 @@ path = "tests/test.hdt"
 document = HDTDocument(path)
 nbTotalTriples = 132
 
-
 class TestHDTDocument(unittest.TestCase):
 
     def test_file_path(self):
@@ -60,3 +59,25 @@ class TestHDTDocument(unittest.TestCase):
             self.assertNotEqual(pred, None)
             self.assertNotEqual(obj, None)
         self.assertEqual(nbItems, cardinality - 10)
+
+    def test_read_document_ids(self):
+        (triples, cardinality) = document.search_triples_ids("", "", "")
+        self.assertEqual(cardinality, nbTotalTriples)
+        self.assertEqual(len(triples), cardinality)
+        for subj, pred, obj in triples:
+            self.assertTrue(subj > 0)
+            self.assertTrue(pred > 0)
+            self.assertTrue(obj > 0)
+
+    def test_ids_to_string(self):
+        (triples, triplesCard) = document.search_triples("", "", "")
+        (ids, idsCard) = document.search_triples_ids("", "", "")
+        self.assertEqual(triplesCard, idsCard)
+        self.assertEqual(triplesCard, nbTotalTriples)
+        self.assertEqual(len(triples), triplesCard)
+        for subj, pred, obj in triples:
+            sid, pid, oid = next(ids)
+            s, p, o = document.tripleid_to_string(sid, pid, oid)
+            self.assertEqual(subj, s)
+            self.assertEqual(pred, p)
+            self.assertEqual(obj, o)

@@ -17,7 +17,8 @@ def list_files(path, extension=".cpp", exclude="-1"):
 sources = [
     "src/hdt.cpp",
     "src/hdt_document.cpp",
-    "src/triple_iterator.cpp"
+    "src/triple_iterator.cpp",
+    "src/tripleid_iterator.cpp"
 ]
 
 # HDT source files
@@ -35,6 +36,7 @@ sources += list_files("hdt-cpp/hdt-lib/src/util")
 
 # pybind11 + pyHDT headers
 include_dirs = [
+    "/home/stagiaire-gdd/libs/include/python3.4m/",
     pybind11.get_include(),
     pybind11.get_include(True),
     "include/"

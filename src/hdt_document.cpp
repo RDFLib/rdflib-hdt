@@ -3,8 +3,10 @@
  * Author: Thomas MINIER - MIT License 2017-2018
  */
 
+#include <HDTManager.hpp>
+#include <SingleTriple.hpp>
+#include <HDTEnums.hpp>
 #include "hdt_document.hpp"
-#include "HDTManager.hpp"
 #include "triple_iterator.hpp"
 
 using namespace hdt;
@@ -61,6 +63,32 @@ search_results HDTDocument::search(std::string subject, std::string predicate, s
 }
 
 /*!
+ * Same as search, but for an iterator over TripleIDs.
+ * Returns a tuple<TripleIDIterator*, cardinality>
+ * @param subject   [description]
+ * @param predicate [description]
+ * @param object    [description]
+ * @param limit     [description]
+ * @param offset    [description]
+ */
+search_results_ids HDTDocument::searchIDs(std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset) {
+  TripleID tp(
+    hdt->getDictionary()->stringToId(subject, hdt::SUBJECT),
+    hdt->getDictionary()->stringToId(predicate, hdt::PREDICATE),
+    hdt->getDictionary()->stringToId(object, hdt::OBJECT)
+  );
+  IteratorTripleID *it = hdt->getTriples()->search(tp);
+  size_t cardinality = it->estimatedNumResults();
+
+  // apply offset
+  if (offset > 0) {
+    it->skip(offset);
+  }
+  TripleIDIterator* resultIterator = new TripleIDIterator(it, subject, predicate, object, limit, offset);
+  return std::make_tuple(resultIterator, cardinality);
+}
+
+/*!
  * Get the total number of triples in the HDT document
  * @return [description]
  */
@@ -98,4 +126,19 @@ unsigned int HDTDocument::getNbObjects() {
  */
 unsigned int HDTDocument::getNbShared() {
   return hdt->getDictionary()->getNshared();
+}
+
+/*!
+ * Convert a TripleID to a string triple pattern
+ * @param  subject   [description]
+ * @param  predicate [description]
+ * @param  object    [description]
+ * @return           [description]
+ */
+triple HDTDocument::idsToString (unsigned int subject, unsigned int predicate, unsigned int object) {
+  return std::make_tuple(
+    hdt->getDictionary()->idToString(subject, hdt::SUBJECT),
+    hdt->getDictionary()->idToString(predicate, hdt::PREDICATE),
+    hdt->getDictionary()->idToString(object, hdt::OBJECT)
+  );
 }

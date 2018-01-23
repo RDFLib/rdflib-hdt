@@ -10,11 +10,15 @@
 #include <list>
 #include "HDT.hpp"
 #include "triple_iterator.hpp"
+#include "tripleid_iterator.hpp"
 #include "pyhdt_types.hpp"
 
 // The result of a search for a triple pattern in a HDT document:
 // a tuple (matching RDF triples, nb of matching RDF triples)
 typedef std::tuple<TripleIterator*, size_t> search_results;
+
+// Same as seach_results, but for an iterator over triple ids
+typedef std::tuple<TripleIDIterator*, size_t> search_results_ids;
 
 /*!
  * HDTDocument is the main entry to manage an hdt document
@@ -82,6 +86,15 @@ public:
   }
 
   /*!
+   * Convert a TripleID to a string triple pattern
+   * @param  subject   [description]
+   * @param  predicate [description]
+   * @param  object    [description]
+   * @return           [description]
+   */
+  triple idsToString (unsigned int subject, unsigned int predicate, unsigned int object);
+
+  /*!
    * Search all matching triples for a triple pattern, whith an optional limit and offset.
    * Returns a tuple<TripleIterator*, cardinality>
    * @param subject   [description]
@@ -91,6 +104,17 @@ public:
    * @param offset    [description]
    */
   search_results search(std::string subject, std::string predicate, std::string object, unsigned int limit = 0, unsigned int offset = 0);
+
+  /*!
+   * Same as search, but for an iterator over TripleIDs.
+   * Returns a tuple<TripleIDIterator*, cardinality>
+   * @param subject   [description]
+   * @param predicate [description]
+   * @param object    [description]
+   * @param limit     [description]
+   * @param offset    [description]
+   */
+  search_results_ids searchIDs(std::string subject, std::string predicate, std::string object, unsigned int limit = 0, unsigned int offset = 0);
 };
 
 #endif /* PYHDT_DOCUMENT_HPP */

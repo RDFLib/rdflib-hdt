@@ -38,7 +38,7 @@ std::string HDTDocument::getFilePath() {
  * @return [description]
  */
 std::string HDTDocument::python_repr() {
-  return "<HDTDocument:" + hdt_file + ">";
+  return "<HDTDocument " + hdt_file + " (~" + std::to_string(getNbTriples()) + " RDF triples)>";
 }
 
 /*!

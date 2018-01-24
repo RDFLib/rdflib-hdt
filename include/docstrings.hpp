@@ -97,14 +97,43 @@ const char * HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
     offset (int, optional): Number of matching to skip before returning results.
 
   Return:
-    A tuple (list of matching triples, triple pattern cardinality).
-    A triple itself is a tuple (subject, predicate, object).
+    A tuple (list of matching RDF triples, triple pattern cardinality).
+    A triple itself is a 3-elements tuple (subject, predicate, object).
 
   Example:
   (triples, cardinality) = document.search_triples("", "", "")
   print("cardinality of { ?s ?p ?o }: %i" % cardinality)
   for s, p, o in triples:
     print(s, p, o)
+)";
+
+const char * HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
+  Same as HDTDocument.search, but RDF triples are represented as unique ids (from the HDT Dictionnary).
+  Use empty strings ("") to indicate variables.
+  Transformation from triple ids to triple strings is done using HDTDocument.tripleid_to_string
+
+  Args:
+    subject (str): The subject of the triple pattern to seach for.
+    predicate (str): The predicate of the triple pattern to seach for.
+    obj (str): The object of the triple pattern ot seach for.
+    limit (int, optional): Maximum number of triples to search for.
+    offset (int, optional): Number of matching to skip before returning results.
+
+  Return:
+    A tuple (list of matching RDF triples, triple pattern cardinality).
+    A triple itself is a 3-elements tuple (subject, predicate, object),
+)";
+
+const char * HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
+  Transform a RDF triple from a TripleID representation to a string representation.
+
+  Args:
+    subject (int): unique ID of the subject.
+    predicate (int): unique ID of the predicate.
+    obj (int): unique ID of the object.
+
+  Return:
+    A triple in string representation, i.e., a 3-elements tuple (subject, predicate, object),
 )";
 
 /**
@@ -152,12 +181,17 @@ const char * TRIPLE_ITERATOR_GETOFFSET_DOC = R"(
   An offset of 0 indicates that the iterator will not skip any items.
 )";
 
+const char * TRIPLE_ITERATOR_NBREADS_DOC = R"(
+  Return the number of items read by the iterator until now.
+  Do not include any offset, thus the real position of the iterator in the collection of triples can be computed as offset + nb_reads
+)";
+
 const char * TRIPLE_ITERATOR_SIZE_DOC = R"(
   Return the estimated cardinality of the triple pattern currently evaluated.
   The iterator's limit and offset are not taken into account.
 )";
 
 const char * TRIPLE_ITERATOR_ACC_ESTIMATION_DOC = R"(
-  Return true if the iterator can accuratly estimate the cardinality of the triple pattern, false otherwise.
+  Return True if the iterator can accuratly estimate the cardinality of the triple pattern, False otherwise.
 )";
 #endif /* PYHDT_DOCSTRINGS_HPP */

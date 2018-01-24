@@ -94,6 +94,14 @@ unsigned int TripleIDIterator::getOffset() {
 }
 
 /*!
+ * Get the number of results read by the iterator
+ * @return [description]
+ */
+unsigned int TripleIDIterator::getNbResultsRead() {
+  return resultsRead;
+}
+
+/*!
  * Get the estimated cardinality of the pattern currently evaluated.
  * Offset & limit are not taken into account.
  * @return [description]

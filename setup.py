@@ -17,6 +17,7 @@ def list_files(path, extension=".cpp", exclude="-1"):
 sources = [
     "src/hdt.cpp",
     "src/hdt_document.cpp",
+    "src/hdt_triple_iterator.cpp",
     "src/triple_iterator.cpp",
     "src/tripleid_iterator.cpp"
 ]

@@ -13,12 +13,9 @@
  * @param iterator [description]
  */
 TripleIterator::TripleIterator(hdt::IteratorTripleString *_it, std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset) :
-  iterator(_it),
-  subject((_subj.compare("") == 0) ? "?s" : _subj),
-  predicate((_pred.compare("") == 0) ? "?p" : _pred),
-  object((_obj.compare("") == 0) ? "?o" : _obj),
-  limit(_limit),
-  offset(_offset) {};
+  HDTTripleIterator(_subj,  _pred, _obj, _limit, _offset),
+  iterator(_it)
+  {};
 
   /*!
    * Destructor
@@ -28,77 +25,11 @@ TripleIterator::~TripleIterator() {
 };
 
 /*!
- * Implementation for Python function "__repr__"
- * @return [description]
- */
-std::string TripleIterator::python_repr() {
-  if (limit != 0 && offset > 0) {
-    return "<TripleIterator {" + subject + " " + predicate + " " + object + "} LIMIT " + std::to_string(limit) + " OFFSET " + std::to_string(offset) + " >";
-  } else if (limit != 0) {
-    return "<TripleIterator {" + subject + " " + predicate + " " + object + "} LIMIT " + std::to_string(limit) + " >";
-  } else if (offset > 0) {
-    return "<TripleIterator {" + subject + " " + predicate + " " + object + "} OFFSET " + std::to_string(offset) + ">";
-  }
-  return "<TripleIterator {" + subject + " " + predicate + " " + object + "}>";
-}
-
-/*!
  * Implementation for Python function "__iter__"
  * @return [description]
  */
 TripleIterator* TripleIterator::python_iter() {
   return this;
-}
-
-/*!
- * Get the subject of the triple pattern currently evaluated.
- * An empty string represents a variable
- * @return [description]
- */
-std::string TripleIterator::getSubject() {
-  return subject;
-}
-
-/*!
- * Get the predicate of the triple pattern currently evaluated.
- * An empty string represents a variable
- * @return [description]
- */
-std::string TripleIterator::getPredicate() {
-  return predicate;
-}
-
-/*!
- * Get the object of the triple pattern currently evaluated.
- * An empty string represents a variable
- * @return [description]
- */
-std::string TripleIterator::getObject() {
-  return object;
-}
-
-/*!
- * Get the limit of the current iterator
- * @return [description]
- */
-unsigned int TripleIterator::getLimit() {
-  return limit;
-}
-
-/*!
- * Get the offset of the current iterator
- * @return [description]
- */
-unsigned int TripleIterator::getOffset() {
-  return offset;
-}
-
-/*!
- * Get the number of results read by the iterator
- * @return [description]
- */
-unsigned int TripleIterator::getNbResultsRead() {
-  return resultsRead;
 }
 
 /*!

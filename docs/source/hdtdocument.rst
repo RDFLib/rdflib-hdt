@@ -64,8 +64,11 @@ An ``HDTDocument`` allows for searching RDF triples in this format, using the ``
 
   (triples, cardinality) = document.search_triples_ids("", "", "")
 
-  for triple in triples:
-    print(triple) # will print 3-element tuples of integers
+  for s, p, o in triples:
+    print(s, p, o) # will print 3-element tuples of integers
+    
+    # convert a triple ID to a string format
+    print(document.tripleid_to_string(s, p, o))
 
 Ordering
 ^^^^^^^^^^^

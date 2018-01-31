@@ -86,3 +86,11 @@ unsigned int HDTTripleIterator::getOffset() {
 unsigned int HDTTripleIterator::getNbResultsRead() {
   return resultsRead;
 }
+
+/*!
+ * Set the number of results read by the iterator
+ * @return [description]
+ */
+void HDTTripleIterator::setNbResultsRead(unsigned int value) {
+  resultsRead = value;
+}

@@ -76,6 +76,12 @@ public:
    * @return [description]
    */
   unsigned int getNbResultsRead();
+
+  /*!
+   * Set the number of results read by the iterator
+   * @return [description]
+   */
+  void setNbResultsRead(unsigned int value);
 };
 
 #endif /* HDT_TRIPLE_ITERATOR_HPP */

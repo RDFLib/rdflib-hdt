@@ -17,7 +17,7 @@ PYBIND11_MODULE(hdt, m) {
     .def_property_readonly("object", &HDTTripleIterator::getObject, TRIPLE_ITERATOR_GETOBJECT_DOC)
     .def_property_readonly("limit", &HDTTripleIterator::getLimit, TRIPLE_ITERATOR_GETLIMIT_DOC)
     .def_property_readonly("offset", &HDTTripleIterator::getOffset, TRIPLE_ITERATOR_GETOFFSET_DOC)
-    .def_property_readonly("nb_reads", &HDTTripleIterator::getNbResultsRead, TRIPLE_ITERATOR_NBREADS_DOC)
+    .def_property("nb_reads", &HDTTripleIterator::getNbResultsRead, &HDTTripleIterator::setNbResultsRead, TRIPLE_ITERATOR_NBREADS_DOC)
     .def("__repr__", &HDTTripleIterator::python_repr);
 
     py::class_<TripleIterator>(m, "TripleIterator", baseIterator, TRIPLE_ITERATOR_CLASS_DOC)

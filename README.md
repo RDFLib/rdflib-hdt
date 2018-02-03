@@ -15,6 +15,14 @@ Read and query HDT document with ease in Python
 
 Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is strongly advised!
 
+## Quick install
+
+```
+curl https://github.com/Callidon/pyHDT/blob/master/install.sh -sSf | sh
+```
+
+## Manual installation
+
 ```
 git clone --recursive https://github.com/Callidon/pyHDT
 cd pyHDT/

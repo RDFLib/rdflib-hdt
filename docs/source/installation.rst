@@ -12,10 +12,21 @@ Requirements
 You must have the `Python.h` header available on your system.
 For example, for Python 3.4, install the `python3.4-dev` package on Debian/Ubuntu systems.
 
-Installation using Git
-^^^^^^^^^^^^^^^^^^^^^^
+Installation
+^^^^^^^^^^^^^
 
 Installation in a `virtualenv <https://virtualenv.pypa.io/en/stable/>`_ is strongly advised!
+
+Quick install
+^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+  curl https://github.com/Callidon/pyHDT/blob/master/install.sh -sSf | sh
+
+
+Manual installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 

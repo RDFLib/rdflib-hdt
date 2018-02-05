@@ -11,6 +11,28 @@
 
 using namespace hdt;
 
+/**
+ * Skip `offset` items from an iterator, optimized for HDT iterators.
+ * @param it          [description]
+ * @param offset      [description]
+ * @param cardinality [description]
+ */
+template<typename T>
+void applyOffset(T *it, unsigned int offset, unsigned int cardinality) {
+  if (offset > 0 && offset >= cardinality) {
+    // hdt does not allow to skip past beyond the estimated nb of results,
+    // so we may have a few results to skip manually
+    unsigned int remainingSteps = offset - cardinality + 1;
+    it->skip(cardinality - 1);
+    while (it->hasNext() && remainingSteps > 0) {
+      it->next();
+      remainingSteps--;
+    }
+  } else if (offset > 0) {
+    it->skip(offset);
+  }
+}
+
 /*!
  * Constructor
  * @param file [description]
@@ -54,19 +76,8 @@ search_results HDTDocument::search(std::string subject, std::string predicate, s
   IteratorTripleString *it = hdt->search(subject.c_str(), predicate.c_str(), object.c_str());
   size_t cardinality = it->estimatedNumResults();
 
-  // apply offset, limited to the triple cardinality at max
-  if (offset > 0 && offset >= cardinality) {
-    // hdt does not allow to skip past beyond nb of results,
-    // so we may have a few results to skip manually
-    unsigned int remainingSteps = offset - cardinality + 1;
-    it->skip(cardinality - 1);
-    while (it->hasNext() && remainingSteps > 0) {
-      it->next();
-      remainingSteps--;
-    }
-  } else if (offset > 0) {
-    it->skip(offset);
-  }
+  // apply offset
+  applyOffset<IteratorTripleString>(it, offset, cardinality);
   TripleIterator* resultIterator = new TripleIterator(it, subject, predicate, object, limit, offset);
   return std::make_tuple(resultIterator, cardinality);
 }
@@ -90,18 +101,7 @@ search_results_ids HDTDocument::searchIDs(std::string subject, std::string predi
   size_t cardinality = it->estimatedNumResults();
 
   // apply offset
-  if (offset > 0 && offset >= cardinality) {
-    // hdt does not allow to skip past beyond nb of results,
-    // so we may have a few results to skip manually
-    unsigned int remainingSteps = offset - cardinality + 1;
-    it->skip(cardinality - 1);
-    while (it->hasNext() && remainingSteps > 0) {
-      it->next();
-      remainingSteps--;
-    }
-  } else if (offset > 0) {
-    it->skip(offset);
-  }
+  applyOffset<IteratorTripleID>(it, offset, cardinality);
   TripleIDIterator* resultIterator = new TripleIDIterator(it, subject, predicate, object, limit, offset);
   return std::make_tuple(resultIterator, cardinality);
 }

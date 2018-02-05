@@ -64,6 +64,26 @@ class TestHDTIterators(unittest.TestCase):
             self.assertTrue(obj > 0)
         self.assertEqual(triples.nb_reads, cardinality)
 
+    def test_string_iterator_peek(self):
+        expected = ('http://example.org/s1', 'http://example.org/p1', 'http://example.org/o001')
+        (triples, cardinality) = document.search_triples("", "", "")
+        v = triples.peek()
+        self.assertEqual(v, expected)
+        self.assertEqual(triples.nb_reads, 0)
+        v = next(triples)
+        self.assertEqual(v, expected)
+        self.assertEqual(triples.nb_reads, 1)
+
+    def test_ids_iterator_peek(self):
+        expected = (1, 1, 13)
+        (triples, cardinality) = document.search_triples_ids("", "", "")
+        v = triples.peek()
+        self.assertEqual(v, expected)
+        self.assertEqual(triples.nb_reads, 0)
+        v = next(triples)
+        self.assertEqual(v, expected)
+        self.assertEqual(triples.nb_reads, 1)
+
     def test_string_iterator_big_offset(self):
         nbItems = 0
         (triples, cardinality) = document.search_triples("", "", "", offset=nbTotalTriples + 1)
@@ -71,7 +91,7 @@ class TestHDTIterators(unittest.TestCase):
             nbItems += 1
         self.assertEqual(nbItems, 0)
 
-    def test_id_iterator_big_offset(self):
+    def test_ids_iterator_big_offset(self):
         nbItems = 0
         (triples, cardinality) = document.search_triples_ids("", "", "", offset=nbTotalTriples + 1)
         for s, p, o in triples:

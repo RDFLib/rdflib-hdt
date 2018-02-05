@@ -64,6 +64,12 @@ bool TripleIterator::hasNext() {
  * @return [description]
  */
 triple TripleIterator::next() {
+  // return any previously peeked value
+  if (hasBufferedTriple) {
+    hasBufferedTriple = false;
+    resultsRead++;
+    return _bufferedTriple;
+  }
   bool noLimit = limit == 0;
   if(iterator->hasNext() && (noLimit || limit > resultsRead)) {
     resultsRead++;
@@ -71,4 +77,19 @@ triple TripleIterator::next() {
     return std::make_tuple(ts->getSubject(), ts->getPredicate(), ts->getObject());
   }
   throw pybind11::stop_iteration();
+}
+
+/**
+ * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended,
+ * but without advancing the iterator.
+ * @return [description]
+ */
+triple TripleIterator::peek() {
+  if (hasBufferedTriple) {
+    return _bufferedTriple;
+  }
+  _bufferedTriple = next();
+  hasBufferedTriple = true;
+  resultsRead--;
+  return _bufferedTriple;
 }

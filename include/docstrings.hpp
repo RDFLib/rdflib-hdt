@@ -155,6 +155,10 @@ const char * TRIPLE_ITERATOR_NEXT_DOC = R"(
   Return the next matching triple read by the iterator, or raise StopIterator if there is no more items to yield.
 )";
 
+const char * TRIPLE_ITERATOR_PEEK_DOC = R"(
+  Return the next matching triple read by the iterator without advancing it, or raise StopIterator if there is no more items to yield.
+)";
+
 const char * TRIPLE_ITERATOR_HASNEXT_DOC = R"(
   Return true if the iterator still has items to yield, false otherwise.
 )";

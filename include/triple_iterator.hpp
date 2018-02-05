@@ -18,6 +18,8 @@
 class TripleIterator: HDTTripleIterator {
 private:
   hdt::IteratorTripleString *iterator;
+  triple _bufferedTriple;
+  bool hasBufferedTriple = false;
 public:
   /*!
    * Constructor
@@ -60,6 +62,13 @@ public:
    * @return [description]
    */
   triple next();
+
+  /**
+   * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended,
+   * but without advancing the iterator.
+   * @return [description]
+   */
+  triple peek();
 };
 
 #endif /* TRIPLE_ITERATOR_HPP */

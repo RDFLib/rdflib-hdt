@@ -7,7 +7,7 @@ command -v pip >/dev/null 2>&1 || { echo >&2 "pip is required for the installati
 command -v git >/dev/null 2>&1 || { echo >&2 "Git is required for the installation of pyHDT! Aborting installation..."; exit 1; }
 
 echo "Fetching sources..."
-git clone --recursive https://github.com/Callidon/pyHDT
+git clone https://github.com/Callidon/pyHDT
 cd pyHDT/
 
 echo "Installing pybind11 mappings..."

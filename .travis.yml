@@ -1,6 +1,5 @@
 language: python
 python:
-  - "2.7"
   - "3.6"
 notifications:
   email: false
@@ -14,7 +13,6 @@ install:
   - if [ $TRAVIS_OS_NAME == linux ]; then
       export CXX=g++-4.8;
     fi
-  - git submodule update --init --recursive
   - pip install -r requirements.txt
   - python setup.py install
 script:

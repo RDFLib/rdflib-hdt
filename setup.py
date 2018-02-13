@@ -90,7 +90,7 @@ setup(
     author="Thomas Minier",
     author_email="thomas.minier@univ-nantes.fr",
     url="https://github.com/Callidon/pyHDT",
-    download_url='https://github.com/Callidon/pyHDT/archive/v1.0.0.tar.gz'
+    download_url='https://github.com/Callidon/pyHDT/archive/v1.0.0.tar.gz',
     description="Read and query HDT document with ease in Python",
     keywords=["hdt", "rdf", "database"],
     license="MIT",

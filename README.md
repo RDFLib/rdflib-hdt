@@ -1,6 +1,10 @@
-# pyHDT [![Build Status](https://travis-ci.org/Callidon/pyHDT.svg?branch=master)](https://travis-ci.org/Callidon/pyHDT) [![Documentation Status](https://readthedocs.org/projects/pyhdt/badge/?version=latest)](http://pyhdt.readthedocs.io/en/latest/?badge=latest)
+# pyHDT
+
+[![Build Status](https://travis-ci.org/Callidon/pyHDT.svg?branch=master)](https://travis-ci.org/Callidon/pyHDT) [![Documentation Status](https://readthedocs.org/projects/pyhdt/badge/?version=latest)](http://pyhdt.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/hdt.svg)](https://badge.fury.io/py/hdt)
 
 Read and query HDT document with ease in Python
+
+[Online Documentation](http://pyhdt.readthedocs.io/en/latest)
 
 # Requirements
 
@@ -13,7 +17,13 @@ Read and query HDT document with ease in Python
 
 # Installation
 
-Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is strongly advised!
+Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**
+
+## Pip install (recommanded)
+
+```
+pip install hdt
+```
 
 ## Quick install
 

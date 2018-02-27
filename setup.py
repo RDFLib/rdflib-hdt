@@ -3,7 +3,10 @@
 from distutils.core import setup, Extension
 from os import listdir
 from shutil import rmtree
-from urllib.request import urlretrieve
+try:
+    from urllib.request import urlretrieve
+except ModuleNotFoundError as e:
+    from urllib import urlretrieve
 from zipfile import ZipFile
 from subprocess import call
 from os import remove

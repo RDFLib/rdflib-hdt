@@ -19,12 +19,6 @@ Read and query HDT document with ease in Python
 
 Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**
 
-## Pip install (recommanded)
-
-```
-pip install hdt
-```
-
 ## Quick install
 
 ```

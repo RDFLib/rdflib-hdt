@@ -14,11 +14,11 @@ import pybind11
 
 __pyhdt_version__ = "1.0.0"
 
-HDT_DOWNLOAD_LINK = "https://github.com/rdfhdt/hdt-cpp/archive/hdt-node.zip"
+HDT_DOWNLOAD_LINK = "https://github.com/rdfhdt/hdt-cpp/archive/v1.3.2.zip"
 HDT_EXTRACT_DIRECTORY = "./"
 
 
-def list_files(path, extension=".cpp", exclude="-1"):
+def list_files(path, extension=".cpp", exclude="S.cpp"):
     """List paths to all files that ends with a given extension"""
     return ["%s/%s" % (path, f) for f in listdir(path) if f.endswith(extension) and (not f.endswith(exclude))]
 
@@ -40,21 +40,26 @@ sources = [
 ]
 
 # HDT source files
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/bitsequence")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/dictionary")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/hdt")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/header")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/huffman")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/libdcs")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/libdcs/fmindex")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/rdf")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/sequence")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/triples")
-sources += list_files("hdt-cpp-hdt-node/hdt-lib/src/util")
+sources += list_files("hdt-cpp-1.3.2/libcds/src/static/bitsequence")
+sources += list_files("hdt-cpp-1.3.2/libcds/src/static/coders")
+sources += list_files("hdt-cpp-1.3.2/libcds/src/static/mapper")
+sources += list_files("hdt-cpp-1.3.2/libcds/src/static/sequence")
+sources += list_files("hdt-cpp-1.3.2/libcds/src/static/permutation")
+sources += list_files("hdt-cpp-1.3.2/libcds/src/utils")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/bitsequence")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/dictionary")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/hdt")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/header")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/huffman")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/libdcs")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/libdcs/fmindex")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/rdf")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/sequence")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/triples")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/util")
 
 # pybind11 + pyHDT headers
 include_dirs = [
-    "/home/stagiaire-gdd/libs/include/python3.4m/",
     pybind11.get_include(),
     pybind11.get_include(True),
     "include/"
@@ -62,29 +67,22 @@ include_dirs = [
 
 # HDT-lib + libcds headers
 include_dirs += [
-    "hdt-cpp-hdt-node/hdt-lib/include/",
-    "hdt-cpp-hdt-node/hdt-lib/src/dictionary/",
-    "hdt-cpp-hdt-node/libcds-v1.0.12/src/static/bitsequence",
-    "hdt-cpp-hdt-node/libcds-v1.0.12/src/static/coders",
-    "hdt-cpp-hdt-node/libcds-v1.0.12/src/static/mapper",
-    "hdt-cpp-hdt-node/libcds-v1.0.12/src/static/permutation",
-    "hdt-cpp-hdt-node/libcds-v1.0.12/src/static/sequence",
-    "hdt-cpp-hdt-node/libcds-v1.0.12/src/utils"
+    "hdt-cpp-1.3.2/libhdt/include/",
+    "hdt-cpp-1.3.2/libhdt/src/dictionary/",
+    "hdt-cpp-1.3.2/libcds/include/",
+    "hdt-cpp-1.3.2/libcds/src/static/bitsequence",
+    "hdt-cpp-1.3.2/libcds/src/static/coders",
+    "hdt-cpp-1.3.2/libcds/src/static/mapper",
+    "hdt-cpp-1.3.2/libcds/src/static/permutation",
+    "hdt-cpp-1.3.2/libcds/src/static/sequence",
+    "hdt-cpp-1.3.2/libcds/src/utils"
 ]
-
-libraries = ['cds']
-library_dirs = ['hdt-cpp-hdt-node/libcds-v1.0.12/lib']
-
 # Need to build in c++11 minimum
 # TODO add a check to use c++14 or c++17 if available
 extra_compile_args = ["-std=c++11"]
 
-# build libcds first
-call(["make", "-C", "hdt-cpp-hdt-node/libcds-v1.0.12"])
-
 # build HDT extension
 hdt_extension = Extension("hdt", sources=sources, include_dirs=include_dirs,
-                          libraries=libraries, library_dirs=library_dirs,
                           extra_compile_args=extra_compile_args, language='c++')
 
 setup(
@@ -95,7 +93,7 @@ setup(
     url="https://github.com/Callidon/pyHDT",
     download_url='https://github.com/Callidon/pyHDT/archive/v1.0.0.tar.gz',
     description="Read and query HDT document with ease in Python",
-    keywords=["hdt", "rdf", "database"],
+    keywords=["hdt", "rdf", "semantic web"],
     license="MIT",
     ext_modules=[hdt_extension]
 )

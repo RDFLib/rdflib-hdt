@@ -1,6 +1,6 @@
 # setup.py
 # Author: Thomas MINIER - MIT License 2017-2018
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 from os import listdir
 from shutil import rmtree
 try:
@@ -10,9 +10,10 @@ except ModuleNotFoundError as e:
 from zipfile import ZipFile
 from subprocess import call
 from os import remove
+from shutil import rmtree
 import pybind11
 
-__pyhdt_version__ = "1.0.0"
+__pyhdt_version__ = "1.0.2"
 
 HDT_DOWNLOAD_LINK = "https://github.com/rdfhdt/hdt-cpp/archive/v1.3.2.zip"
 HDT_EXTRACT_DIRECTORY = "./"
@@ -84,6 +85,9 @@ extra_compile_args = ["-std=c++11"]
 # build HDT extension
 hdt_extension = Extension("hdt", sources=sources, include_dirs=include_dirs,
                           extra_compile_args=extra_compile_args, language='c++')
+packages_data = {
+    '': ['*.hpp']
+}
 
 setup(
     name="hdt",
@@ -95,5 +99,10 @@ setup(
     description="Read and query HDT document with ease in Python",
     keywords=["hdt", "rdf", "semantic web"],
     license="MIT",
+    install_requires=['pybind11==2.2.1'],
+    packages_data=packages_data,
     ext_modules=[hdt_extension]
 )
+
+# remove HDT sources
+rmtree("hdt-cpp-1.3.2")

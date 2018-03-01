@@ -1,0 +1,10 @@
+graft include/
+graft hdt-cpp-1.3.2/libhdt/include/
+graft hdt-cpp-1.3.2/libhdt/src/dictionary/
+graft hdt-cpp-1.3.2/libcds/include/
+graft hdt-cpp-1.3.2/libcds/src/static/bitsequence
+graft hdt-cpp-1.3.2/libcds/src/static/coders
+graft hdt-cpp-1.3.2/libcds/src/static/mapper
+graft hdt-cpp-1.3.2/libcds/src/static/permutation
+graft hdt-cpp-1.3.2/libcds/src/static/sequence
+graft hdt-cpp-1.3.2/libcds/src/utils

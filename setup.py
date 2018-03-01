@@ -13,7 +13,7 @@ from os import remove
 from shutil import rmtree
 import pybind11
 
-__pyhdt_version__ = "1.0.2"
+__pyhdt_version__ = "1.0.3"
 
 HDT_DOWNLOAD_LINK = "https://github.com/rdfhdt/hdt-cpp/archive/v1.3.2.zip"
 HDT_EXTRACT_DIRECTORY = "./"
@@ -63,11 +63,10 @@ sources += list_files("hdt-cpp-1.3.2/libhdt/src/util")
 include_dirs = [
     pybind11.get_include(),
     pybind11.get_include(True),
-    "include/"
 ]
 
-# HDT-lib + libcds headers
-include_dirs += [
+headers = [
+    "include/",
     "hdt-cpp-1.3.2/libhdt/include/",
     "hdt-cpp-1.3.2/libhdt/src/dictionary/",
     "hdt-cpp-1.3.2/libcds/include/",
@@ -78,6 +77,9 @@ include_dirs += [
     "hdt-cpp-1.3.2/libcds/src/static/sequence",
     "hdt-cpp-1.3.2/libcds/src/utils"
 ]
+
+# HDT-lib + libcds headers
+include_dirs += headers
 # Need to build in c++11 minimum
 # TODO add a check to use c++14 or c++17 if available
 extra_compile_args = ["-std=c++11"]
@@ -85,9 +87,6 @@ extra_compile_args = ["-std=c++11"]
 # build HDT extension
 hdt_extension = Extension("hdt", sources=sources, include_dirs=include_dirs,
                           extra_compile_args=extra_compile_args, language='c++')
-packages_data = {
-    '': ['*.hpp']
-}
 
 setup(
     name="hdt",
@@ -100,7 +99,6 @@ setup(
     keywords=["hdt", "rdf", "semantic web"],
     license="MIT",
     install_requires=['pybind11==2.2.1'],
-    packages_data=packages_data,
     ext_modules=[hdt_extension]
 )
 

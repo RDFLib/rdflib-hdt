@@ -8,30 +8,28 @@ Read and query HDT document with ease in Python
 
 # Requirements
 
-* [git](https://git-scm.com/)
 * [pip](https://pip.pypa.io/en/stable/)
 * **gcc/clang** with **c++11 support**
 * **Python Development headers**
-> You sould have the `Python.h` header available on your system.   
-> For example, for Python 3.4, install the `python3.4-dev` package on Debian/Ubuntu systems.
+> You should have the `Python.h` header available on your system.   
+> For example, for Python 3.6, install the `python3.6-dev` package on Debian/Ubuntu systems.
 
 # Installation
 
 Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**
 
-## Quick install
+## Pip install (recommended)
 
 ```
-curl https://github.com/Callidon/pyHDT/blob/master/install.sh -sSf | sh
+pip install hdt
 ```
 
 ## Manual installation
 
 ```
-git clone --recursive https://github.com/Callidon/pyHDT
+git clone https://github.com/Callidon/pyHDT
 cd pyHDT/
-pip install -r requirements.txt
-python setup.py install
+./install.sh
 ```
 
 # Getting started

@@ -1,6 +1,7 @@
 language: python
 python:
 - '3.6'
+- '2.7'
 notifications:
   email: false
 addons:
@@ -9,14 +10,17 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
+before_install:
+  - if [ $TRAVIS_OS_NAME == linux ]; then export CXX=g++-4.8; fi
+  - wget https://github.com/rdfhdt/hdt-cpp/archive/v1.3.2.zip
+  - unzip v1.3.2.zip
 install:
-- if [ $TRAVIS_OS_NAME == linux ]; then export CXX=g++-4.8; fi
-- pip install -r requirements.txt
-- python setup.py install
+  - pip install -r requirements.txt
+  - python setup.py install
 script:
-- python -m unittest discover -p "*_test.py"
+  - python -m unittest discover -p "*_test.py"
 before_deploy:
-- rm -rf build/
+  - rm -rf build/
 deploy:
   provider: pypi
   user: callidon

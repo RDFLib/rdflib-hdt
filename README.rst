@@ -17,19 +17,25 @@ Requirements
    > For example, for Python 3.6, install the ``python3.6-dev`` package
    on Debian/Ubuntu systems.
 
+Then, install the `pybind11
+library <http://pybind11.readthedocs.io/en/stable/>`__
+
+::
+
+    pip install pybind11
+
 Installation
 ============
 
 Installation in a `virtualenv <https://virtualenv.pypa.io/en/stable/>`__
 is **strongly advised!**
 
-Pip install (recommanded)
+Pip install (recommended)
 -------------------------
 
 ::
 
     pip install hdt
-
 
 Manual installation
 -------------------

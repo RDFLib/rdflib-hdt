@@ -18,7 +18,7 @@ using namespace hdt;
  * @param cardinality [description]
  */
 template<typename T>
-void applyOffset(T *it, unsigned int offset, unsigned int cardinality) {
+inline void applyOffset(T *it, unsigned int offset, unsigned int cardinality) {
   if (offset > 0 && offset >= cardinality) {
     // hdt does not allow to skip past beyond the estimated nb of results,
     // so we may have a few results to skip manually

@@ -1,5 +1,17 @@
 graft requirements.txt
 graft include/
+graft hdt-cpp-1.3.2/libhdt/src/bitsequence
+graft hdt-cpp-1.3.2/libhdt/src/dictionary
+graft hdt-cpp-1.3.2/libhdt/src/hdt
+graft hdt-cpp-1.3.2/libhdt/src/header
+graft hdt-cpp-1.3.2/libhdt/src/huffman
+graft hdt-cpp-1.3.2/libhdt/src/libdcs
+graft hdt-cpp-1.3.2/libhdt/src/libdcs/fmindex
+graft hdt-cpp-1.3.2/libhdt/src/rdf
+graft hdt-cpp-1.3.2/libhdt/src/sequence
+graft hdt-cpp-1.3.2/libhdt/src/triples
+graft hdt-cpp-1.3.2/libhdt/src/util
+graft hdt-cpp-1.3.2/libhdt/third
 graft hdt-cpp-1.3.2/libhdt/include/
 graft hdt-cpp-1.3.2/libhdt/src/dictionary/
 graft hdt-cpp-1.3.2/libcds/include/

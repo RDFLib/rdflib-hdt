@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 from os import listdir
 import pybind11
 
-__pyhdt_version__ = "1.0.4c"
+__pyhdt_version__ = "1.1.0"
 
 with open('README.rst') as file:
     long_description = file.read()
@@ -73,7 +73,6 @@ setup(
     author="Thomas Minier",
     author_email="thomas.minier@univ-nantes.fr",
     url="https://github.com/Callidon/pyHDT",
-    download_url='https://github.com/Callidon/pyHDT/archive/v1.0.4c.tar.gz',
     description="Read and query HDT document with ease in Python",
     long_description=long_description,
     keywords=["hdt", "rdf", "semantic web", "search"],

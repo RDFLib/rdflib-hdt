@@ -10,6 +10,10 @@ nbTotalTriples = 132
 
 class TestHDTDocument(unittest.TestCase):
 
+    @unittest.expectedFailure
+    def test_missing_file(self):
+        wrongDoc = HDTDocument("/home/dtrump/wall.hdt")
+
     def test_file_path(self):
         self.assertEqual(document.file_path, path)
 

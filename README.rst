@@ -1,6 +1,3 @@
-pyHDT
-=====
-
 |Build Status| |Documentation Status| |PyPI version|
 
 Read and query HDT document with ease in Python

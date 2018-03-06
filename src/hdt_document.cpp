@@ -3,6 +3,7 @@
  * Author: Thomas MINIER - MIT License 2017-2018
  */
 
+#include <fstream>
 #include <HDTManager.hpp>
 #include <SingleTriple.hpp>
 #include <HDTEnums.hpp>
@@ -11,7 +12,7 @@
 
 using namespace hdt;
 
-/**
+/*!
  * Skip `offset` items from an iterator, optimized for HDT iterators.
  * @param it          [description]
  * @param offset      [description]
@@ -34,11 +35,26 @@ inline void applyOffset(T *it, unsigned int offset, unsigned int cardinality) {
 }
 
 /*!
+ * returns true if a file is readable, False otherwise
+ * @param  name [description]
+ * @return      [description]
+ */
+inline bool file_exists(const std::string& name) {
+  std::ifstream f(name.c_str());
+  bool result = f.good();
+  f.close();
+  return result;
+}
+
+/*!
  * Constructor
  * @param file [description]
  */
 HDTDocument::HDTDocument(std::string file) {
   hdt_file = file;
+  if(!file_exists(file)) {
+    throw std::runtime_error("Cannot open HDT file '" + file + "': Not Found!");
+  }
   hdt = HDTManager::mapIndexedHDT(file.c_str());
 }
 
@@ -75,7 +91,6 @@ std::string HDTDocument::python_repr() {
 search_results HDTDocument::search(std::string subject, std::string predicate, std::string object, unsigned int limit, unsigned int offset) {
   IteratorTripleString *it = hdt->search(subject.c_str(), predicate.c_str(), object.c_str());
   size_t cardinality = it->estimatedNumResults();
-
   // apply offset
   applyOffset<IteratorTripleString>(it, offset, cardinality);
   TripleIterator* resultIterator = new TripleIterator(it, subject, predicate, object, limit, offset);
@@ -99,7 +114,6 @@ search_results_ids HDTDocument::searchIDs(std::string subject, std::string predi
   );
   IteratorTripleID *it = hdt->getTriples()->search(tp);
   size_t cardinality = it->estimatedNumResults();
-
   // apply offset
   applyOffset<IteratorTripleID>(it, offset, cardinality);
   TripleIDIterator* resultIterator = new TripleIDIterator(it, subject, predicate, object, limit, offset);

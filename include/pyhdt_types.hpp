@@ -6,9 +6,9 @@
 #ifndef PYHDT_TYPES_HPP
 #define PYHDT_TYPES_HPP
 
+#include <list>
 #include <string>
 #include <tuple>
-#include <list>
 
 // A RDF Triple. RDF terms are represented as simple strings by HDT.
 typedef std::tuple<std::string, std::string, std::string> triple;

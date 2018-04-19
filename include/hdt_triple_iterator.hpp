@@ -20,12 +20,14 @@ protected:
   unsigned int limit;
   unsigned int offset;
   unsigned int resultsRead = 0;
+
 public:
   /*!
    * Constructor
    * @param iterator [description]
    */
-  HDTTripleIterator(std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset);
+  HDTTripleIterator(std::string _subj, std::string _pred, std::string _obj,
+                    unsigned int _limit, unsigned int _offset);
 
   /*!
    * Destructor

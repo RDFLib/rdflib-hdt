@@ -12,25 +12,22 @@
  * Constructor
  * @param iterator [description]
  */
-TripleIDIterator::TripleIDIterator(hdt::IteratorTripleID *_it, std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset) :
-  HDTTripleIterator(_subj,  _pred, _obj, _limit, _offset),
-  iterator(_it)
-  {};
+TripleIDIterator::TripleIDIterator(hdt::IteratorTripleID *_it,
+                                   std::string _subj, std::string _pred,
+                                   std::string _obj, unsigned int _limit,
+                                   unsigned int _offset)
+    : HDTTripleIterator(_subj, _pred, _obj, _limit, _offset), iterator(_it){};
 
-  /*!
-   * Destructor
-   */
-TripleIDIterator::~TripleIDIterator() {
-  delete iterator;
-};
+/*!
+ * Destructor
+ */
+TripleIDIterator::~TripleIDIterator() { delete iterator; };
 
 /*!
  * Implementation for Python function "__iter__"
  * @return [description]
  */
-TripleIDIterator* TripleIDIterator::python_iter() {
-  return this;
-}
+TripleIDIterator *TripleIDIterator::python_iter() { return this; }
 
 /*!
  * Get the estimated cardinality of the pattern currently evaluated.
@@ -59,8 +56,8 @@ bool TripleIDIterator::hasNext() {
 }
 
 /**
- * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended.
- * Used to implement Python Itertor protocol.
+ * Get the next item in the iterator, or raise py::StopIteration if the iterator
+ * has ended. Used to implement Python Itertor protocol.
  * @return [description]
  */
 triple_id TripleIDIterator::next() {
@@ -71,17 +68,18 @@ triple_id TripleIDIterator::next() {
     return _bufferedTriple;
   }
   bool noLimit = limit == 0;
-  if(iterator->hasNext() && (noLimit || limit > resultsRead)) {
+  if (iterator->hasNext() && (noLimit || limit > resultsRead)) {
     resultsRead++;
     hdt::TripleID *ts = iterator->next();
-    return std::make_tuple(ts->getSubject(), ts->getPredicate(), ts->getObject());
+    return std::make_tuple(ts->getSubject(), ts->getPredicate(),
+                           ts->getObject());
   }
   throw pybind11::stop_iteration();
 }
 
 /**
- * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended,
- * but without advancing the iterator.
+ * Get the next item in the iterator, or raise py::StopIteration if the iterator
+ * has ended, but without advancing the iterator.
  * @return [description]
  */
 triple_id TripleIDIterator::peek() {

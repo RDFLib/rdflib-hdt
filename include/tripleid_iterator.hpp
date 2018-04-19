@@ -6,26 +6,29 @@
 #ifndef TRIPLEID_ITERATOR_HPP
 #define TRIPLEID_ITERATOR_HPP
 
-#include <string>
-#include <Iterator.hpp>
-#include "pyhdt_types.hpp"
 #include "hdt_triple_iterator.hpp"
+#include "pyhdt_types.hpp"
+#include <Iterator.hpp>
+#include <string>
 
 /*!
- * TripleIDIterator iterates over IDs of RDF triples of an HDT document which match a triple pattern + limit + offset
- * \author Thomas Minier
+ * TripleIDIterator iterates over IDs of RDF triples of an HDT document which
+ * match a triple pattern + limit + offset \author Thomas Minier
  */
-class TripleIDIterator: HDTTripleIterator {
+class TripleIDIterator : HDTTripleIterator {
 private:
   hdt::IteratorTripleID *iterator;
   triple_id _bufferedTriple;
   bool hasBufferedTriple = false;
+
 public:
   /*!
    * Constructor
    * @param iterator [description]
    */
-  TripleIDIterator(hdt::IteratorTripleID *_it, std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset);
+  TripleIDIterator(hdt::IteratorTripleID *_it, std::string _subj,
+                   std::string _pred, std::string _obj, unsigned int _limit,
+                   unsigned int _offset);
 
   /*!
    * Destructor
@@ -36,7 +39,7 @@ public:
    * Implementation for Python function "__iter__"
    * @return [description]
    */
-  TripleIDIterator* python_iter();
+  TripleIDIterator *python_iter();
 
   /*!
    * Get the estimated cardinality of the pattern currently evaluated.
@@ -58,14 +61,15 @@ public:
   bool hasNext();
 
   /**
-   * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended
+   * Get the next item in the iterator, or raise py::StopIteration if the
+   * iterator has ended
    * @return [description]
    */
   triple_id next();
 
   /**
-   * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended,
-   * but without advancing the iterator.
+   * Get the next item in the iterator, or raise py::StopIteration if the
+   * iterator has ended, but without advancing the iterator.
    * @return [description]
    */
   triple_id peek();

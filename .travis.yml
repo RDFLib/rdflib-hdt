@@ -15,9 +15,10 @@ before_install:
   - unzip v1.3.2.zip
 install:
   - pip install -r requirements.txt
+  - pip install pytest
   - python setup.py install
 script:
-  - python -m unittest discover -p "*_test.py"
+  - pytest
 before_deploy:
   - rm -rf build/
 deploy:

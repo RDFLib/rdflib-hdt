@@ -6,26 +6,29 @@
 #ifndef TRIPLE_ITERATOR_HPP
 #define TRIPLE_ITERATOR_HPP
 
-#include <string>
-#include <Iterator.hpp>
-#include "pyhdt_types.hpp"
 #include "hdt_triple_iterator.hpp"
+#include "pyhdt_types.hpp"
+#include <Iterator.hpp>
+#include <string>
 
 /*!
- * TripleIterator iterates over RDF triples of an HDT document which match a triple pattern + limit + offset
- * \author Thomas Minier
+ * TripleIterator iterates over RDF triples of an HDT document which match a
+ * triple pattern + limit + offset \author Thomas Minier
  */
-class TripleIterator: HDTTripleIterator {
+class TripleIterator : HDTTripleIterator {
 private:
   hdt::IteratorTripleString *iterator;
   triple _bufferedTriple;
   bool hasBufferedTriple = false;
+
 public:
   /*!
    * Constructor
    * @param iterator [description]
    */
-  TripleIterator(hdt::IteratorTripleString *_it, std::string _subj, std::string _pred, std::string _obj, unsigned int _limit, unsigned int _offset);
+  TripleIterator(hdt::IteratorTripleString *_it, std::string _subj,
+                 std::string _pred, std::string _obj, unsigned int _limit,
+                 unsigned int _offset);
 
   /*!
    * Destructor
@@ -36,7 +39,7 @@ public:
    * Implementation for Python function "__iter__"
    * @return [description]
    */
-  TripleIterator* python_iter();
+  TripleIterator *python_iter();
 
   /*!
    * Get the estimated cardinality of the pattern currently evaluated.
@@ -58,14 +61,15 @@ public:
   bool hasNext();
 
   /**
-   * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended
+   * Get the next item in the iterator, or raise py::StopIteration if the
+   * iterator has ended
    * @return [description]
    */
   triple next();
 
   /**
-   * Get the next item in the iterator, or raise py::StopIteration if the iterator has ended,
-   * but without advancing the iterator.
+   * Get the next item in the iterator, or raise py::StopIteration if the
+   * iterator has ended, but without advancing the iterator.
    * @return [description]
    */
   triple peek();

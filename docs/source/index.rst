@@ -11,6 +11,7 @@ Getting started
 
    installation
    hdtdocument
+   api
 
 Indices and tables
 ==================

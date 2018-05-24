@@ -38,7 +38,7 @@ class TestHDTDocument(unittest.TestCase):
         (ids, idsCard) = document.search_triples_ids("", "", "")
         self.assertEqual(triplesCard, idsCard)
         self.assertEqual(triplesCard, nbTotalTriples)
-        self.assertEqual(len(triples), triplesCard)
+        self.assertEqual(len(triples)[0], triplesCard)
         for subj, pred, obj in triples:
             sid, pid, oid = next(ids)
             s, p, o = document.tripleid_to_string(sid, pid, oid)

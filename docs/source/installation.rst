@@ -4,7 +4,6 @@ Installation
 Requirements
 ^^^^^^^^^^^^
 
-* `git <https://git-scm.com/>`_
 * `pip <https://pip.pypa.io/en/stable/>`_
 * **gcc/clang** with **c++11 support**
 * **Python Development headers**
@@ -12,21 +11,28 @@ Requirements
 You must have the `Python.h` header available on your system.
 For example, for Python 3.4, install the `python3.4-dev` package on Debian/Ubuntu systems.
 
+Then, install the `pybind11
+library <http://pybind11.readthedocs.io/en/stable/>`__
+
+::
+
+    pip install pybind11
+
 Installation
 ^^^^^^^^^^^^^
 
-Installation in a `virtualenv <https://virtualenv.pypa.io/en/stable/>`_ is strongly advised!
+Installation in a `virtualenv <https://virtualenv.pypa.io/en/stable/>`_ is **strongly advised!**
 
-Quick install
-^^^^^^^^^^^^^^^
+Installation with pip
+-------------------------
 
-.. code-block:: bash
+::
 
-  curl https://github.com/Callidon/pyHDT/blob/master/install.sh -sSf | sh
+    pip install hdt
 
 
 Manual installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 .. code-block:: bash
 

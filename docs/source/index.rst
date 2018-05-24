@@ -1,10 +1,7 @@
-.. pyHDT documentation master file, created by
-   sphinx-quickstart on Mon Jan 22 10:41:42 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 pyHDT: Read and query HDT document with ease in Python
 ======================================================
+
+|Build Status| |Documentation Status| |PyPI version|
 
 Getting started
 ==================
@@ -21,3 +18,10 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. |Build Status| image:: https://travis-ci.org/Callidon/pyHDT.svg?branch=master
+   :target: https://travis-ci.org/Callidon/pyHDT
+.. |Documentation Status| image:: https://readthedocs.org/projects/pyhdt/badge/?version=latest
+   :target: http://pyhdt.readthedocs.io/en/latest/?badge=latest
+.. |PyPI version| image:: https://badge.fury.io/py/hdt.svg
+   :target: https://badge.fury.io/py/hdt

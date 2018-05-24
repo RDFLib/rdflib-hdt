@@ -16,7 +16,6 @@ class TestHDTIterators(unittest.TestCase):
         self.assertEqual(triples.predicate, "?p")
         self.assertEqual(triples.object, "?o")
         self.assertEqual(cardinality, nbTotalTriples)
-        self.assertEqual(len(triples)[0], cardinality)
         for subj, pred, obj in triples:
             self.assertNotEqual(subj, None)
             self.assertNotEqual(pred, None)
@@ -28,7 +27,6 @@ class TestHDTIterators(unittest.TestCase):
         (triples, cardinality) = document.search_triples("", "", "", limit=10)
         self.assertEqual(triples.limit, 10)
         self.assertEqual(cardinality, nbTotalTriples)
-        self.assertEqual(len(triples)[0], nbTotalTriples)
         for subj, pred, obj in triples:
             nbItems += 1
             self.assertNotEqual(subj, None)
@@ -42,7 +40,6 @@ class TestHDTIterators(unittest.TestCase):
         (triples, cardinality) = document.search_triples("", "", "", offset=10)
         self.assertEqual(triples.offset, 10)
         self.assertEqual(cardinality, nbTotalTriples)
-        self.assertEqual(len(triples)[0], nbTotalTriples)
         for subj, pred, obj in triples:
             nbItems += 1
             self.assertNotEqual(subj, None)
@@ -57,7 +54,6 @@ class TestHDTIterators(unittest.TestCase):
         self.assertEqual(triples.predicate, "?p")
         self.assertEqual(triples.object, "?o")
         self.assertEqual(cardinality, nbTotalTriples)
-        self.assertEqual(len(triples)[0], cardinality)
         for subj, pred, obj in triples:
             self.assertTrue(subj > 0)
             self.assertTrue(pred > 0)

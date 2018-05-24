@@ -10,20 +10,6 @@
 
 const char *MODULE_DOC = R"(
   The hdt module enables to load and query HDT files with ease.
-
-  Example:
-
-  from hdt import HDTDocument
-
-  # Load an HDT file. Missing indexes are generated automatically
-  document = HDTDocument("test.hdt")
-
-  # Fetch all triples that matches { ?s ?p ?o }
-  (triples, cardinality) = document.search_triples("", "", "")
-
-  print("cardinality of { ?s ?p ?o }: %i" % cardinality)
-  for s, p, o in triples:
-    print(s, p, o)
 )";
 
 /**
@@ -33,32 +19,6 @@ const char *MODULE_DOC = R"(
 const char *HDT_DOCUMENT_CLASS_DOC = R"(
   An HDTDocument enables to load and query a HDT file.
   Indexes are automatically generated if missing.
-
-  Example:
-
-  from hdt import HDTDocument
-
-  # Load an HDT file. Missing indexes are generated automatically
-  document = HDTDocument("test.hdt")
-
-  # Display some metadata about the HDT document itself
-  print("nb triples: %i" % document.get_total_triples())
-  print("nb subjects: %i" % document.get_nb_subjects())
-  print("nb predicates: %i" % document.get_nb_predicates())
-  print("nb objects: %i" % document.get_nb_objets())
-  print("nb shared subject-object: %i" % document.get_nb_shared())
-
-  # Fetch all triples that matches { ?s ?p ?o }
-  # Use empty strings ("") to indicates variables
-  (triples, cardinality) = document.search_triples("", "", "")
-
-  print("cardinality of { ?s ?p ?o }: %i" % cardinality)
-  for s, p, o in triples:
-    print(s, p, o)
-
-  # Search also support limit and offset
-  (triples, cardinality) = document.search_triples("", "", "", limit=10, offset=100)
-  # etc ...
 )";
 
 const char *HDT_DOCUMENT_GETFILEPATH_DOC = R"(
@@ -99,12 +59,6 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
   Return:
     A tuple (list of matching RDF triples, triple pattern cardinality).
     A triple itself is a 3-elements tuple (subject, predicate, object).
-
-  Example:
-  (triples, cardinality) = document.search_triples("", "", "")
-  print("cardinality of { ?s ?p ?o }: %i" % cardinality)
-  for s, p, o in triples:
-    print(s, p, o)
 )";
 
 const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
@@ -194,8 +148,9 @@ const char *TRIPLE_ITERATOR_SIZE_DOC = R"(
   Get a hint on the cardinality of the triple pattern currently evaluated.
   The iterator's limit and offset are not taken into account.
 
-  Return a tuple<integer, boolean>, where the left member is the estimated cardinality,
-  and the right member is True is the estimation is accurate, False otherwise
+  Return:
+    A tuple<integer, boolean>, where the left member is the estimated cardinality,
+    and the right member is True is the estimation is accurate, False otherwise
 )";
 
 const char *TRIPLE_ITERATOR_ACC_ESTIMATION_DOC = R"(

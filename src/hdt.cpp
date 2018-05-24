@@ -35,8 +35,7 @@ PYBIND11_MODULE(hdt, m) {
       .def("__next__", &TripleIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("peek", &TripleIterator::peek, TRIPLE_ITERATOR_PEEK_DOC)
       .def("has_next", &TripleIterator::hasNext, TRIPLE_ITERATOR_HASNEXT_DOC)
-      .def_property_readonly("size_hint", &TripleIterator::sizeHint,
-                             TRIPLE_ITERATOR_SIZE_DOC)
+      .def("size_hint", &TripleIterator::sizeHint, TRIPLE_ITERATOR_SIZE_DOC)
       .def("__len__", &TripleIterator::sizeHint,
            TRIPLE_ITERATOR_SIZE_DOC)
       .def("__iter__", &TripleIterator::python_iter);
@@ -47,11 +46,8 @@ PYBIND11_MODULE(hdt, m) {
       .def("__next__", &TripleIDIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("peek", &TripleIDIterator::peek, TRIPLE_ITERATOR_PEEK_DOC)
       .def("has_next", &TripleIDIterator::hasNext, TRIPLE_ITERATOR_HASNEXT_DOC)
-      .def_property_readonly("size_hint",
-                             &TripleIDIterator::sizeHint,
-                             TRIPLE_ITERATOR_SIZE_DOC)
-      .def("__len__", &TripleIDIterator::sizeHint,
-           TRIPLE_ITERATOR_SIZE_DOC)
+      .def("size_hint", &TripleIDIterator::sizeHint, TRIPLE_ITERATOR_SIZE_DOC)
+      .def("__len__", &TripleIDIterator::sizeHint, TRIPLE_ITERATOR_SIZE_DOC)
       .def("__iter__", &TripleIDIterator::python_iter);
 
   py::class_<HDTDocument>(m, "HDTDocument", HDT_DOCUMENT_CLASS_DOC)
@@ -77,7 +73,8 @@ PYBIND11_MODULE(hdt, m) {
            py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,
            py::arg("offset") = 0)
       .def("tripleid_to_string", &HDTDocument::idsToString,
-           HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC)
+           HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC,
+           py::arg("subject"), py::arg("predicate"), py::arg("object"))
       .def("__len__", &HDTDocument::getNbTriples, HDT_DOCUMENT_GETNBTRIPLES_DOC)
       .def("__repr__", &HDTDocument::python_repr);
 }

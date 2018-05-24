@@ -22,4 +22,8 @@ typedef std::list<triple> triple_list;
 // A list of RDF triples IDs
 typedef std::list<triple_id> triple_ids_list;
 
+// A hint over the cardinality of a triple pattern
+// The right element of the tuple is True if the hint is accurate, False otherwise
+typedef std::tuple<size_t, bool> size_hint;
+
 #endif /* PYHDT_TYPES_HPP */

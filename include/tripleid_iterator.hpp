@@ -46,13 +46,7 @@ public:
    * Offset & limit are not taken into account.
    * @return [description]
    */
-  size_t estimateCardinality();
-
-  /*!
-   * Return true if the estimated number of results is accurate, false otherwise
-   * @return [description]
-   */
-  bool accurateEstimation();
+  size_hint sizeHint();
 
   /*!
    * Return true if the iterator still has items available, False otherwise.

@@ -191,8 +191,11 @@ const char *TRIPLE_ITERATOR_NBREADS_DOC = R"(
 )";
 
 const char *TRIPLE_ITERATOR_SIZE_DOC = R"(
-  Return the estimated cardinality of the triple pattern currently evaluated.
+  Get a hint on the cardinality of the triple pattern currently evaluated.
   The iterator's limit and offset are not taken into account.
+
+  Return a tuple<integer, boolean>, where the left member is the estimated cardinality,
+  and the right member is True is the estimation is accurate, False otherwise
 )";
 
 const char *TRIPLE_ITERATOR_ACC_ESTIMATION_DOC = R"(

@@ -30,20 +30,12 @@ TripleIterator::~TripleIterator() { delete iterator; };
 TripleIterator *TripleIterator::python_iter() { return this; }
 
 /*!
- * Get the estimated cardinality of the pattern currently evaluated.
+ * Get a hint over the cardinality of the triple pattern evaluated.
  * Offset & limit are not taken into account.
  * @return [description]
  */
-size_t TripleIterator::estimateCardinality() {
-  return iterator->estimatedNumResults();
-}
-
-/*!
- * Return true if the estimated number of results is accurate, false otherwise
- * @return [description]
- */
-bool TripleIterator::accurateEstimation() {
-  return iterator->numResultEstimation() == hdt::EXACT;
+size_hint TripleIterator::sizeHint() {
+  return std::make_tuple(iterator->estimatedNumResults(), iterator->numResultEstimation() == hdt::EXACT);
 }
 
 /*!

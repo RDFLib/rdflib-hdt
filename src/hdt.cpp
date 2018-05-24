@@ -35,12 +35,9 @@ PYBIND11_MODULE(hdt, m) {
       .def("__next__", &TripleIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("peek", &TripleIterator::peek, TRIPLE_ITERATOR_PEEK_DOC)
       .def("has_next", &TripleIterator::hasNext, TRIPLE_ITERATOR_HASNEXT_DOC)
-      .def_property_readonly("nb_results", &TripleIterator::estimateCardinality,
+      .def_property_readonly("size_hint", &TripleIterator::sizeHint,
                              TRIPLE_ITERATOR_SIZE_DOC)
-      .def_property_readonly("accurate_len",
-                             &TripleIterator::accurateEstimation,
-                             TRIPLE_ITERATOR_ACC_ESTIMATION_DOC)
-      .def("__len__", &TripleIterator::estimateCardinality,
+      .def("__len__", &TripleIterator::sizeHint,
            TRIPLE_ITERATOR_SIZE_DOC)
       .def("__iter__", &TripleIterator::python_iter);
 
@@ -50,13 +47,10 @@ PYBIND11_MODULE(hdt, m) {
       .def("__next__", &TripleIDIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("peek", &TripleIDIterator::peek, TRIPLE_ITERATOR_PEEK_DOC)
       .def("has_next", &TripleIDIterator::hasNext, TRIPLE_ITERATOR_HASNEXT_DOC)
-      .def_property_readonly("nb_results",
-                             &TripleIDIterator::estimateCardinality,
+      .def_property_readonly("size_hint",
+                             &TripleIDIterator::sizeHint,
                              TRIPLE_ITERATOR_SIZE_DOC)
-      .def_property_readonly("accurate_len",
-                             &TripleIDIterator::accurateEstimation,
-                             TRIPLE_ITERATOR_ACC_ESTIMATION_DOC)
-      .def("__len__", &TripleIDIterator::estimateCardinality,
+      .def("__len__", &TripleIDIterator::sizeHint,
            TRIPLE_ITERATOR_SIZE_DOC)
       .def("__iter__", &TripleIDIterator::python_iter);
 

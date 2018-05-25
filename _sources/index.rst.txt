@@ -23,6 +23,6 @@ Indices and tables
 .. |Build Status| image:: https://travis-ci.org/Callidon/pyHDT.svg?branch=master
    :target: https://travis-ci.org/Callidon/pyHDT
 .. |Documentation Status| image:: https://readthedocs.org/projects/pyhdt/badge/?version=latest
-   :target: http://pyhdt.readthedocs.io/en/latest/?badge=latest
+   :target: https://callidon.github.io/pyHDT
 .. |PyPI version| image:: https://badge.fury.io/py/hdt.svg
    :target: https://badge.fury.io/py/hdt

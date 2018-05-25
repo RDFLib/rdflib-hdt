@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 from os import listdir
 import pybind11
 
-__pyhdt_version__ = "1.1.0"
+__pyhdt_version__ = "1.1.1"
 
 with open('README.rst') as file:
     long_description = file.read()

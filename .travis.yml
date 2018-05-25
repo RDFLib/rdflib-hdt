@@ -1,4 +1,5 @@
 language: python
+cache: pip
 python:
 - '3.6'
 notifications:
@@ -15,16 +16,24 @@ before_install:
   - unzip v1.3.2.zip
 install:
   - pip install -r requirements.txt
-  - pip install pytest
+  - pip install pytest sphinx sphinx_rtd_theme
   - python setup.py install
 script:
   - pytest
 before_deploy:
   - rm -rf build/
+  - cd docs && make html
 deploy:
+- provider: pypi
   skip_cleanup: true
-  provider: pypi
   user: callidon
   password: $PYPI_PASSWD
   on:
     tags: true
+- provider: pages
+  skip_cleanup: true
+  github_token: $GH_PAGES
+  keep_history: true
+  local_dir: docs/build/html
+  on:
+    branch: master

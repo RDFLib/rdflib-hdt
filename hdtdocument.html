@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HDTDocument &mdash; pyHDT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API documentation" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pyHDT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HDTDocument</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#loading-hdt-files">Loading HDT files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#searching-for-triples">Searching for triples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#searching-for-triple-ids">Searching for triple IDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ordering">Ordering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyHDT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>HDTDocument</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/hdtdocument.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hdtdocument">
+<h1>HDTDocument<a class="headerlink" href="#hdtdocument" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="loading-hdt-files">
+<h2>Loading HDT files<a class="headerlink" href="#loading-hdt-files" title="Permalink to this headline">¶</a></h2>
+<p>The main class for manipulating HDT Dicument using pyHDT is <code class="docutils literal notranslate"><span class="pre">HDTDocument</span></code>.
+Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.</p>
+<p>For example, if you load a file <em>/home/awesome-user/test.hdt</em>, HDTDocument will look for the index file
+<em>/home/awesome-user/test.hdt.index.v1-1</em>.</p>
+<p>Missing indexes are generated automatically, but be careful, as it requires to load all HDT triples in memory!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+
+<span class="c1"># Load HDT file. Missing indexes are generated automatically</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display some metadata about the HDT document itself</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb triples: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_total_triples</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb subjects: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_subjects</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb predicates: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_predicates</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb objects: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_objets</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb shared subject-object: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_shared</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="searching-for-triples">
+<h2>Searching for triples<a class="headerlink" href="#searching-for-triples" title="Permalink to this headline">¶</a></h2>
+<p>You can search for all RDF triples in the HDT file matching a triple pattern using <cite>search_triples</cite>.
+It returns a 2-element tuple, with an <em>iterator</em> over the matching RDF triples and the estimated triple pattern <em>cardinality</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fetch all triples that matches { ?s ?p ?o }</span>
+<span class="c1"># Use empty strings (&quot;&quot;) to indicates variables</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;cardinality of { ?s ?p ?o }: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cardinality</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">triple</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">triple</span><span class="p">)</span>
+
+<span class="c1"># Search also support limit and offset</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># etc ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="searching-for-triple-ids">
+<h2>Searching for triple IDs<a class="headerlink" href="#searching-for-triple-ids" title="Permalink to this headline">¶</a></h2>
+<p>A typical HDT document encodes a triple’s subject, predicate and object as unique integers, named <strong>TripleID</strong>.
+For example, the triple <code class="docutils literal notranslate"><span class="pre">(&quot;ex:Toto&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code> can be encoded as <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.
+An <code class="docutils literal notranslate"><span class="pre">HDTDocument</span></code> allows for searching RDF triples in this format, using the <code class="docutils literal notranslate"><span class="pre">search_triple_ids</span></code> method, which works exactly like the classic <code class="docutils literal notranslate"><span class="pre">search_triple</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples_ids</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="c1"># will print 3-element tuples of integers</span>
+
+  <span class="c1"># convert a triple ID to a string format</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">tripleid_to_string</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ordering">
+<h2>Ordering<a class="headerlink" href="#ordering" title="Permalink to this headline">¶</a></h2>
+<p>When searching for triples (either in string or triple id format), results are returned ordred by (subject, predicate, object).
+However, this order is <strong>not</strong> an order on string values, but an order on <strong>triple ids</strong>.
+For example, <code class="docutils literal notranslate"><span class="pre">(&quot;ex:2&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span> <span class="pre">&lt;</span> <span class="pre">(&quot;ex:1&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code>,
+because their triple ids counterparts are <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code> and <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.</p>
+<p>For more details about this topic, please refer to the <a class="reference external" href="http://www.imap.websemanticsjournal.org/preprints/index.php/ps/article/viewFile/328/333">HDT journal article</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="API documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Thomas Minier.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

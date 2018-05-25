@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API documentation &mdash; pyHDT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="HDTDocument" href="hdtdocument.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pyHDT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdtdocument.html">HDTDocument</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hdtdocument">HDTDocument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tripleiterator">TripleIterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tripleiditerator">TripleIDIterator</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyHDT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>API documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-documentation">
+<h1>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hdtdocument">
+<h2>HDTDocument<a class="headerlink" href="#hdtdocument" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="hdt.HDTDocument">
+<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">HDTDocument</code><a class="headerlink" href="#hdt.HDTDocument" title="Permalink to this definition">¶</a></dt>
+<dd><p>An HDTDocument enables to load and query a HDT file.
+Indexes are automatically generated if missing.</p>
+<dl class="attribute">
+<dt id="hdt.HDTDocument.file_path">
+<code class="descname">file_path</code><a class="headerlink" href="#hdt.HDTDocument.file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the path to the HDT file currently loaded</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.HDTDocument.nb_objects">
+<code class="descname">nb_objects</code><a class="headerlink" href="#hdt.HDTDocument.nb_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of objects in the HDT document</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.HDTDocument.nb_predicates">
+<code class="descname">nb_predicates</code><a class="headerlink" href="#hdt.HDTDocument.nb_predicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of predicates in the HDT document</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.HDTDocument.nb_shared">
+<code class="descname">nb_shared</code><a class="headerlink" href="#hdt.HDTDocument.nb_shared" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of shared subject-object in the HDT document</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.HDTDocument.nb_subjects">
+<code class="descname">nb_subjects</code><a class="headerlink" href="#hdt.HDTDocument.nb_subjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of subjects in the HDT document</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.HDTDocument.search_triples">
+<code class="descname">search_triples</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: str</em>, <em>predicate: str</em>, <em>object: str</em>, <em>limit: int=0</em>, <em>offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for RDF triples matching the triple pattern { subject predicate object }, with an optional limit and offset.
+Use empty strings (“”) to indicate variables.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>subject (str): The subject of the triple pattern to seach for.
+predicate (str): The predicate of the triple pattern to seach for.
+obj (str): The object of the triple pattern ot seach for.
+limit (int, optional): Maximum number of triples to search for.
+offset (int, optional): Number of matching to skip before returning results.</dd>
+<dt>Return:</dt>
+<dd>A tuple (list of matching RDF triples, triple pattern cardinality).
+A triple itself is a 3-elements tuple (subject, predicate, object).</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.HDTDocument.search_triples_ids">
+<code class="descname">search_triples_ids</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: str</em>, <em>predicate: str</em>, <em>object: str</em>, <em>limit: int=0</em>, <em>offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIDIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as HDTDocument.search, but RDF triples are represented as unique ids (from the HDT Dictionnary).
+Use empty strings (“”) to indicate variables.
+Transformation from triple ids to triple strings is done using HDTDocument.tripleid_to_string</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>subject (str): The subject of the triple pattern to seach for.
+predicate (str): The predicate of the triple pattern to seach for.
+obj (str): The object of the triple pattern ot seach for.
+limit (int, optional): Maximum number of triples to search for.
+offset (int, optional): Number of matching to skip before returning results.</dd>
+<dt>Return:</dt>
+<dd>A tuple (list of matching RDF triples, triple pattern cardinality).
+A triple itself is a 3-elements tuple (subject, predicate, object),</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.HDTDocument.total_triples">
+<code class="descname">total_triples</code><a class="headerlink" href="#hdt.HDTDocument.total_triples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total number of triples in the HDT document</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.HDTDocument.tripleid_to_string">
+<code class="descname">tripleid_to_string</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: int</em>, <em>predicate: int</em>, <em>object: int</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.HDTDocument.tripleid_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a RDF triple from a TripleID representation to a string representation.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>subject (int): unique ID of the subject.
+predicate (int): unique ID of the predicate.
+obj (int): unique ID of the object.</dd>
+<dt>Return:</dt>
+<dd>A triple in string representation, i.e., a 3-elements tuple (subject, predicate, object),</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="tripleiterator">
+<h2>TripleIterator<a class="headerlink" href="#tripleiterator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="hdt.TripleIterator">
+<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">TripleIterator</code><a class="headerlink" href="#hdt.TripleIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A TripleIterator iterates over triples in a HDT file matching a triple pattern, with an optional limit &amp; offset.
+Such iterator can be obtained by a call to HDTDocument#search_triples</p>
+<dl class="method">
+<dt id="hdt.TripleIterator.has_next">
+<code class="descname">has_next</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.TripleIterator.has_next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if the iterator still has items to yield, false otherwise.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIterator.limit">
+<code class="descname">limit</code><a class="headerlink" href="#hdt.TripleIterator.limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the limit of the iterator, i.e., the maximum number of items the iterator will yield.
+A limit of 0 indicates that the iterator limit is the cardinality of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIterator.nb_reads">
+<code class="descname">nb_reads</code><a class="headerlink" href="#hdt.TripleIterator.nb_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of items read by the iterator until now.
+Do not include any offset, thus the real position of the iterator in the collection of triples can be computed as offset + nb_reads</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.TripleIterator.next">
+<code class="descname">next</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.TripleIterator.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next matching triple read by the iterator, or raise StopIterator if there is no more items to yield.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIterator.object">
+<code class="descname">object</code><a class="headerlink" href="#hdt.TripleIterator.object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the object of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIterator.offset">
+<code class="descname">offset</code><a class="headerlink" href="#hdt.TripleIterator.offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the offset of the iterator, i.e., the number of items the iterator will first skip before yielding.
+An offset of 0 indicates that the iterator will not skip any items.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.TripleIterator.peek">
+<code class="descname">peek</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.TripleIterator.peek" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next matching triple read by the iterator without advancing it, or raise StopIterator if there is no more items to yield.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIterator.predicate">
+<code class="descname">predicate</code><a class="headerlink" href="#hdt.TripleIterator.predicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the predicate of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.TripleIterator.size_hint">
+<code class="descname">size_hint</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, bool]<a class="headerlink" href="#hdt.TripleIterator.size_hint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a hint on the cardinality of the triple pattern currently evaluated.
+The iterator’s limit and offset are not taken into account.</p>
+<dl class="docutils">
+<dt>Return:</dt>
+<dd>A tuple&lt;integer, boolean&gt;, where the left member is the estimated cardinality,
+and the right member is True is the estimation is accurate, False otherwise</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIterator.subject">
+<code class="descname">subject</code><a class="headerlink" href="#hdt.TripleIterator.subject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the subject of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="tripleiditerator">
+<h2>TripleIDIterator<a class="headerlink" href="#tripleiditerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="hdt.TripleIDIterator">
+<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">TripleIDIterator</code><a class="headerlink" href="#hdt.TripleIDIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A TripleIDIterator iterates over triples’ IDs in a HDT file matching a triple pattern, with an optional limit &amp; offset.
+Such iterator can be obtained by a call to HDTDocument#search_triples_ids.
+Conversion from a tuple of triple ids into a RDF triple is done using HDTDocument#ids_to_string()</p>
+<dl class="method">
+<dt id="hdt.TripleIDIterator.has_next">
+<code class="descname">has_next</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.TripleIDIterator.has_next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if the iterator still has items to yield, false otherwise.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIDIterator.limit">
+<code class="descname">limit</code><a class="headerlink" href="#hdt.TripleIDIterator.limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the limit of the iterator, i.e., the maximum number of items the iterator will yield.
+A limit of 0 indicates that the iterator limit is the cardinality of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIDIterator.nb_reads">
+<code class="descname">nb_reads</code><a class="headerlink" href="#hdt.TripleIDIterator.nb_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of items read by the iterator until now.
+Do not include any offset, thus the real position of the iterator in the collection of triples can be computed as offset + nb_reads</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.TripleIDIterator.next">
+<code class="descname">next</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, int, int]<a class="headerlink" href="#hdt.TripleIDIterator.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next matching triple read by the iterator, or raise StopIterator if there is no more items to yield.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIDIterator.object">
+<code class="descname">object</code><a class="headerlink" href="#hdt.TripleIDIterator.object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the object of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIDIterator.offset">
+<code class="descname">offset</code><a class="headerlink" href="#hdt.TripleIDIterator.offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the offset of the iterator, i.e., the number of items the iterator will first skip before yielding.
+An offset of 0 indicates that the iterator will not skip any items.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.TripleIDIterator.peek">
+<code class="descname">peek</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, int, int]<a class="headerlink" href="#hdt.TripleIDIterator.peek" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next matching triple read by the iterator without advancing it, or raise StopIterator if there is no more items to yield.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIDIterator.predicate">
+<code class="descname">predicate</code><a class="headerlink" href="#hdt.TripleIDIterator.predicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the predicate of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.TripleIDIterator.size_hint">
+<code class="descname">size_hint</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, bool]<a class="headerlink" href="#hdt.TripleIDIterator.size_hint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a hint on the cardinality of the triple pattern currently evaluated.
+The iterator’s limit and offset are not taken into account.</p>
+<dl class="docutils">
+<dt>Return:</dt>
+<dd>A tuple&lt;integer, boolean&gt;, where the left member is the estimated cardinality,
+and the right member is True is the estimation is accurate, False otherwise</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hdt.TripleIDIterator.subject">
+<code class="descname">subject</code><a class="headerlink" href="#hdt.TripleIDIterator.subject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the subject of the triple pattern currently evaluated.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="hdtdocument.html" class="btn btn-neutral" title="HDTDocument" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Thomas Minier.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

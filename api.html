@@ -239,7 +239,18 @@ Use empty strings (<code class="docutils literal notranslate"><span class="pre">
 <dt>Return:</dt>
 <dd><p class="first">A 2-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (<a class="reference internal" href="#hdt.TripleIterator" title="hdt.TripleIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.TripleIterator</span></code></a>, estimated pattern cardinality), where
 the TripleIterator iterates over matching RDF triples.</p>
-<p class="last">A RDF triple itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object).</p>
+<p>A RDF triple itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object).</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fetch all triples that matches { ?s ?p ?o }</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;cardinality of { ?s ?p ?o }: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cardinality</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">triple</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">triple</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -263,7 +274,18 @@ Use empty strings (“”) to indicate variables.</p>
 <dt>Return:</dt>
 <dd><p class="first">A 2-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (<a class="reference internal" href="#hdt.TripleIDIterator" title="hdt.TripleIDIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.TripleIDIterator</span></code></a>, estimated pattern cardinality), where
 the TripleIDIterator iterates over matching RDF triples IDs.</p>
-<p class="last">A RDF triple ID itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subjectID, predicateID, objectID).</p>
+<p>A RDF triple ID itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subjectID, predicateID, objectID).</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fetch all triples that matches { ?s ?p ?o }</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples_ids</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;cardinality of { ?s ?p ?o }: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cardinality</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">triple</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">triple</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -287,7 +309,18 @@ the TripleIDIterator iterates over matching RDF triples IDs.</p>
 </ul>
 </dd>
 <dt>Return:</dt>
-<dd>A triple in string representation, i.e., a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object),</dd>
+<dd><p class="first">A triple in string representation, i.e., a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object)</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples_ids</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="c1"># will print IDS, i.e., integers</span>
+  <span class="c1"># convert a triple ID to a string format</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">tripleid_to_string</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
 </dl>
 </dd></dl>
 

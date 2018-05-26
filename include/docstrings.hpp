@@ -62,6 +62,19 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
     the TripleIterator iterates over matching RDF triples.
 
     A RDF triple itself is a 3-elements ``tuple`` (subject, predicate, object).
+
+    .. code-block:: python
+
+      from hdt import HDTDocument
+      document = HDTDocument("test.hdt")
+
+      # Fetch all triples that matches { ?s ?p ?o }
+      (triples, cardinality) = document.search_triples("", "", "")
+
+      print("cardinality of { ?s ?p ?o }: %i" % cardinality)
+      for triple in triples:
+        print(triple)
+
 )";
 
 const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
@@ -82,6 +95,19 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
     the TripleIDIterator iterates over matching RDF triples IDs.
 
     A RDF triple ID itself is a 3-elements ``tuple`` (subjectID, predicateID, objectID).
+
+    .. code-block:: python
+
+      from hdt import HDTDocument
+      document = HDTDocument("test.hdt")
+
+      # Fetch all triples that matches { ?s ?p ?o }
+      (triples, cardinality) = document.search_triples_ids("", "", "")
+
+      print("cardinality of { ?s ?p ?o }: %i" % cardinality)
+      for triple in triples:
+        print(triple)
+
 )";
 
 const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
@@ -93,7 +119,19 @@ const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
     - obj ``int``: unique ID of the object.
 
   Return:
-    A triple in string representation, i.e., a 3-elements ``tuple`` (subject, predicate, object),
+    A triple in string representation, i.e., a 3-elements ``tuple`` (subject, predicate, object)
+
+    .. code-block:: python
+
+      from hdt import HDTDocument
+      document = HDTDocument("test.hdt")
+      (triples, cardinality) = document.search_triples_ids("", "", "")
+
+      for s, p, o in triples:
+        print(s, p, o) # will print IDS, i.e., integers
+        # convert a triple ID to a string format
+        print(document.tripleid_to_string(s, p, o))
+
 )";
 
 /**

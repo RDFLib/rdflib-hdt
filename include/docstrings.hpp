@@ -93,7 +93,7 @@ const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
     - obj ``int``: unique ID of the object.
 
   Return:
-    A triple in string representation, i.e., a 3-elements tuple (subject, predicate, object),
+    A triple in string representation, i.e., a 3-elements ``tuple`` (subject, predicate, object),
 )";
 
 /**

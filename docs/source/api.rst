@@ -24,11 +24,11 @@ HDTDocument
       document = HDTDocument("test.hdt")
 
       # Display some metadata about the HDT document itself
-      print("nb triples: %i" % document.get_total_triples())
-      print("nb subjects: %i" % document.get_nb_subjects())
-      print("nb predicates: %i" % document.get_nb_predicates())
-      print("nb objects: %i" % document.get_nb_objets())
-      print("nb shared subject-object: %i" % document.get_nb_shared())
+      print("nb triples: %i" % document.total_triples)
+      print("nb subjects: %i" % document.nb_subjects)
+      print("nb predicates: %i" % document.nb_predicates)
+      print("nb objects: %i" % document.nb_objets)
+      print("nb shared subject-object: %i" % document.nb_shared)
 
 
 TripleIterator

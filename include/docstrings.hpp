@@ -46,45 +46,51 @@ const char *HDT_DOCUMENT_GETNBSHARED_DOC = R"(
 )";
 
 const char *HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
-  Search for RDF triples matching the triple pattern { subject predicate object }, with an optional limit and offset.
-  Use empty strings ("") to indicate variables.
+  Search for RDF triples matching the triple pattern { ``subject`` ``predicate`` ``object`` },
+  with an optional ``limit`` and ``offset``.
+  Use empty strings (``""``) to indicate SPARQL variables.
 
   Args:
-    subject (str): The subject of the triple pattern to seach for.
-    predicate (str): The predicate of the triple pattern to seach for.
-    obj (str): The object of the triple pattern ot seach for.
-    limit (int, optional): Maximum number of triples to search for.
-    offset (int, optional): Number of matching to skip before returning results.
+    - subject ``str``: The subject of the triple pattern to seach for.
+    - predicate ``str``: The predicate of the triple pattern to seach for.
+    - obj ``str``: The object of the triple pattern ot seach for.
+    - limit ``int`` ``optional``: Maximum number of triples to search for.
+    - offset ``int`` ``optional``: Number of matching triples to skip before returning results.
 
   Return:
-    A tuple (list of matching RDF triples, triple pattern cardinality).
-    A triple itself is a 3-elements tuple (subject, predicate, object).
+    A 2-elements ``tuple`` (:class:`hdt.TripleIterator`, estimated pattern cardinality), where
+    the TripleIterator iterates over matching RDF triples.
+
+    A RDF triple itself is a 3-elements ``tuple`` (subject, predicate, object).
 )";
 
 const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
-  Same as HDTDocument.search, but RDF triples are represented as unique ids (from the HDT Dictionnary).
+  Same as :meth:`hdt.HDTDocument.search_triples`, but RDF triples are represented as unique ids (from the HDT Dictionnary).
   Use empty strings ("") to indicate variables.
-  Transformation from triple ids to triple strings is done using HDTDocument.tripleid_to_string
+
+  Transformation from triple ids to triple strings is done using :meth:`hdt.HDTDocument.tripleid_to_string`.
 
   Args:
-    subject (str): The subject of the triple pattern to seach for.
-    predicate (str): The predicate of the triple pattern to seach for.
-    obj (str): The object of the triple pattern ot seach for.
-    limit (int, optional): Maximum number of triples to search for.
-    offset (int, optional): Number of matching to skip before returning results.
+    - subject ``str``: The subject of the triple pattern to seach for.
+    - predicate ``str``: The predicate of the triple pattern to seach for.
+    - obj ``str``: The object of the triple pattern ot seach for.
+    - limit ``int`` ``optional``: Maximum number of triples to search for.
+    - offset ``int`` ``optional``: Number of matching triples to skip before returning results.
 
   Return:
-    A tuple (list of matching RDF triples, triple pattern cardinality).
-    A triple itself is a 3-elements tuple (subject, predicate, object),
+    A 2-elements ``tuple`` (:class:`hdt.TripleIDIterator`, estimated pattern cardinality), where
+    the TripleIDIterator iterates over matching RDF triples IDs.
+
+    A RDF triple ID itself is a 3-elements ``tuple`` (subjectID, predicateID, objectID).
 )";
 
 const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
   Transform a RDF triple from a TripleID representation to a string representation.
 
   Args:
-    subject (int): unique ID of the subject.
-    predicate (int): unique ID of the predicate.
-    obj (int): unique ID of the object.
+    - subject ``int``: unique ID of the subject.
+    - predicate ``int``: unique ID of the predicate.
+    - obj ``int``: unique ID of the object.
 
   Return:
     A triple in string representation, i.e., a 3-elements tuple (subject, predicate, object),
@@ -96,21 +102,24 @@ const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
 
 const char *TRIPLE_ITERATOR_CLASS_DOC = R"(
   A TripleIterator iterates over triples in a HDT file matching a triple pattern, with an optional limit & offset.
-  Such iterator can be obtained by a call to HDTDocument#search_triples
+
+  Such iterator is returned by :meth:`hdt.HDTDocument.search_triples`.
 )";
 
 const char *TRIPLE_ID_ITERATOR_CLASS_DOC = R"(
   A TripleIDIterator iterates over triples' IDs in a HDT file matching a triple pattern, with an optional limit & offset.
-  Such iterator can be obtained by a call to HDTDocument#search_triples_ids.
-  Conversion from a tuple of triple ids into a RDF triple is done using HDTDocument#ids_to_string()
+
+  Such iterator is returned by :meth:`hdt.HDTDocument.search_triples_ids`
+
+  Conversion from a tuple of triple ids into a RDF triple is done using :meth:`hdt.HDTDocument.tripleid_to_string`.
 )";
 
 const char *TRIPLE_ITERATOR_NEXT_DOC = R"(
-  Return the next matching triple read by the iterator, or raise StopIterator if there is no more items to yield.
+  Return the next matching triple read by the iterator, or raise ``StopIterator`` if there is no more items to yield.
 )";
 
 const char *TRIPLE_ITERATOR_PEEK_DOC = R"(
-  Return the next matching triple read by the iterator without advancing it, or raise StopIterator if there is no more items to yield.
+  Return the next matching triple read by the iterator without advancing it, or raise ``StopIterator`` if there is no more items to yield.
 )";
 
 const char *TRIPLE_ITERATOR_HASNEXT_DOC = R"(
@@ -149,7 +158,7 @@ const char *TRIPLE_ITERATOR_SIZE_DOC = R"(
   The iterator's limit and offset are not taken into account.
 
   Return:
-    A tuple<integer, boolean>, where the left member is the estimated cardinality,
+    A 2-element ``tuple`` (integer, boolean), where the left member is the estimated cardinality,
     and the right member is True is the estimation is accurate, False otherwise
 )";
 

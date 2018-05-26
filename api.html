@@ -181,11 +181,11 @@ Indexes are automatically generated if missing.</p>
 <span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
 
 <span class="c1"># Display some metadata about the HDT document itself</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb triples: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_total_triples</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb subjects: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_subjects</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb predicates: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_predicates</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb objects: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_objets</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb shared subject-object: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">get_nb_shared</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb triples: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">total_triples</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb subjects: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">nb_subjects</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb predicates: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">nb_predicates</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb objects: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">nb_objets</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;nb shared subject-object: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">document</span><span class="o">.</span><span class="n">nb_shared</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -287,7 +287,7 @@ the TripleIDIterator iterates over matching RDF triples IDs.</p>
 </ul>
 </dd>
 <dt>Return:</dt>
-<dd>A triple in string representation, i.e., a 3-elements tuple (subject, predicate, object),</dd>
+<dd>A triple in string representation, i.e., a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object),</dd>
 </dl>
 </dd></dl>
 

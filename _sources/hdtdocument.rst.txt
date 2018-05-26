@@ -20,11 +20,11 @@ Missing indexes are generated automatically, but be careful, as it requires to l
   document = HDTDocument("test.hdt")
 
   # Display some metadata about the HDT document itself
-  print("nb triples: %i" % document.get_total_triples())
-  print("nb subjects: %i" % document.get_nb_subjects())
-  print("nb predicates: %i" % document.get_nb_predicates())
-  print("nb objects: %i" % document.get_nb_objets())
-  print("nb shared subject-object: %i" % document.get_nb_shared())
+  print("nb triples: %i" % document.total_triples)
+  print("nb subjects: %i" % document.nb_subjects)
+  print("nb predicates: %i" % document.nb_predicates)
+  print("nb objects: %i" % document.nb_objets)
+  print("nb shared subject-object: %i" % document.nb_shared)
 
 
 Searching for triples
@@ -66,7 +66,7 @@ An ``HDTDocument`` allows for searching RDF triples in this format, using the ``
 
   for s, p, o in triples:
     print(s, p, o) # will print 3-element tuples of integers
-    
+
     # convert a triple ID to a string format
     print(document.tripleid_to_string(s, p, o))
 

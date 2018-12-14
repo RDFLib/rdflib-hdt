@@ -11,26 +11,7 @@ namespace py = pybind11;
 PYBIND11_MODULE(hdt, m) {
   m.doc() = MODULE_DOC;
 
-  py::class_<HDTTripleIterator> baseIterator(
-      m, "HDTTripleIterator", "An abstract iterator over an HDTDocument");
-  baseIterator
-      .def_property_readonly("subject", &HDTTripleIterator::getSubject,
-                             TRIPLE_ITERATOR_GETSUBJECT_DOC)
-      .def_property_readonly("predicate", &HDTTripleIterator::getPredicate,
-                             TRIPLE_ITERATOR_GETPREDICATE_DOC)
-      .def_property_readonly("object", &HDTTripleIterator::getObject,
-                             TRIPLE_ITERATOR_GETOBJECT_DOC)
-      .def_property_readonly("limit", &HDTTripleIterator::getLimit,
-                             TRIPLE_ITERATOR_GETLIMIT_DOC)
-      .def_property_readonly("offset", &HDTTripleIterator::getOffset,
-                             TRIPLE_ITERATOR_GETOFFSET_DOC)
-      .def_property("nb_reads", &HDTTripleIterator::getNbResultsRead,
-                    &HDTTripleIterator::setNbResultsRead,
-                    TRIPLE_ITERATOR_NBREADS_DOC)
-      .def("__repr__", &HDTTripleIterator::python_repr);
-
-  py::class_<TripleIterator>(m, "TripleIterator", baseIterator,
-                             TRIPLE_ITERATOR_CLASS_DOC)
+  py::class_<TripleIterator>(m, "TripleIterator", TRIPLE_ITERATOR_CLASS_DOC)
       .def("next", &TripleIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("__next__", &TripleIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("peek", &TripleIterator::peek, TRIPLE_ITERATOR_PEEK_DOC)
@@ -38,17 +19,42 @@ PYBIND11_MODULE(hdt, m) {
       .def("size_hint", &TripleIterator::sizeHint, TRIPLE_ITERATOR_SIZE_DOC)
       .def("__len__", &TripleIterator::sizeHint,
            TRIPLE_ITERATOR_SIZE_DOC)
-      .def("__iter__", &TripleIterator::python_iter);
+      .def("__iter__", &TripleIterator::python_iter)
+      .def_property_readonly("subject", &TripleIterator::getSubject,
+                             TRIPLE_ITERATOR_GETSUBJECT_DOC)
+      .def_property_readonly("predicate", &TripleIterator::getPredicate,
+                             TRIPLE_ITERATOR_GETPREDICATE_DOC)
+      .def_property_readonly("object", &TripleIterator::getObject,
+                             TRIPLE_ITERATOR_GETOBJECT_DOC)
+      .def_property_readonly("limit", &TripleIterator::getLimit,
+                             TRIPLE_ITERATOR_GETLIMIT_DOC)
+      .def_property_readonly("offset", &TripleIterator::getOffset,
+                             TRIPLE_ITERATOR_GETOFFSET_DOC)
+      .def_property_readonly("nb_reads", &TripleIterator::getNbResultsRead,
+                    TRIPLE_ITERATOR_NBREADS_DOC)
+      .def("__repr__", &TripleIterator::python_repr);
 
-  py::class_<TripleIDIterator>(m, "TripleIDIterator", baseIterator,
-                               TRIPLE_ID_ITERATOR_CLASS_DOC)
+  py::class_<TripleIDIterator>(m, "TripleIDIterator", TRIPLE_ID_ITERATOR_CLASS_DOC)
       .def("next", &TripleIDIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("__next__", &TripleIDIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("peek", &TripleIDIterator::peek, TRIPLE_ITERATOR_PEEK_DOC)
       .def("has_next", &TripleIDIterator::hasNext, TRIPLE_ITERATOR_HASNEXT_DOC)
       .def("size_hint", &TripleIDIterator::sizeHint, TRIPLE_ITERATOR_SIZE_DOC)
       .def("__len__", &TripleIDIterator::sizeHint, TRIPLE_ITERATOR_SIZE_DOC)
-      .def("__iter__", &TripleIDIterator::python_iter);
+      .def("__iter__", &TripleIDIterator::python_iter)
+      .def_property_readonly("subject", &TripleIDIterator::getSubject,
+                             TRIPLE_ITERATOR_GETSUBJECT_DOC)
+      .def_property_readonly("predicate", &TripleIDIterator::getPredicate,
+                             TRIPLE_ITERATOR_GETPREDICATE_DOC)
+      .def_property_readonly("object", &TripleIDIterator::getObject,
+                             TRIPLE_ITERATOR_GETOBJECT_DOC)
+      .def_property_readonly("limit", &TripleIDIterator::getLimit,
+                             TRIPLE_ITERATOR_GETLIMIT_DOC)
+      .def_property_readonly("offset", &TripleIDIterator::getOffset,
+                             TRIPLE_ITERATOR_GETOFFSET_DOC)
+      .def_property_readonly("nb_reads", &TripleIDIterator::getNbResultsRead,
+                    TRIPLE_ITERATOR_NBREADS_DOC)
+      .def("__repr__", &TripleIDIterator::python_repr);
 
   py::class_<HDTDocument>(m, "HDTDocument", HDT_DOCUMENT_CLASS_DOC)
       .def(py::init(&HDTDocument::create))

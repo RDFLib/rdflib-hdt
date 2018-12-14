@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 from os import listdir
 import pybind11
 
-__pyhdt_version__ = "1.1.1"
+__pyhdt_version__ = "1.2.0"
 
 with open('README.rst') as file:
     long_description = file.read()
@@ -19,7 +19,6 @@ def list_files(path, extension=".cpp", exclude="S.cpp"):
 sources = [
     "src/hdt.cpp",
     "src/hdt_document.cpp",
-    "src/hdt_triple_iterator.cpp",
     "src/triple_iterator.cpp",
     "src/tripleid_iterator.cpp"
 ]
@@ -77,6 +76,6 @@ setup(
     long_description=long_description,
     keywords=["hdt", "rdf", "semantic web", "search"],
     license="MIT",
-    install_requires=['pybind11==2.2.1'],
+    install_requires=['pybind11==2.2.4'],
     ext_modules=[hdt_extension]
 )

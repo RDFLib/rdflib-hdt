@@ -6,7 +6,6 @@
 #ifndef TRIPLEID_ITERATOR_HPP
 #define TRIPLEID_ITERATOR_HPP
 
-#include "hdt_triple_iterator.hpp"
 #include "pyhdt_types.hpp"
 #include <Iterator.hpp>
 #include <string>
@@ -15,11 +14,17 @@
  * TripleIDIterator iterates over IDs of RDF triples of an HDT document which
  * match a triple pattern + limit + offset \author Thomas Minier
  */
-class TripleIDIterator : HDTTripleIterator {
+class TripleIDIterator {
 private:
+  std::string subject;
+  std::string predicate;
+  std::string object;
+  unsigned int limit;
+  unsigned int offset;
   hdt::IteratorTripleID *iterator;
   triple_id _bufferedTriple;
   bool hasBufferedTriple = false;
+  unsigned int resultsRead = 0;
 
 public:
   /*!
@@ -34,6 +39,51 @@ public:
    * Destructor
    */
   ~TripleIDIterator();
+
+  /*!
+   * Implementation for Python function "__repr__"
+   * @return [description]
+   */
+  std::string python_repr();
+
+  /*!
+   * Get the subject of the triple pattern currently evaluated.
+   * An empty string represents a variable
+   * @return [description]
+   */
+  std::string getSubject();
+
+  /*!
+   * Get the predicate of the triple pattern currently evaluated.
+   * An empty string represents a variable
+   * @return [description]
+   */
+  std::string getPredicate();
+
+  /*!
+   * Get the object of the triple pattern currently evaluated.
+   * An empty string represents a variable
+   * @return [description]
+   */
+  std::string getObject();
+
+  /*!
+   * Get the limit of the current iterator
+   * @return [description]
+   */
+  unsigned int getLimit();
+
+  /*!
+   * Get the offset of the current iterator
+   * @return [description]
+   */
+  unsigned int getOffset();
+
+  /*!
+   * Get the number of results read by the iterator
+   * @return [description]
+   */
+  unsigned int getNbResultsRead();
 
   /*!
    * Implementation for Python function "__iter__"

@@ -87,17 +87,14 @@ std::string HDTDocument::python_repr() {
  * @param limit     [description]
  * @param offset    [description]
  */
-search_results HDTDocument::search(std::string subject, std::string predicate,
-                                   std::string object, unsigned int limit,
+search_results HDTDocument::search(std::string subject,
+                                   std::string predicate,
+                                   std::string object,
+                                   unsigned int limit,
                                    unsigned int offset) {
-  IteratorTripleString *it =
-      hdt->search(subject.c_str(), predicate.c_str(), object.c_str());
-  size_t cardinality = it->estimatedNumResults();
-  // apply offset
-  applyOffset<IteratorTripleString>(it, offset, cardinality);
-  TripleIterator *resultIterator =
-      new TripleIterator(it, subject, predicate, object, limit, offset);
-  return std::make_tuple(resultIterator, cardinality);
+  search_results_ids tRes = searchIDs(subject, predicate, object, limit, offset);
+  TripleIterator *resultIterator = new TripleIterator(std::get<0>(tRes), hdt->getDictionary());
+  return std::make_tuple(resultIterator, std::get<1>(tRes));
 }
 
 /*!

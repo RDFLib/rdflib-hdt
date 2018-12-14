@@ -6,34 +6,76 @@
 #ifndef TRIPLE_ITERATOR_HPP
 #define TRIPLE_ITERATOR_HPP
 
-#include "hdt_triple_iterator.hpp"
+#include "tripleid_iterator.hpp"
 #include "pyhdt_types.hpp"
-#include <Iterator.hpp>
+#include "Dictionary.hpp"
 #include <string>
 
 /*!
  * TripleIterator iterates over RDF triples of an HDT document which match a
  * triple pattern + limit + offset \author Thomas Minier
  */
-class TripleIterator : HDTTripleIterator {
+class TripleIterator {
 private:
-  hdt::IteratorTripleString *iterator;
-  triple _bufferedTriple;
-  bool hasBufferedTriple = false;
+  TripleIDIterator *iterator;
+  hdt::Dictionary *dictionary;
 
 public:
   /*!
    * Constructor
    * @param iterator [description]
    */
-  TripleIterator(hdt::IteratorTripleString *_it, std::string _subj,
-                 std::string _pred, std::string _obj, unsigned int _limit,
-                 unsigned int _offset);
+  TripleIterator(TripleIDIterator *_it, hdt::Dictionary *_dict);
 
   /*!
    * Destructor
    */
   ~TripleIterator();
+
+  /*!
+   * Implementation for Python function "__repr__"
+   * @return [description]
+   */
+  std::string python_repr();
+
+  /*!
+   * Get the subject of the triple pattern currently evaluated.
+   * An empty string represents a variable
+   * @return [description]
+   */
+  std::string getSubject();
+
+  /*!
+   * Get the predicate of the triple pattern currently evaluated.
+   * An empty string represents a variable
+   * @return [description]
+   */
+  std::string getPredicate();
+
+  /*!
+   * Get the object of the triple pattern currently evaluated.
+   * An empty string represents a variable
+   * @return [description]
+   */
+  std::string getObject();
+
+  /*!
+   * Get the limit of the current iterator
+   * @return [description]
+   */
+  unsigned int getLimit();
+
+  /*!
+   * Get the offset of the current iterator
+   * @return [description]
+   */
+  unsigned int getOffset();
+
+  /*!
+   * Get the number of results read by the iterator
+   * @return [description]
+   */
+  unsigned int getNbResultsRead();
 
   /*!
    * Implementation for Python function "__iter__"

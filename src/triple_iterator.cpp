@@ -12,16 +12,71 @@
  * Constructor
  * @param iterator [description]
  */
-TripleIterator::TripleIterator(hdt::IteratorTripleString *_it,
-                               std::string _subj, std::string _pred,
-                               std::string _obj, unsigned int _limit,
-                               unsigned int _offset)
-    : HDTTripleIterator(_subj, _pred, _obj, _limit, _offset), iterator(_it){};
+TripleIterator::TripleIterator(TripleIDIterator *_it, hdt::Dictionary *_dict)
+    : iterator(_it), dictionary(_dict) {};
 
 /*!
  * Destructor
  */
 TripleIterator::~TripleIterator() { delete iterator; };
+
+/*!
+ * Implementation for Python function "__repr__"
+ * @return [description]
+ */
+std::string TripleIterator::python_repr() {
+  if (getLimit() != 0 && getOffset() > 0) {
+    return "<Iterator {" + getSubject() + " " + getPredicate() + " " + getObject() +
+           "} LIMIT " + std::to_string(getLimit()) + " OFFSET " +
+           std::to_string(getOffset()) + " >";
+  } else if (getLimit() != 0) {
+    return "<Iterator {" + getSubject() + " " + getPredicate() + " " + getObject() +
+           "} LIMIT " + std::to_string(getLimit()) + " >";
+  } else if (getOffset() > 0) {
+    return "<Iterator {" + getSubject() + " " + getPredicate() + " " + getObject() +
+           "} OFFSET " + std::to_string(getOffset()) + ">";
+  }
+  return "<Iterator {" + getSubject() + " " + getPredicate() + " " + getObject() + "}>";
+}
+
+/*!
+ * Get the subject of the triple pattern currently evaluated.
+ * An empty string represents a variable
+ * @return [description]
+ */
+std::string TripleIterator::getSubject() { return iterator->getSubject(); }
+
+/*!
+ * Get the predicate of the triple pattern currently evaluated.
+ * An empty string represents a variable
+ * @return [description]
+ */
+std::string TripleIterator::getPredicate() { return iterator->getPredicate(); }
+
+/*!
+ * Get the object of the triple pattern currently evaluated.
+ * An empty string represents a variable
+ * @return [description]
+ */
+std::string TripleIterator::getObject() { return iterator->getObject(); }
+
+/*!
+ * Get the limit of the current iterator
+ * @return [description]
+ */
+unsigned int TripleIterator::getLimit() { return iterator->getLimit(); }
+
+/*!
+ * Get the offset of the current iterator
+ * @return [description]
+ */
+unsigned int TripleIterator::getOffset() { return iterator->getOffset(); }
+
+/*!
+ * Get the number of results read by the iterator
+ * @return [description]
+ */
+unsigned int TripleIterator::getNbResultsRead() { return iterator->getNbResultsRead(); }
 
 /*!
  * Implementation for Python function "__iter__"
@@ -35,7 +90,7 @@ TripleIterator *TripleIterator::python_iter() { return this; }
  * @return [description]
  */
 size_hint TripleIterator::sizeHint() {
-  return std::make_tuple(iterator->estimatedNumResults(), iterator->numResultEstimation() == hdt::EXACT);
+  return iterator->sizeHint();
 }
 
 /*!
@@ -43,8 +98,7 @@ size_hint TripleIterator::sizeHint() {
  * @return [description]
  */
 bool TripleIterator::hasNext() {
-  bool noLimit = limit == 0;
-  return iterator->hasNext() && (noLimit || limit > resultsRead);
+  return iterator->hasNext();
 }
 
 /**
@@ -53,20 +107,11 @@ bool TripleIterator::hasNext() {
  * @return [description]
  */
 triple TripleIterator::next() {
-  // return any previously peeked value
-  if (hasBufferedTriple) {
-    hasBufferedTriple = false;
-    resultsRead++;
-    return _bufferedTriple;
-  }
-  bool noLimit = limit == 0;
-  if (iterator->hasNext() && (noLimit || limit > resultsRead)) {
-    resultsRead++;
-    hdt::TripleString *ts = iterator->next();
-    return std::make_tuple(ts->getSubject(), ts->getPredicate(),
-                           ts->getObject());
-  }
-  throw pybind11::stop_iteration();
+  triple_id t = iterator->next();
+  return std::make_tuple(
+    dictionary->idToString(std::get<0>(t), hdt::SUBJECT),
+    dictionary->idToString(std::get<1>(t), hdt::PREDICATE),
+    dictionary->idToString(std::get<2>(t), hdt::OBJECT));
 }
 
 /**
@@ -75,11 +120,9 @@ triple TripleIterator::next() {
  * @return [description]
  */
 triple TripleIterator::peek() {
-  if (hasBufferedTriple) {
-    return _bufferedTriple;
-  }
-  _bufferedTriple = next();
-  hasBufferedTriple = true;
-  resultsRead--;
-  return _bufferedTriple;
+  triple_id t = iterator->peek();
+  return std::make_tuple(
+    dictionary->idToString(std::get<0>(t), hdt::SUBJECT),
+    dictionary->idToString(std::get<1>(t), hdt::PREDICATE),
+    dictionary->idToString(std::get<2>(t), hdt::OBJECT));
 }

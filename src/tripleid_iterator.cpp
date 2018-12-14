@@ -16,12 +16,73 @@ TripleIDIterator::TripleIDIterator(hdt::IteratorTripleID *_it,
                                    std::string _subj, std::string _pred,
                                    std::string _obj, unsigned int _limit,
                                    unsigned int _offset)
-    : HDTTripleIterator(_subj, _pred, _obj, _limit, _offset), iterator(_it){};
+    : subject((_subj.compare("") == 0) ? "?s" : _subj),
+      predicate((_pred.compare("") == 0) ? "?p" : _pred),
+      object((_obj.compare("") == 0) ? "?o" : _obj), limit(_limit),
+      offset(_offset), iterator(_it){};
 
 /*!
  * Destructor
  */
 TripleIDIterator::~TripleIDIterator() { delete iterator; };
+
+/*!
+ * Implementation for Python function "__repr__"
+ * @return [description]
+ */
+std::string TripleIDIterator::python_repr() {
+  if (limit != 0 && offset > 0) {
+    return "<Iterator {" + subject + " " + predicate + " " + object +
+           "} LIMIT " + std::to_string(limit) + " OFFSET " +
+           std::to_string(offset) + " >";
+  } else if (limit != 0) {
+    return "<Iterator {" + subject + " " + predicate + " " + object +
+           "} LIMIT " + std::to_string(limit) + " >";
+  } else if (offset > 0) {
+    return "<Iterator {" + subject + " " + predicate + " " + object +
+           "} OFFSET " + std::to_string(offset) + ">";
+  }
+  return "<Iterator {" + subject + " " + predicate + " " + object + "}>";
+}
+
+/*!
+ * Get the subject of the triple pattern currently evaluated.
+ * An empty string represents a variable
+ * @return [description]
+ */
+std::string TripleIDIterator::getSubject() { return subject; }
+
+/*!
+ * Get the predicate of the triple pattern currently evaluated.
+ * An empty string represents a variable
+ * @return [description]
+ */
+std::string TripleIDIterator::getPredicate() { return predicate; }
+
+/*!
+ * Get the object of the triple pattern currently evaluated.
+ * An empty string represents a variable
+ * @return [description]
+ */
+std::string TripleIDIterator::getObject() { return object; }
+
+/*!
+ * Get the limit of the current iterator
+ * @return [description]
+ */
+unsigned int TripleIDIterator::getLimit() { return limit; }
+
+/*!
+ * Get the offset of the current iterator
+ * @return [description]
+ */
+unsigned int TripleIDIterator::getOffset() { return offset; }
+
+/*!
+ * Get the number of results read by the iterator
+ * @return [description]
+ */
+unsigned int TripleIDIterator::getNbResultsRead() { return resultsRead; }
 
 /*!
  * Implementation for Python function "__iter__"

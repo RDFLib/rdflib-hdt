@@ -9,6 +9,7 @@
 #include <HDTManager.hpp>
 #include <SingleTriple.hpp>
 #include <fstream>
+#include <pybind11/stl.h>
 
 using namespace hdt;
 
@@ -56,6 +57,7 @@ HDTDocument::HDTDocument(std::string file) {
     throw std::runtime_error("Cannot open HDT file '" + file + "': Not Found!");
   }
   hdt = HDTManager::mapIndexedHDT(file.c_str());
+  processor = new QueryProcessor(hdt);
 }
 
 /*!
@@ -176,4 +178,31 @@ triple HDTDocument::idsToString(unsigned int subject, unsigned int predicate,
       hdt->getDictionary()->idToString(subject, hdt::SUBJECT),
       hdt->getDictionary()->idToString(predicate, hdt::PREDICATE),
       hdt->getDictionary()->idToString(object, hdt::OBJECT));
+}
+
+JoinIterator * HDTDocument::searchJoin(std::vector<triple> patterns) {
+  set<string> vars {};
+  vector<TripleString> joinPatterns {};
+  std::string subj, pred, obj;
+
+  for (auto it = patterns.begin(); it != patterns.end(); it++) {
+    // unpack pattern
+    std::tie(subj, pred, obj) = *it;
+    // add variables
+    if (subj.at(0) == '?') {
+      vars.insert(subj);
+    }
+    if (pred.at(0) == '?') {
+      vars.insert(pred);
+    }
+    if (obj.at(0) == '?') {
+      vars.insert(obj);
+    }
+    // build join pattern
+    TripleString pattern(subj, pred, obj);
+    joinPatterns.push_back(pattern);
+  }
+
+  VarBindingString *iterator = processor->searchJoin(joinPatterns, vars);
+  return new JoinIterator(iterator);
 }

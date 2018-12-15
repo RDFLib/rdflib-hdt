@@ -7,11 +7,14 @@
 #define PYHDT_DOCUMENT_HPP
 
 #include "HDT.hpp"
+#include "QueryProcessor.hpp"
 #include "pyhdt_types.hpp"
 #include "triple_iterator.hpp"
 #include "tripleid_iterator.hpp"
+#include "join_iterator.hpp"
 #include <list>
 #include <string>
+#include <vector>
 
 // The result of a search for a triple pattern in a HDT document:
 // a tuple (matching RDF triples, nb of matching RDF triples)
@@ -28,6 +31,7 @@ class HDTDocument {
 private:
   std::string hdt_file;
   hdt::HDT *hdt;
+  hdt::QueryProcessor *processor;
   HDTDocument(std::string file);
 
 public:
@@ -119,6 +123,8 @@ public:
   search_results_ids searchIDs(std::string subject, std::string predicate,
                                std::string object, unsigned int limit = 0,
                                unsigned int offset = 0);
+
+  JoinIterator * searchJoin(std::vector<triple> patterns);
 };
 
 #endif /* PYHDT_DOCUMENT_HPP */

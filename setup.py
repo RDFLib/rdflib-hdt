@@ -20,7 +20,8 @@ sources = [
     "src/hdt.cpp",
     "src/hdt_document.cpp",
     "src/triple_iterator.cpp",
-    "src/tripleid_iterator.cpp"
+    "src/tripleid_iterator.cpp",
+    "src/join_iterator.cpp"
 ]
 
 # HDT source files
@@ -41,6 +42,7 @@ sources += list_files("hdt-cpp-1.3.2/libhdt/src/rdf")
 sources += list_files("hdt-cpp-1.3.2/libhdt/src/sequence")
 sources += list_files("hdt-cpp-1.3.2/libhdt/src/triples")
 sources += list_files("hdt-cpp-1.3.2/libhdt/src/util")
+sources += list_files("hdt-cpp-1.3.2/libhdt/src/sparql")
 
 # pybind11 + pyHDT + libcds +  HDT-lib headers
 include_dirs = [
@@ -49,6 +51,7 @@ include_dirs = [
     "include/",
     "hdt-cpp-1.3.2/libhdt/include/",
     "hdt-cpp-1.3.2/libhdt/src/dictionary/",
+    "hdt-cpp-1.3.2/libhdt/src/sparql/",
     "hdt-cpp-1.3.2/libcds/include/",
     "hdt-cpp-1.3.2/libcds/src/static/bitsequence",
     "hdt-cpp-1.3.2/libcds/src/static/coders",

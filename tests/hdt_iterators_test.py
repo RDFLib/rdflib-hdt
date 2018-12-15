@@ -9,7 +9,6 @@ nbTotalTriples = 132
 
 
 class TestHDTIterators(unittest.TestCase):
-
     def test_read_document_base(self):
         (triples, cardinality) = document.search_triples("", "", "")
         self.assertEqual(triples.subject, "?s")

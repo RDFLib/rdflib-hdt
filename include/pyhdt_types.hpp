@@ -9,6 +9,7 @@
 #include <list>
 #include <string>
 #include <tuple>
+#include <set>
 
 // A RDF Triple. RDF terms are represented as simple strings by HDT.
 typedef std::tuple<std::string, std::string, std::string> triple;
@@ -25,5 +26,9 @@ typedef std::list<triple_id> triple_ids_list;
 // A hint over the cardinality of a triple pattern
 // The right element of the tuple is True if the hint is accurate, False otherwise
 typedef std::tuple<size_t, bool> size_hint;
+
+typedef std::tuple<std::string, std::string> single_binding;
+
+typedef std::set<single_binding> *solution_bindings;
 
 #endif /* PYHDT_TYPES_HPP */

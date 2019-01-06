@@ -24,7 +24,9 @@ JoinIterator::~JoinIterator() {
  * Implementation for Python function "__repr__"
  * @return [description]
  */
-std::string JoinIterator::python_repr() { return ""; }
+std::string JoinIterator::python_repr() {
+  return "JoinIterator";
+}
 
 
 /*!

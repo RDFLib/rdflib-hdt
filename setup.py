@@ -6,6 +6,8 @@ import pybind11
 
 __pyhdt_version__ = "1.2.0"
 
+PYBIND_VERSION = 'pybind11==2.2.4'
+
 with open('README.rst') as file:
     long_description = file.read()
 
@@ -79,6 +81,7 @@ setup(
     long_description=long_description,
     keywords=["hdt", "rdf", "semantic web", "search"],
     license="MIT",
-    install_requires=['pybind11==2.2.4'],
+    install_requires=[PYBIND_VERSION],
+    setup_requires=[PYBIND_VERSION],
     ext_modules=[hdt_extension]
 )

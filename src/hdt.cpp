@@ -57,14 +57,15 @@ PYBIND11_MODULE(hdt, m) {
                     TRIPLE_ITERATOR_NBREADS_DOC)
       .def("__repr__", &TripleIDIterator::python_repr);
 
-  py::class_<JoinIterator>(m, "JoinIterator")
-    .def("next", &JoinIterator::next)
-    .def("has_next", &JoinIterator::hasNext)
-    .def("cardinality", &JoinIterator::estimatedCardinality)
-    .def("reset", &JoinIterator::reset)
-    .def("__len__", &JoinIterator::estimatedCardinality)
-    .def("__next__", &JoinIterator::next)
-    .def("__iter__", &JoinIterator::python_iter);
+  py::class_<JoinIterator>(m, "JoinIterator", JOIN_ITERATOR_CLASS_DOC)
+    .def("next", &JoinIterator::next, JOIN_ITERATOR_NEXT_DOC)
+    .def("has_next", &JoinIterator::hasNext, JOIN_ITERATOR_HAS_NEXT_DOC)
+    .def("cardinality", &JoinIterator::estimatedCardinality, JOIN_ITERATOR_SIZE_DOC)
+    .def("reset", &JoinIterator::reset, JOIN_ITERATOR_RESET_DOC)
+    .def("__len__", &JoinIterator::estimatedCardinality, JOIN_ITERATOR_SIZE_DOC)
+    .def("__next__", &JoinIterator::next, JOIN_ITERATOR_NEXT_DOC)
+    .def("__iter__", &JoinIterator::python_iter)
+    .def("__repr__", &JoinIterator::python_repr);
 
   py::class_<HDTDocument>(m, "HDTDocument", HDT_DOCUMENT_CLASS_DOC)
       .def(py::init(&HDTDocument::create))
@@ -84,7 +85,7 @@ PYBIND11_MODULE(hdt, m) {
            HDT_DOCUMENT_SEARCH_TRIPLES_DOC, py::arg("subject"),
            py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,
            py::arg("offset") = 0)
-      .def("search_join", &HDTDocument::searchJoin)
+      .def("search_join", &HDTDocument::searchJoin, HDT_DOCUMENT_SEARCH_JOIN_DOC, py::arg("patterns"))
       .def("search_triples_ids", &HDTDocument::searchIDs,
            HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC, py::arg("subject"),
            py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,

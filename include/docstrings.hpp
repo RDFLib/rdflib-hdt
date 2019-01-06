@@ -1,6 +1,6 @@
 /**
- * s.hpp
- * Author: Thomas MINIER - MIT License 2017-2018
+ * docstrings.hpp
+ * Author: Thomas MINIER - MIT License 2017-2019
  */
 
 #ifndef PYHDT_DOCSTRINGS_HPP
@@ -110,6 +110,32 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
 
 )";
 
+const char *HDT_DOCUMENT_SEARCH_JOIN_DOC = R"(
+  Evaluate a join between a set of triple patterns using an iterator.
+  A triple pattern itself is a 3-elements ``tuple`` (subject, predicate, object), where SPARQL variables, i.e., join predicates, are prefixed by a "?".
+
+  Args:
+    - patterns ``set``: set of triple patterns.
+
+  Return:
+    A JoinIterator, which can be consumed as a Python iterator to evaluates the join.
+
+    .. code-block:: python
+
+      from hdt import HDTDocument
+      document = HDTDocument("test.hdt")
+
+      # find all actors with their names in the HDT document
+      tp_a = ("?s", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://example.org#Actor")
+      tp_b = ("?s", "http://xmlns.com/foaf/0.1/name", "?name")
+      iterator = document.search_join(set([tp_a, tp_b]))
+
+      print("estimated join cardinality : %i" % len(iterator))
+      for mappings in iterator:
+        print(mappings)
+
+)";
+
 const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
   Transform a RDF triple from a TripleID representation to a string representation.
 
@@ -203,4 +229,27 @@ const char *TRIPLE_ITERATOR_SIZE_DOC = R"(
 const char *TRIPLE_ITERATOR_ACC_ESTIMATION_DOC = R"(
   Return True if the iterator can accuratly estimate the cardinality of the triple pattern, False otherwise.
 )";
+
+const char *JOIN_ITERATOR_CLASS_DOC = R"(
+  A JoinIterator iterates over the set of solution mappings for a join between several triple patterns. It implements the Python iterator protocol and yields sets of solutions mappings.
+
+  Such iterator is returned by :meth:`hdt.HDTDocument.search_join`
+)";
+
+const char *JOIN_ITERATOR_NEXT_DOC = R"(
+  Return the next set of solution mappings read by the iterator, or raise ``StopIterator`` if there is no more items to yield.
+)";
+
+const char *JOIN_ITERATOR_HAS_NEXT_DOC = R"(
+  Return true if the iterator still has items to yield, false otherwise.
+)";
+
+const char *JOIN_ITERATOR_SIZE_DOC = R"(
+  Return the estimated join cardinality.
+)";
+
+const char *JOIN_ITERATOR_RESET_DOC = R"(
+  Reset the join, i.e., move the iterator back to its initial state.
+)";
+
 #endif /* PYHDT_DOCSTRINGS_HPP */

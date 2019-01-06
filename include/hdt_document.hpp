@@ -124,6 +124,11 @@ public:
                                std::string object, unsigned int limit = 0,
                                unsigned int offset = 0);
 
+  /**
+   * Evaluate a join between a set of triple patterns using a JoinIterator.
+   * @param  patterns [description]
+   * @return          [description]
+   */
   JoinIterator * searchJoin(std::vector<triple> patterns);
 };
 

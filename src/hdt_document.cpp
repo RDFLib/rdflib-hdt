@@ -180,6 +180,11 @@ triple HDTDocument::idsToString(unsigned int subject, unsigned int predicate,
       hdt->getDictionary()->idToString(object, hdt::OBJECT));
 }
 
+/**
+ * Evaluate a join between a set of triple patterns using a JoinIterator.
+ * @param  patterns [description]
+ * @return          [description]
+ */
 JoinIterator * HDTDocument::searchJoin(std::vector<triple> patterns) {
   set<string> vars {};
   vector<TripleString> joinPatterns {};

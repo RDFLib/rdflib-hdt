@@ -44,3 +44,10 @@ TripleIDIterator
 .. autoclass:: TripleIDIterator
   :inherited-members:
   :members:
+
+JoinIterator
+--------------
+
+.. autoclass:: JoinIterator
+  :inherited-members:
+  :members:

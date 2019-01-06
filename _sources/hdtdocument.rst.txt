@@ -70,6 +70,25 @@ An ``HDTDocument`` allows for searching RDF triples in this format, using the ``
     # convert a triple ID to a string format
     print(document.tripleid_to_string(s, p, o))
 
+Join evaluation
+^^^^^^^^^^^^^^^
+
+An HDT document also provides support for evaluating joins over a set of triples patterns.
+
+.. code-block:: python
+
+  from hdt import HDTDocument
+  document = HDTDocument("test.hdt")
+
+  # find all actors with their names in the HDT document
+  tp_a = ("?s", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://example.org#Actor")
+  tp_b = ("?s", "http://xmlns.com/foaf/0.1/name", "?name")
+  iterator = document.search_join(set([tp_a, tp_b]))
+
+  print("estimated join cardinality : %i" % len(iterator))
+  for mappings in iterator:
+    print(mappings)
+
 Ordering
 ^^^^^^^^^^^
 

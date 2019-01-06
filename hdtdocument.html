@@ -88,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#loading-hdt-files">Loading HDT files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#searching-for-triples">Searching for triples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#searching-for-triple-ids">Searching for triple IDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#join-evaluation">Join evaluation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ordering">Ordering</a></li>
 </ul>
 </li>
@@ -218,6 +219,23 @@ An <code class="docutils literal notranslate"><span class="pre">HDTDocument</spa
 </pre></div>
 </div>
 </div>
+<div class="section" id="join-evaluation">
+<h2>Join evaluation<a class="headerlink" href="#join-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>An HDT document also provides support for evaluating joins over a set of triples patterns.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># find all actors with their names in the HDT document</span>
+<span class="n">tp_a</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;?s&quot;</span><span class="p">,</span> <span class="s2">&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;</span><span class="p">,</span> <span class="s2">&quot;http://example.org#Actor&quot;</span><span class="p">)</span>
+<span class="n">tp_b</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;?s&quot;</span><span class="p">,</span> <span class="s2">&quot;http://xmlns.com/foaf/0.1/name&quot;</span><span class="p">,</span> <span class="s2">&quot;?name&quot;</span><span class="p">)</span>
+<span class="n">iterator</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_join</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">tp_a</span><span class="p">,</span> <span class="n">tp_b</span><span class="p">]))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;estimated join cardinality : </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">mappings</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">mappings</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="ordering">
 <h2>Ordering<a class="headerlink" href="#ordering" title="Permalink to this headline">¶</a></h2>
 <p>When searching for triples (either in string or triple id format), results are returned ordred by (subject, predicate, object).
@@ -273,6 +291,7 @@ because their triple ids counterparts are <code class="docutils literal notransl
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
 
   

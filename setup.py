@@ -1,5 +1,5 @@
 # setup.py
-# Author: Thomas MINIER - MIT License 2017-2018
+# Author: Thomas MINIER - MIT License 2017-2019
 from setuptools import setup, Extension
 from os import listdir
 import pybind11

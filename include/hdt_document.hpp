@@ -1,6 +1,6 @@
 /**
  * hdt_document.hpp
- * Author: Thomas MINIER - MIT License 2017-2018
+ * Author: Thomas MINIER - MIT License 2017-2019
  */
 
 #ifndef PYHDT_DOCUMENT_HPP

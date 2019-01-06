@@ -1,6 +1,6 @@
 /**
  * triple_iterator.cpp
- * Author: Thomas MINIER - MIT License 2017-2018
+ * Author: Thomas MINIER - MIT License 2017-2019
  */
 
 #include "triple_iterator.hpp"

@@ -1,6 +1,6 @@
 /**
  * hdt_types.hpp
- * Author: Thomas MINIER - MIT License 2017-2018
+ * Author: Thomas MINIER - MIT License 2017-2019
  */
 
 #ifndef PYHDT_TYPES_HPP

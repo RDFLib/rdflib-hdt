@@ -1,3 +1,8 @@
+/**
+ * hdt.cpp
+ * Author: Thomas MINIER - MIT License 2017-2019
+ */
+
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 

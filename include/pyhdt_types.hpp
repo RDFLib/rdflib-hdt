@@ -11,6 +11,15 @@
 #include <tuple>
 #include <set>
 
+/**
+ * Indictates the position of an Object Identifier
+ */
+enum IdentifierPosition {
+  Subject = 1,
+  Predicate = 2,
+  Object = 3
+};
+
 // A RDF Triple. RDF terms are represented as simple strings by HDT.
 typedef std::tuple<std::string, std::string, std::string> triple;
 

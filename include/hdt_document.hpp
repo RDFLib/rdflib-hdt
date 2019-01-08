@@ -95,8 +95,16 @@ public:
    * @param  object    [description]
    * @return           [description]
    */
-  triple idsToString(unsigned int subject, unsigned int predicate,
+  triple convertTripleID(unsigned int subject, unsigned int predicate,
                      unsigned int object);
+
+  /**
+   * Convert an Object Identifier into the equivalent URI/Literal value
+   * @param  id  - Object Identifier
+   * @param  pos - Identifier position (subject, predicate or object)
+   * @return     [description]
+   */
+  string convertID(unsigned int id, IdentifierPosition pos);
 
   /*!
    * Search all matching triples for a triple pattern, whith an optional limit

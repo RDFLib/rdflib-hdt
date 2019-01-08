@@ -51,3 +51,12 @@ JoinIterator
 .. autoclass:: JoinIterator
   :inherited-members:
   :members:
+
+
+Enumerations
+-------------
+
+IdentifierPosition
+^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: IdentifierPosition

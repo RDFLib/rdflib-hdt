@@ -172,12 +172,31 @@ unsigned int HDTDocument::getNbShared() {
  * @param  object    [description]
  * @return           [description]
  */
-triple HDTDocument::idsToString(unsigned int subject, unsigned int predicate,
+triple HDTDocument::convertTripleID(unsigned int subject, unsigned int predicate,
                                 unsigned int object) {
   return std::make_tuple(
       hdt->getDictionary()->idToString(subject, hdt::SUBJECT),
       hdt->getDictionary()->idToString(predicate, hdt::PREDICATE),
       hdt->getDictionary()->idToString(object, hdt::OBJECT));
+}
+
+/**
+ * Convert an Object Identifier into the equivalent URI/Literal value
+ * @param  id  - Object Identifier
+ * @param  pos - Identifier position (subject, predicate or object)
+ * @return     [description]
+ */
+string HDTDocument::convertID(unsigned int id, IdentifierPosition pos) {
+  switch (pos) {
+    case IdentifierPosition::Subject:
+      return hdt->getDictionary()->idToString(id, hdt::SUBJECT);
+    case IdentifierPosition::Predicate:
+      return hdt->getDictionary()->idToString(id, hdt::PREDICATE);
+    case IdentifierPosition::Object:
+      return hdt->getDictionary()->idToString(id, hdt::OBJECT);
+    default:
+      throw std::runtime_error("Invalid Object Identifier exception");
+  }
 }
 
 /**

@@ -1,7 +1,7 @@
 # hdt_document_test.py
 # Author: Thomas MINIER - MIT License 2017-2019
 import pytest
-from hdt import HDTDocument
+from hdt import HDTDocument, IdentifierPosition
 
 path = "tests/test.hdt"
 document = HDTDocument(path)
@@ -45,7 +45,24 @@ def test_ids_to_string():
     assert triplesCard == nbTotalTriples
     for subj, pred, obj in triples:
         sid, pid, oid = next(ids)
-        s, p, o = document.tripleid_to_string(sid, pid, oid)
+        s, p, o = document.convert_tripleid(sid, pid, oid)
+        assert subj == s
+        assert pred == p
+        assert obj == o
+
+
+def test_convert_id():
+    (triples, triplesCard) = document.search_triples("", "", "")
+    (ids, idsCard) = document.search_triples_ids("", "", "")
+    assert triplesCard == idsCard
+    assert triplesCard == nbTotalTriples
+    for subj, pred, obj in triples:
+        sid, pid, oid = next(ids)
+        s, p, o = (
+            document.convert_id(sid, IdentifierPosition.Subject),
+            document.convert_id(pid, IdentifierPosition.Predicate),
+            document.convert_id(oid, IdentifierPosition.Object)
+            )
         assert subj == s
         assert pred == p
         assert obj == o

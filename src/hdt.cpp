@@ -17,6 +17,12 @@ namespace py = pybind11;
 PYBIND11_MODULE(hdt, m) {
   m.doc() = MODULE_DOC;
 
+  py::enum_<IdentifierPosition>(m, "IdentifierPosition", IDENTIFIER_POSITION_DOC)
+    .value("Subject", IdentifierPosition::Subject)
+    .value("Predicate", IdentifierPosition::Predicate)
+    .value("Object", IdentifierPosition::Object)
+    .export_values();
+
   py::class_<TripleIterator>(m, "TripleIterator", TRIPLE_ITERATOR_CLASS_DOC)
       .def("next", &TripleIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("__next__", &TripleIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
@@ -95,9 +101,12 @@ PYBIND11_MODULE(hdt, m) {
            HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC, py::arg("subject"),
            py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,
            py::arg("offset") = 0)
-      .def("tripleid_to_string", &HDTDocument::idsToString,
+      .def("convert_tripleid", &HDTDocument::convertTripleID,
            HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC,
            py::arg("subject"), py::arg("predicate"), py::arg("object"))
+      .def("convert_id", &HDTDocument::convertID, HDT_DOCUMENT_CONVERT_ID_DOC,
+           py::arg("id"), py::arg("position"))
       .def("__len__", &HDTDocument::getNbTriples, HDT_DOCUMENT_GETNBTRIPLES_DOC)
       .def("__repr__", &HDTDocument::python_repr);
+
 }

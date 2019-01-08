@@ -68,7 +68,7 @@ An ``HDTDocument`` allows for searching RDF triples in this format, using the ``
     print(s, p, o) # will print 3-element tuples of integers
 
     # convert a triple ID to a string format
-    print(document.tripleid_to_string(s, p, o))
+    print(document.convert_tripleid(s, p, o))
 
 Join evaluation
 ^^^^^^^^^^^^^^^

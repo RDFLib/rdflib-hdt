@@ -13,6 +13,27 @@ const char *MODULE_DOC = R"(
 )";
 
 /**
+ * Enums docstrings
+ */
+
+const char *IDENTIFIER_POSITION_DOC = R"(
+ An enum used to indicate the position (subject, predicate or object) of an Object identifier.
+
+ Possibles values:
+  - ``IdentifierPosition.Subject``: the subject position
+  - ``IdentifierPosition.Predicate``: the subject position
+  - ``IdentifierPosition.Object``: the object position
+
+ .. code-block:: python
+
+   from hdt import IdentifierPosition
+   print(IdentifierPosition.Subject)
+   print(IdentifierPosition.Predicate)
+   print(IdentifierPosition.Object)
+
+)";
+
+/**
  * HDT Document docstrings
  */
 
@@ -81,7 +102,7 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
   Same as :meth:`hdt.HDTDocument.search_triples`, but RDF triples are represented as unique ids (from the HDT Dictionnary).
   Use empty strings ("") to indicate variables.
 
-  Transformation from triple ids to triple strings is done using :meth:`hdt.HDTDocument.tripleid_to_string`.
+  Transformation from triple ids to triple strings is done using :meth:`hdt.HDTDocument.convert_tripleid`.
 
   Args:
     - subject ``str``: The subject of the triple pattern to seach for.
@@ -112,13 +133,13 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
 
 const char *HDT_DOCUMENT_SEARCH_JOIN_DOC = R"(
   Evaluate a join between a set of triple patterns using an iterator.
-  A triple pattern itself is a 3-elements ``tuple`` (subject, predicate, object), where SPARQL variables, i.e., join predicates, are prefixed by a "?".
+  A triple pattern itself is a 3-elements ``tuple`` (subject, predicate, object), where SPARQL variables, i.e., join predicates, are prefixed by a ``?``.
 
   Args:
     - patterns ``set``: set of triple patterns.
 
   Return:
-    A JoinIterator, which can be consumed as a Python iterator to evaluates the join.
+    A :class:`hdt.JoinIterator`, which can be consumed as a Python iterator to evaluates the join.
 
     .. code-block:: python
 
@@ -156,7 +177,26 @@ const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
       for s, p, o in triples:
         print(s, p, o) # will print IDS, i.e., integers
         # convert a triple ID to a string format
-        print(document.tripleid_to_string(s, p, o))
+        print(document.convert_tripleid(s, p, o))
+
+)";
+
+const char *HDT_DOCUMENT_CONVERT_ID_DOC = R"(
+  Transform an Object Identifier to a string representation.
+  Such identifier are used in TripleID.
+
+  Args:
+    - id ``int``: Object identifier.
+    - position :class:`hdt.IdentifierPosition`: Identifier position.
+
+  Return:
+    The string representation of the Object Identifier, i.e., either an URI or a RDF literal.
+
+    .. code-block:: python
+
+      from hdt import HDTDocument, IdentifierPosition
+      document = HDTDocument("test.hdt")
+      print(document.convert_id(10, IdentifierPosition.Subject))
 
 )";
 
@@ -175,7 +215,7 @@ const char *TRIPLE_ID_ITERATOR_CLASS_DOC = R"(
 
   Such iterator is returned by :meth:`hdt.HDTDocument.search_triples_ids`
 
-  Conversion from a tuple of triple ids into a RDF triple is done using :meth:`hdt.HDTDocument.tripleid_to_string`.
+  Conversion from a tuple of triple ids into a RDF triple is done using :meth:`hdt.HDTDocument.convert_tripleid`.
 )";
 
 const char *TRIPLE_ITERATOR_NEXT_DOC = R"(

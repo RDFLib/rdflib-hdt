@@ -89,6 +89,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#tripleiterator">TripleIterator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tripleiditerator">TripleIDIterator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#joiniterator">JoinIterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enumerations">Enumerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#identifierposition">IdentifierPosition</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -190,6 +194,57 @@ Indexes are automatically generated if missing.</p>
 </div>
 </dd></dl>
 
+<dl class="method">
+<dt id="hdt.HDTDocument.convert_id">
+<code class="descname">convert_id</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>id: int</em>, <em>position: hdt.IdentifierPosition</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#hdt.HDTDocument.convert_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform an Object Identifier to a string representation.
+Such identifier are used in TripleID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>id <code class="docutils literal notranslate"><span class="pre">int</span></code>: Object identifier.</li>
+<li>position <a class="reference internal" href="#hdt.IdentifierPosition" title="hdt.IdentifierPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.IdentifierPosition</span></code></a>: Identifier position.</li>
+</ul>
+</dd>
+<dt>Return:</dt>
+<dd><p class="first">The string representation of the Object Identifier, i.e., either an URI or a RDF literal.</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span><span class="p">,</span> <span class="n">IdentifierPosition</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">convert_id</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">IdentifierPosition</span><span class="o">.</span><span class="n">Subject</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.HDTDocument.convert_tripleid">
+<code class="descname">convert_tripleid</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: int</em>, <em>predicate: int</em>, <em>object: int</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.HDTDocument.convert_tripleid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a RDF triple from a TripleID representation to a string representation.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>subject <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the subject.</li>
+<li>predicate <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the predicate.</li>
+<li>obj <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the object.</li>
+</ul>
+</dd>
+<dt>Return:</dt>
+<dd><p class="first">A triple in string representation, i.e., a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object)</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples_ids</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="c1"># will print IDS, i.e., integers</span>
+  <span class="c1"># convert a triple ID to a string format</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">convert_tripleid</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="hdt.HDTDocument.file_path">
 <code class="descname">file_path</code><a class="headerlink" href="#hdt.HDTDocument.file_path" title="Permalink to this definition">¶</a></dt>
@@ -224,7 +279,7 @@ Indexes are automatically generated if missing.</p>
 <dt id="hdt.HDTDocument.search_join">
 <code class="descname">search_join</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument, patterns: List[Tuple[str, str, str]]</em><span class="sig-paren">)</span> &#x2192; hdt.JoinIterator<a class="headerlink" href="#hdt.HDTDocument.search_join" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a join between a set of triple patterns using an iterator.
-A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object), where SPARQL variables, i.e., join predicates, are prefixed by a “?”.</p>
+A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object), where SPARQL variables, i.e., join predicates, are prefixed by a <code class="docutils literal notranslate"><span class="pre">?</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><ul class="first last simple">
@@ -232,7 +287,7 @@ A triple pattern itself is a 3-elements <code class="docutils literal notranslat
 </ul>
 </dd>
 <dt>Return:</dt>
-<dd><p class="first">A JoinIterator, which can be consumed as a Python iterator to evaluates the join.</p>
+<dd><p class="first">A <a class="reference internal" href="#hdt.JoinIterator" title="hdt.JoinIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.JoinIterator</span></code></a>, which can be consumed as a Python iterator to evaluates the join.</p>
 <div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
 <span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
 
@@ -290,7 +345,7 @@ the TripleIterator iterates over matching RDF triples.</p>
 <code class="descname">search_triples_ids</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: str</em>, <em>predicate: str</em>, <em>object: str</em>, <em>limit: int=0</em>, <em>offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIDIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#hdt.HDTDocument.search_triples" title="hdt.HDTDocument.search_triples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.search_triples()</span></code></a>, but RDF triples are represented as unique ids (from the HDT Dictionnary).
 Use empty strings (“”) to indicate variables.</p>
-<p>Transformation from triple ids to triple strings is done using <a class="reference internal" href="#hdt.HDTDocument.tripleid_to_string" title="hdt.HDTDocument.tripleid_to_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.tripleid_to_string()</span></code></a>.</p>
+<p>Transformation from triple ids to triple strings is done using <a class="reference internal" href="#hdt.HDTDocument.convert_tripleid" title="hdt.HDTDocument.convert_tripleid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.convert_tripleid()</span></code></a>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><ul class="first last simple">
@@ -324,34 +379,6 @@ the TripleIDIterator iterates over matching RDF triples IDs.</p>
 <dt id="hdt.HDTDocument.total_triples">
 <code class="descname">total_triples</code><a class="headerlink" href="#hdt.HDTDocument.total_triples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the total number of triples in the HDT document</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hdt.HDTDocument.tripleid_to_string">
-<code class="descname">tripleid_to_string</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: int</em>, <em>predicate: int</em>, <em>object: int</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.HDTDocument.tripleid_to_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform a RDF triple from a TripleID representation to a string representation.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd><ul class="first last simple">
-<li>subject <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the subject.</li>
-<li>predicate <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the predicate.</li>
-<li>obj <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the object.</li>
-</ul>
-</dd>
-<dt>Return:</dt>
-<dd><p class="first">A triple in string representation, i.e., a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object)</p>
-<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
-<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples_ids</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="c1"># will print IDS, i.e., integers</span>
-  <span class="c1"># convert a triple ID to a string format</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">tripleid_to_string</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">))</span>
-</pre></div>
-</div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -443,7 +470,7 @@ and the right member is True is the estimation is accurate, False otherwise</dd>
 <em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">TripleIDIterator</code><a class="headerlink" href="#hdt.TripleIDIterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>A TripleIDIterator iterates over triples’ IDs in a HDT file matching a triple pattern, with an optional limit &amp; offset.</p>
 <p>Such iterator is returned by <a class="reference internal" href="#hdt.HDTDocument.search_triples_ids" title="hdt.HDTDocument.search_triples_ids"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.search_triples_ids()</span></code></a></p>
-<p>Conversion from a tuple of triple ids into a RDF triple is done using <a class="reference internal" href="#hdt.HDTDocument.tripleid_to_string" title="hdt.HDTDocument.tripleid_to_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.tripleid_to_string()</span></code></a>.</p>
+<p>Conversion from a tuple of triple ids into a RDF triple is done using <a class="reference internal" href="#hdt.HDTDocument.convert_tripleid" title="hdt.HDTDocument.convert_tripleid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.convert_tripleid()</span></code></a>.</p>
 <dl class="method">
 <dt id="hdt.TripleIDIterator.has_next">
 <code class="descname">has_next</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.TripleIDIterator.has_next" title="Permalink to this definition">¶</a></dt>
@@ -549,6 +576,33 @@ and the right member is True is the estimation is accurate, False otherwise</dd>
 
 </dd></dl>
 
+</div>
+<div class="section" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="identifierposition">
+<h3>IdentifierPosition<a class="headerlink" href="#identifierposition" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="hdt.IdentifierPosition">
+<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">IdentifierPosition</code><a class="headerlink" href="#hdt.IdentifierPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>An enum used to indicate the position (subject, predicate or object) of an Object identifier.</p>
+<dl class="docutils">
+<dt>Possibles values:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">IdentifierPosition.Subject</span></code>: the subject position</li>
+<li><code class="docutils literal notranslate"><span class="pre">IdentifierPosition.Predicate</span></code>: the subject position</li>
+<li><code class="docutils literal notranslate"><span class="pre">IdentifierPosition.Object</span></code>: the object position</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">IdentifierPosition</span>
+<span class="k">print</span><span class="p">(</span><span class="n">IdentifierPosition</span><span class="o">.</span><span class="n">Subject</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">IdentifierPosition</span><span class="o">.</span><span class="n">Predicate</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">IdentifierPosition</span><span class="o">.</span><span class="n">Object</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 </div>
 </div>
 

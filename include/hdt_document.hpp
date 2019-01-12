@@ -99,12 +99,20 @@ public:
                      unsigned int object);
 
   /**
-   * Convert an Object Identifier into the equivalent URI/Literal value
+   * Convert an Object Identifier into the equivalent an RDF term
    * @param  id  - Object Identifier
    * @param  pos - Identifier position (subject, predicate or object)
-   * @return The URI/Literal equivalent to the Object Identifier
+   * @return The an RDF term equivalent to the Object Identifier
    */
   string convertID(unsigned int id, IdentifierPosition pos);
+
+  /**
+   * Convert an RDF term into the associated an Object Identifier.
+   * @param  term  - RDF Term in string format
+   * @param  pos - Identifier position (subject, predicate or object)
+   * @return The Object Identifier associated with the RDF term
+   */
+  unsigned int convertTerm(std::string term, IdentifierPosition pos);
 
   /*!
    * Search all matching triples for a triple pattern, whith an optional limit and offset.
@@ -123,15 +131,15 @@ public:
   /*!
    * Same as HDTDocument#search, but search for TripleIDs instead.
    * Returns a tuple<TripleIDIterator*, cardinality>
-   * @param subject   - Triple pattern's subject
-   * @param predicate - Triple pattern's predicate
-   * @param object    - Triple pattern's object
+   * @param subject   - Triple pattern's subject identifier
+   * @param predicate - Triple pattern's predicate identifier
+   * @param object    - Triple pattern's object identifier
    * @param limit     - (Optional) Maximum number of matching triples to read
    * @param offset    - (Optional) Number of matching triples to skip
    * @return A tuple (TripleIDIterator*, cardinality)
    */
-  search_results_ids searchIDs(std::string subject, std::string predicate,
-                               std::string object, unsigned int limit = 0,
+  search_results_ids searchIDs(unsigned int subject, unsigned int predicate,
+                               unsigned int object, unsigned int limit = 0,
                                unsigned int offset = 0);
 
   /**

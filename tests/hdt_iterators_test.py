@@ -49,7 +49,7 @@ def test_read_document_offset():
 
 
 def test_read_document_ids():
-    (triples, cardinality) = document.search_triples_ids("", "", "")
+    (triples, cardinality) = document.search_triples_ids(0, 0, 0)
     assert triples.subject == "?s"
     assert triples.predicate == "?p"
     assert triples.object, "?o"
@@ -74,7 +74,7 @@ def test_string_iterator_peek():
 
 def test_ids_iterator_peek():
     expected = (1, 1, 13)
-    (triples, cardinality) = document.search_triples_ids("", "", "")
+    (triples, cardinality) = document.search_triples_ids(0, 0, 0)
     v = triples.peek()
     assert v == expected
     assert triples.nb_reads == 0
@@ -93,7 +93,7 @@ def test_string_iterator_big_offset():
 
 def test_ids_iterator_big_offset():
     nbItems = 0
-    (triples, cardinality) = document.search_triples_ids("", "", "", offset=nbTotalTriples + 1)
+    (triples, cardinality) = document.search_triples_ids(0, 0, 0, offset=nbTotalTriples + 1)
     for s, p, o in triples:
         nbItems += 1
     assert nbItems == 0

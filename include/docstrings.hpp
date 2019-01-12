@@ -69,7 +69,7 @@ const char *HDT_DOCUMENT_GETNBSHARED_DOC = R"(
 const char *HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
   Search for RDF triples matching the triple pattern { ``subject`` ``predicate`` ``object`` },
   with an optional ``limit`` and ``offset``.
-  Use empty strings (``""``) to indicate SPARQL variables.
+  Use empty strings (``""``) to indicate wildcards.
 
   Args:
     - subject ``str``: The subject of the triple pattern to seach for.
@@ -100,14 +100,14 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_DOC = R"(
 
 const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
   Same as :meth:`hdt.HDTDocument.search_triples`, but RDF triples are represented as unique ids (from the HDT Dictionnary).
-  Use empty strings ("") to indicate variables.
+  Use the integer `0` to indicate wildcards.
 
-  Transformation from triple ids to triple strings is done using :meth:`hdt.HDTDocument.convert_tripleid`.
+  Mapping between ids and RDF terms is done using :meth:`hdt.HDTDocument.convert_id`, :meth:`hdt.HDTDocument.convert_term` and :meth:`hdt.HDTDocument.convert_tripleid`.
 
   Args:
-    - subject ``str``: The subject of the triple pattern to seach for.
-    - predicate ``str``: The predicate of the triple pattern to seach for.
-    - obj ``str``: The object of the triple pattern ot seach for.
+    - subject ``int``: The Object identifier of the triple pattern's subject.
+    - predicate ``int``: The Object identifier of the triple pattern's predicate.
+    - obj ``int``: The Object identifier of the triple pattern's object.
     - limit ``int`` ``optional``: Maximum number of triples to search for.
     - offset ``int`` ``optional``: Number of matching triples to skip before returning results.
 
@@ -122,10 +122,11 @@ const char *HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC = R"(
       from hdt import HDTDocument
       document = HDTDocument("test.hdt")
 
-      # Fetch all triples that matches { ?s ?p ?o }
-      (triples, cardinality) = document.search_triples_ids("", "", "")
+      pred = document.convert_term("http://xmlns.com/foaf/0.1/")
+      # Fetch all RDF triples that matches { ?s foaf:name ?o }
+      (triples, cardinality) = document.search_triples_ids(0, pred, 0)
 
-      print("cardinality of { ?s ?p ?o }: %i" % cardinality)
+      print("cardinality of { ?s foaf:name ?o }: %i" % cardinality)
       for triple in triples:
         print(triple)
 
@@ -172,17 +173,20 @@ const char *HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC = R"(
 
       from hdt import HDTDocument
       document = HDTDocument("test.hdt")
-      (triples, cardinality) = document.search_triples_ids("", "", "")
+
+      # Fetch all triples that matches { ?s foaf:name ?o }
+      pred = document.convert_term("http://xmlns.com/foaf/0.1/")
+      (triples, cardinality) = document.search_triples_ids(0, pred, 0)
 
       for s, p, o in triples:
-        print(s, p, o) # will print IDS, i.e., integers
+        print(s, p, o) # will print Object identifiers, i.e., integers
         # convert a triple ID to a string format
         print(document.convert_tripleid(s, p, o))
 
 )";
 
 const char *HDT_DOCUMENT_CONVERT_ID_DOC = R"(
-  Transform an Object Identifier to a string representation.
+  Transform an Object Identifier to a RDF term.
   Such identifier are used in TripleID.
 
   Args:
@@ -190,13 +194,32 @@ const char *HDT_DOCUMENT_CONVERT_ID_DOC = R"(
     - position :class:`hdt.IdentifierPosition`: Identifier position.
 
   Return:
-    The string representation of the Object Identifier, i.e., either an URI or a RDF literal.
+    The RDF term associated with of the Object Identifier, i.e., either an URI or a RDF literal.
 
     .. code-block:: python
 
       from hdt import HDTDocument, IdentifierPosition
       document = HDTDocument("test.hdt")
       print(document.convert_id(10, IdentifierPosition.Subject))
+
+)";
+
+const char *HDT_DOCUMENT_CONVERT_TERM_DOC = R"(
+  Transform an RDF Term to the associated Object Identifier.
+  Such identifier are used in TripleID.
+
+  Args:
+    - term ``str``: RDF Term.
+    - position :class:`hdt.IdentifierPosition`: Identifier position.
+
+  Return:
+    The the Object Identifier associated with the RDF Term
+
+    .. code-block:: python
+
+      from hdt import HDTDocument, IdentifierPosition
+      document = HDTDocument("test.hdt")
+      print(document.convert_term("http://example.org#Alice", IdentifierPosition.Subject))
 
 )";
 

@@ -95,35 +95,42 @@ search_results HDTDocument::search(std::string subject,
                                    std::string object,
                                    unsigned int limit,
                                    unsigned int offset) {
-  search_results_ids tRes = searchIDs(subject, predicate, object, limit, offset);
+  unsigned int idSubject = hdt->getDictionary()->stringToId(subject, hdt::SUBJECT);
+  unsigned int idPredicate = hdt->getDictionary()->stringToId(predicate, hdt::PREDICATE);
+  unsigned int idObject = hdt->getDictionary()->stringToId(object, hdt::OBJECT);
+  search_results_ids tRes = searchIDs(idSubject, idPredicate, idObject, limit, offset);
   TripleIterator *resultIterator = new TripleIterator(std::get<0>(tRes), hdt->getDictionary());
   return std::make_tuple(resultIterator, std::get<1>(tRes));
 }
 
 /*!
- * Same as HDTDocument#search, but search for TripleIDs instead.
+ * Same as HDTDocument#search, but search for a TripleIDs instead.
  * Returns a tuple<TripleIDIterator*, cardinality>
- * @param subject   - Triple pattern's subject
- * @param predicate - Triple pattern's predicate
- * @param object    - Triple pattern's object
+ * @param subject   - Triple pattern's subject identifier
+ * @param predicate - Triple pattern's predicate identifier
+ * @param object    - Triple pattern's object identifier
  * @param limit     - (Optional) Maximum number of matching triples to read
  * @param offset    - (Optional) Number of matching triples to skip
  * @return A tuple (TripleIDIterator*, cardinality)
  */
-search_results_ids HDTDocument::searchIDs(std::string subject,
-                                          std::string predicate,
-                                          std::string object,
+search_results_ids HDTDocument::searchIDs(unsigned int subject,
+                                          unsigned int predicate,
+                                          unsigned int object,
                                           unsigned int limit,
                                           unsigned int offset) {
-  TripleID tp(hdt->getDictionary()->stringToId(subject, hdt::SUBJECT),
-              hdt->getDictionary()->stringToId(predicate, hdt::PREDICATE),
-              hdt->getDictionary()->stringToId(object, hdt::OBJECT));
+  TripleID tp(subject, predicate, object);
+  // get RDF terms associated with each ID for metadata
+  std::string strSubject = hdt->getDictionary()->idToString(subject, hdt::SUBJECT);
+  std::string strPredicate = hdt->getDictionary()->idToString(predicate, hdt::PREDICATE);
+  std::string strObject = hdt->getDictionary()->idToString(object, hdt::OBJECT);
+
+  // build iterator
   IteratorTripleID *it = hdt->getTriples()->search(tp);
   size_t cardinality = it->estimatedNumResults();
   // apply offset
   applyOffset<IteratorTripleID>(it, offset, cardinality);
   TripleIDIterator *resultIterator =
-      new TripleIDIterator(it, subject, predicate, object, limit, offset);
+      new TripleIDIterator(it, strSubject, strPredicate, strObject, limit, offset);
   return std::make_tuple(resultIterator, cardinality);
 }
 
@@ -196,6 +203,25 @@ string HDTDocument::convertID(unsigned int id, IdentifierPosition pos) {
       return hdt->getDictionary()->idToString(id, hdt::PREDICATE);
     case IdentifierPosition::Object:
       return hdt->getDictionary()->idToString(id, hdt::OBJECT);
+    default:
+      throw std::runtime_error("Invalid Object Identifier exception");
+  }
+}
+
+/**
+ * Convert an RDF term into the associated an Object Identifier.
+ * @param  term  - RDF Term in string format
+ * @param  pos - Identifier position (subject, predicate or object)
+ * @return The Object Identifier associated with the RDF term
+ */
+unsigned int HDTDocument::convertTerm(std::string term, IdentifierPosition pos) {
+  switch (pos) {
+    case IdentifierPosition::Subject:
+      return hdt->getDictionary()->stringToId(term, hdt::SUBJECT);
+    case IdentifierPosition::Predicate:
+      return hdt->getDictionary()->stringToId(term, hdt::PREDICATE);
+    case IdentifierPosition::Object:
+      return hdt->getDictionary()->stringToId(term, hdt::OBJECT);
     default:
       throw std::runtime_error("Invalid Object Identifier exception");
   }

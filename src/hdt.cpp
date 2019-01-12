@@ -97,15 +97,17 @@ PYBIND11_MODULE(hdt, m) {
            py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,
            py::arg("offset") = 0)
       .def("search_join", &HDTDocument::searchJoin, HDT_DOCUMENT_SEARCH_JOIN_DOC, py::arg("patterns"))
-      .def("search_triples_ids", &HDTDocument::searchIDs,
-           HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC, py::arg("subject"),
-           py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,
-           py::arg("offset") = 0)
+     .def("search_triples_ids", &HDTDocument::searchIDs,
+          HDT_DOCUMENT_SEARCH_TRIPLES_IDS_DOC, py::arg("subject"),
+          py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,
+          py::arg("offset") = 0)
       .def("convert_tripleid", &HDTDocument::convertTripleID,
            HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC,
            py::arg("subject"), py::arg("predicate"), py::arg("object"))
       .def("convert_id", &HDTDocument::convertID, HDT_DOCUMENT_CONVERT_ID_DOC,
            py::arg("id"), py::arg("position"))
+     .def("convert_term", &HDTDocument::convertTerm, HDT_DOCUMENT_CONVERT_TERM_DOC,
+          py::arg("term"), py::arg("position"))
       .def("__len__", &HDTDocument::getNbTriples, HDT_DOCUMENT_GETNBTRIPLES_DOC)
       .def("__repr__", &HDTDocument::python_repr);
 

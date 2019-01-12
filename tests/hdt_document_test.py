@@ -40,7 +40,7 @@ def tests_nb_shared():
 
 def test_ids_to_string():
     (triples, triplesCard) = document.search_triples("", "", "")
-    (ids, idsCard) = document.search_triples_ids("", "", "")
+    (ids, idsCard) = document.search_triples_ids(0, 0, 0)
     assert triplesCard == idsCard
     assert triplesCard == nbTotalTriples
     for subj, pred, obj in triples:
@@ -53,7 +53,7 @@ def test_ids_to_string():
 
 def test_convert_id():
     (triples, triplesCard) = document.search_triples("", "", "")
-    (ids, idsCard) = document.search_triples_ids("", "", "")
+    (ids, idsCard) = document.search_triples_ids(0, 0, 0)
     assert triplesCard == idsCard
     assert triplesCard == nbTotalTriples
     for subj, pred, obj in triples:

@@ -42,58 +42,58 @@ public:
 
   /*!
    * Get the path to the HDT file currently loaded
-   * @return [description]
+   * @return The path to the HDT file currently loaded
    */
   std::string getFilePath();
 
   /*!
    * Implementation for Python function "__repr__"
-   * @return [description]
+   * @return A string representation of the object
    */
   std::string python_repr();
 
   /*!
    * Get the total number of triples in the HDT document
-   * @return [description]
+   * @return The total number of triples in the HDT document
    */
   unsigned int getNbTriples();
 
   /*!
-   * Get the number of subjects in the HDT document
-   * @return [description]
+   * Get the number of distinct subjects in the HDT document
+   * @return The number of distinct subjects in the HDT document
    */
   unsigned int getNbSubjects();
 
   /*!
-   * Get the number of predicates in the HDT document
-   * @return [description]
+   * Get the number of distinct predicates in the HDT document
+   * @return The number of distinct predicates in the HDT document
    */
   unsigned int getNbPredicates();
 
   /*!
-   * Get the number of objects in the HDT document
-   * @return [description]
+   * Get the number of distinct objects in the HDT document
+   * @return The number of distinct objects in the HDT document
    */
   unsigned int getNbObjects();
 
   /*!
    * Get the number of shared subjects-objects in the HDT document
-   * @return [description]
+   * @return The number of shared subjects-objects in the HDT document
    */
   unsigned int getNbShared();
 
   /*!
    * Static factory method used to create a new HDT Document
-   * @param  file
+   * @param file - Path to the HDT file
    */
   static HDTDocument create(std::string file) { return HDTDocument(file); }
 
   /*!
-   * Convert a TripleID to a string triple pattern
-   * @param  subject   [description]
-   * @param  predicate [description]
-   * @param  object    [description]
-   * @return           [description]
+   * Convert a TripleID to a string RDF triple
+   * @param  subject   - Triple's subject
+   * @param  predicate - Triple's predicate
+   * @param  object    - Triple's object
+   * @return The associated RDF triple
    */
   triple convertTripleID(unsigned int subject, unsigned int predicate,
                      unsigned int object);
@@ -102,31 +102,33 @@ public:
    * Convert an Object Identifier into the equivalent URI/Literal value
    * @param  id  - Object Identifier
    * @param  pos - Identifier position (subject, predicate or object)
-   * @return     [description]
+   * @return The URI/Literal equivalent to the Object Identifier
    */
   string convertID(unsigned int id, IdentifierPosition pos);
 
   /*!
-   * Search all matching triples for a triple pattern, whith an optional limit
-   * and offset. Returns a tuple<TripleIterator*, cardinality>
-   * @param subject   [description]
-   * @param predicate [description]
-   * @param object    [description]
-   * @param limit     [description]
-   * @param offset    [description]
+   * Search all matching triples for a triple pattern, whith an optional limit and offset.
+   * Returns a tuple<TripleIterator*, cardinality>
+   * @param subject   - Triple pattern's subject
+   * @param predicate - Triple pattern's predicate
+   * @param object    - Triple pattern's object
+   * @param limit     - (Optional) Maximum number of matching triples to read
+   * @param offset    - (Optional) Number of matching triples to skip
+   * @return A tuple (TripleIterator*, cardinality)
    */
   search_results search(std::string subject, std::string predicate,
                         std::string object, unsigned int limit = 0,
                         unsigned int offset = 0);
 
   /*!
-   * Same as search, but for an iterator over TripleIDs.
+   * Same as HDTDocument#search, but search for TripleIDs instead.
    * Returns a tuple<TripleIDIterator*, cardinality>
-   * @param subject   [description]
-   * @param predicate [description]
-   * @param object    [description]
-   * @param limit     [description]
-   * @param offset    [description]
+   * @param subject   - Triple pattern's subject
+   * @param predicate - Triple pattern's predicate
+   * @param object    - Triple pattern's object
+   * @param limit     - (Optional) Maximum number of matching triples to read
+   * @param offset    - (Optional) Number of matching triples to skip
+   * @return A tuple (TripleIDIterator*, cardinality)
    */
   search_results_ids searchIDs(std::string subject, std::string predicate,
                                std::string object, unsigned int limit = 0,
@@ -134,8 +136,8 @@ public:
 
   /**
    * Evaluate a join between a set of triple patterns using a JoinIterator.
-   * @param  patterns [description]
-   * @return          [description]
+   * @param  patterns - Set of triple patterns
+   * @return A JoinIterator* used to evaluated the join.
    */
   JoinIterator * searchJoin(std::vector<triple> patterns);
 };

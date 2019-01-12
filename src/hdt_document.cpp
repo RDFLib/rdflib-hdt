@@ -15,9 +15,9 @@ using namespace hdt;
 
 /*!
  * Skip `offset` items from an iterator, optimized for HDT iterators.
- * @param it          [description]
- * @param offset      [description]
- * @param cardinality [description]
+ * @param it          - Iterator which should skip items
+ * @param offset      - How many items to skip
+ * @param cardinality - (Estimated) number of results
  */
 template <typename T>
 inline void applyOffset(T *it, unsigned int offset, unsigned int cardinality) {
@@ -36,9 +36,9 @@ inline void applyOffset(T *it, unsigned int offset, unsigned int cardinality) {
 }
 
 /*!
- * returns true if a file is readable, False otherwise
- * @param  name [description]
- * @return      [description]
+ * Returns true if a file is readable, false otherwise
+ * @param  name - Path to the file to test
+ * @return true if the file is readable, false otherwise
  */
 inline bool file_exists(const std::string &name) {
   std::ifstream f(name.c_str());
@@ -49,7 +49,7 @@ inline bool file_exists(const std::string &name) {
 
 /*!
  * Constructor
- * @param file [description]
+ * @param file - Path to HDT file to load
  */
 HDTDocument::HDTDocument(std::string file) {
   hdt_file = file;
@@ -67,13 +67,13 @@ HDTDocument::~HDTDocument() {}
 
 /*!
  * Get the path to the HDT file currently loaded
- * @return [description]
+ * @return The path to the HDT file currently loaded
  */
 std::string HDTDocument::getFilePath() { return hdt_file; }
 
 /*!
  * Implementation for Python function "__repr__"
- * @return [description]
+ * @return A string representation of the object
  */
 std::string HDTDocument::python_repr() {
   return "<HDTDocument " + hdt_file + " (~" + std::to_string(getNbTriples()) +
@@ -81,13 +81,14 @@ std::string HDTDocument::python_repr() {
 }
 
 /*!
- * Search all matching triples for a triple pattern, whith an optional limit and
- * offset. Returns a tuple<vector<triples>, cardinality>
- * @param subject   [description]
- * @param predicate [description]
- * @param object    [description]
- * @param limit     [description]
- * @param offset    [description]
+ * Search all matching triples for a triple pattern, whith an optional limit and offset.
+ * Returns a tuple<TripleIterator*, cardinality>
+ * @param subject   - Triple pattern's subject
+ * @param predicate - Triple pattern's predicate
+ * @param object    - Triple pattern's object
+ * @param limit     - (Optional) Maximum number of matching triples to read
+ * @param offset    - (Optional) Number of matching triples to skip
+ * @return A tuple (TripleIterator*, cardinality)
  */
 search_results HDTDocument::search(std::string subject,
                                    std::string predicate,
@@ -100,13 +101,14 @@ search_results HDTDocument::search(std::string subject,
 }
 
 /*!
- * Same as search, but for an iterator over TripleIDs.
+ * Same as HDTDocument#search, but search for TripleIDs instead.
  * Returns a tuple<TripleIDIterator*, cardinality>
- * @param subject   [description]
- * @param predicate [description]
- * @param object    [description]
- * @param limit     [description]
- * @param offset    [description]
+ * @param subject   - Triple pattern's subject
+ * @param predicate - Triple pattern's predicate
+ * @param object    - Triple pattern's object
+ * @param limit     - (Optional) Maximum number of matching triples to read
+ * @param offset    - (Optional) Number of matching triples to skip
+ * @return A tuple (TripleIDIterator*, cardinality)
  */
 search_results_ids HDTDocument::searchIDs(std::string subject,
                                           std::string predicate,
@@ -127,31 +129,31 @@ search_results_ids HDTDocument::searchIDs(std::string subject,
 
 /*!
  * Get the total number of triples in the HDT document
- * @return [description]
+ * @return The total number of triples in the HDT document
  */
 unsigned int HDTDocument::getNbTriples() {
   return hdt->getTriples()->getNumberOfElements();
 }
 
 /*!
- * Get the number of subjects in the HDT document
- * @return [description]
+ * Get the number of distinct subjects in the HDT document
+ * @return The number of distinct subjects in the HDT document
  */
 unsigned int HDTDocument::getNbSubjects() {
   return hdt->getDictionary()->getNsubjects();
 }
 
 /*!
- * Get the number of predicates in the HDT document
- * @return [description]
+ * Get the number of distinct predicates in the HDT document
+ * @return The number of distinct predicates in the HDT document
  */
 unsigned int HDTDocument::getNbPredicates() {
   return hdt->getDictionary()->getNpredicates();
 }
 
 /*!
- * Get the number of objects in the HDT document
- * @return [description]
+ * Get the number of distinct objects in the HDT document
+ * @return The number of distinct objects in the HDT document
  */
 unsigned int HDTDocument::getNbObjects() {
   return hdt->getDictionary()->getNobjects();
@@ -159,18 +161,18 @@ unsigned int HDTDocument::getNbObjects() {
 
 /*!
  * Get the number of shared subjects-objects in the HDT document
- * @return [description]
+ * @return The number of shared subjects-objects in the HDT document
  */
 unsigned int HDTDocument::getNbShared() {
   return hdt->getDictionary()->getNshared();
 }
 
 /*!
- * Convert a TripleID to a string triple pattern
- * @param  subject   [description]
- * @param  predicate [description]
- * @param  object    [description]
- * @return           [description]
+ * Convert a TripleID to a string RDF triple
+ * @param  subject   - Triple's subject
+ * @param  predicate - Triple's predicate
+ * @param  object    - Triple's object
+ * @return The associated RDF triple
  */
 triple HDTDocument::convertTripleID(unsigned int subject, unsigned int predicate,
                                 unsigned int object) {
@@ -184,7 +186,7 @@ triple HDTDocument::convertTripleID(unsigned int subject, unsigned int predicate
  * Convert an Object Identifier into the equivalent URI/Literal value
  * @param  id  - Object Identifier
  * @param  pos - Identifier position (subject, predicate or object)
- * @return     [description]
+ * @return The URI/Literal equivalent to the Object Identifier
  */
 string HDTDocument::convertID(unsigned int id, IdentifierPosition pos) {
   switch (pos) {
@@ -201,8 +203,8 @@ string HDTDocument::convertID(unsigned int id, IdentifierPosition pos) {
 
 /**
  * Evaluate a join between a set of triple patterns using a JoinIterator.
- * @param  patterns [description]
- * @return          [description]
+ * @param  patterns - Set of triple patterns
+ * @return A JoinIterator* used to evaluated the join.
  */
 JoinIterator * HDTDocument::searchJoin(std::vector<triple> patterns) {
   set<string> vars {};

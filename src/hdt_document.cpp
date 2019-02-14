@@ -95,12 +95,39 @@ search_results HDTDocument::search(std::string subject,
                                    std::string object,
                                    unsigned int limit,
                                    unsigned int offset) {
-  unsigned int idSubject = hdt->getDictionary()->stringToId(subject, hdt::SUBJECT);
-  unsigned int idPredicate = hdt->getDictionary()->stringToId(predicate, hdt::PREDICATE);
-  unsigned int idObject = hdt->getDictionary()->stringToId(object, hdt::OBJECT);
-  search_results_ids tRes = searchIDs(idSubject, idPredicate, idObject, limit, offset);
-  TripleIterator *resultIterator = new TripleIterator(std::get<0>(tRes), hdt->getDictionary());
-  return std::make_tuple(resultIterator, std::get<1>(tRes));
+  unsigned int idSubject = 0;
+  unsigned int idPredicate = 0;
+  unsigned int idObject = 0;
+
+  if (!subject.empty()) {
+    idSubject = hdt->getDictionary()->stringToId(subject, hdt::SUBJECT);
+  }
+
+  if (!predicate.empty()) {
+    idPredicate = hdt->getDictionary()->stringToId(predicate, hdt::PREDICATE);
+  }
+
+  if (!object.empty()) {
+    idObject = hdt->getDictionary()->stringToId(object, hdt::OBJECT);
+  }
+
+  TripleIDIterator *it;
+  size_t cardinality = 0;
+
+  // if a non-variable term was not found in the dictionnary, then the search yield nothing
+  if (((!subject.empty()) && idSubject == 0) || ((!predicate.empty()) && idPredicate == 0) || ((!object.empty()) && idObject == 0)) {
+    it = new TripleIDIterator(new IteratorTripleID(), subject, predicate, object, limit, offset);
+  } else {
+    // build a TripleIDIterator to fetch results
+    TripleID tp(idSubject, idPredicate, idObject);
+    IteratorTripleID *source = hdt->getTriples()->search(tp);
+    cardinality = source->estimatedNumResults();
+    applyOffset<IteratorTripleID>(source, offset, cardinality);
+    it = new TripleIDIterator(source, subject, predicate, object, limit, offset);
+  }
+  // wraps the TripleIDIterator in order to convert OID triples back to RDF triples
+  TripleIterator *resultIterator = new TripleIterator(it, hdt->getDictionary());
+  return std::make_tuple(resultIterator, cardinality);
 }
 
 /*!
@@ -120,17 +147,34 @@ search_results_ids HDTDocument::searchIDs(unsigned int subject,
                                           unsigned int offset) {
   TripleID tp(subject, predicate, object);
   // get RDF terms associated with each ID for metadata
-  std::string strSubject = hdt->getDictionary()->idToString(subject, hdt::SUBJECT);
-  std::string strPredicate = hdt->getDictionary()->idToString(predicate, hdt::PREDICATE);
-  std::string strObject = hdt->getDictionary()->idToString(object, hdt::OBJECT);
+  std::string strSubject = std::string("?s");
+  std::string strPredicate = std::string("?p");
+  std::string strObject = std::string("?o");
 
-  // build iterator
-  IteratorTripleID *it = hdt->getTriples()->search(tp);
-  size_t cardinality = it->estimatedNumResults();
-  // apply offset
-  applyOffset<IteratorTripleID>(it, offset, cardinality);
-  TripleIDIterator *resultIterator =
-      new TripleIDIterator(it, strSubject, strPredicate, strObject, limit, offset);
+  if (subject != 0) {
+    strSubject = hdt->getDictionary()->idToString(subject, hdt::SUBJECT);
+  }
+  if (predicate != 0) {
+    strPredicate = hdt->getDictionary()->idToString(predicate, hdt::PREDICATE);
+  }
+  if (object != 0) {
+    strObject = hdt->getDictionary()->idToString(object, hdt::OBJECT);
+  }
+
+  IteratorTripleID *it;
+  size_t cardinality = 0;
+
+  // if a non-variable term was not found in the dictionnary, then the search yield nothing
+  if ((strSubject.empty() && subject != 0) || (strPredicate.empty() && predicate != 0) || (strObject.empty() && object != 0)) {
+    it = new IteratorTripleID();
+  } else {
+    // build iterator
+    it = hdt->getTriples()->search(tp);
+    cardinality = it->estimatedNumResults();
+    // apply offset
+    applyOffset<IteratorTripleID>(it, offset, cardinality);
+  }
+  TripleIDIterator *resultIterator = new TripleIDIterator(it, strSubject, strPredicate, strObject, limit, offset);
   return std::make_tuple(resultIterator, cardinality);
 }
 

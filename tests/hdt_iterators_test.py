@@ -1,5 +1,6 @@
 # hdt_iterators_test.py
 # Author: Thomas MINIER - MIT License 2017-2019
+import pytest
 from hdt import HDTDocument
 
 path = "tests/test.hdt"
@@ -18,6 +19,35 @@ def test_read_document_base():
         assert pred is not None
         assert obj is not None
     assert triples.nb_reads == cardinality
+
+
+empty_triples = [
+    ("http://example.org#toto", "", ""),
+    ("", "http://example.org#toto", ""),
+    ("", "http://example.org#toto", "")
+]
+
+empty_triples_ids = [
+    (155, 0, 0),
+    (0, 155, 0),
+    (0, 0, 155)
+]
+
+
+@pytest.mark.parametrize("triple", empty_triples)
+def test_search_triples_empty(triple):
+    s, p, o = triple
+    (iterator, cardinality) = document.search_triples(s, p, o)
+    assert cardinality == 0
+    assert not iterator.has_next()
+
+
+@pytest.mark.parametrize("triple", empty_triples_ids)
+def test_search_ids_empty(triple):
+    s, p, o = triple
+    (iterator, cardinality) = document.search_triples_ids(s, p, o)
+    assert cardinality == 0
+    assert not iterator.has_next()
 
 
 def test_read_document_limit():

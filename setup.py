@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 from os import listdir
 import pybind11
 
-__pyhdt_version__ = "1.2.0"
+__pyhdt_version__ = "2.0"
 
 PYBIND_VERSION = 'pybind11==2.2.4'
 

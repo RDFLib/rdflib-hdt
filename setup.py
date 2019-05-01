@@ -27,40 +27,40 @@ sources = [
 ]
 
 # HDT source files
-sources += list_files("hdt-cpp-1.3.2/libcds/src/static/bitsequence")
-sources += list_files("hdt-cpp-1.3.2/libcds/src/static/coders")
-sources += list_files("hdt-cpp-1.3.2/libcds/src/static/mapper")
-sources += list_files("hdt-cpp-1.3.2/libcds/src/static/sequence")
-sources += list_files("hdt-cpp-1.3.2/libcds/src/static/permutation")
-sources += list_files("hdt-cpp-1.3.2/libcds/src/utils")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/bitsequence")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/dictionary")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/hdt")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/header")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/huffman")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/libdcs")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/libdcs/fmindex")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/rdf")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/sequence")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/triples")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/util")
-sources += list_files("hdt-cpp-1.3.2/libhdt/src/sparql")
+sources += list_files("hdt-cpp-1.3.3/libcds/src/static/bitsequence")
+sources += list_files("hdt-cpp-1.3.3/libcds/src/static/coders")
+sources += list_files("hdt-cpp-1.3.3/libcds/src/static/mapper")
+sources += list_files("hdt-cpp-1.3.3/libcds/src/static/sequence")
+sources += list_files("hdt-cpp-1.3.3/libcds/src/static/permutation")
+sources += list_files("hdt-cpp-1.3.3/libcds/src/utils")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/bitsequence")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/dictionary")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/hdt")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/header")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/huffman")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/libdcs")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/libdcs/fmindex")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/rdf")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/sequence")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/triples")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/util")
+sources += list_files("hdt-cpp-1.3.3/libhdt/src/sparql")
 
 # pybind11 + pyHDT + libcds +  HDT-lib headers
 include_dirs = [
     pybind11.get_include(),
     pybind11.get_include(True),
     "include/",
-    "hdt-cpp-1.3.2/libhdt/include/",
-    "hdt-cpp-1.3.2/libhdt/src/dictionary/",
-    "hdt-cpp-1.3.2/libhdt/src/sparql/",
-    "hdt-cpp-1.3.2/libcds/include/",
-    "hdt-cpp-1.3.2/libcds/src/static/bitsequence",
-    "hdt-cpp-1.3.2/libcds/src/static/coders",
-    "hdt-cpp-1.3.2/libcds/src/static/mapper",
-    "hdt-cpp-1.3.2/libcds/src/static/permutation",
-    "hdt-cpp-1.3.2/libcds/src/static/sequence",
-    "hdt-cpp-1.3.2/libcds/src/utils"
+    "hdt-cpp-1.3.3/libhdt/include/",
+    "hdt-cpp-1.3.3/libhdt/src/dictionary/",
+    "hdt-cpp-1.3.3/libhdt/src/sparql/",
+    "hdt-cpp-1.3.3/libcds/include/",
+    "hdt-cpp-1.3.3/libcds/src/static/bitsequence",
+    "hdt-cpp-1.3.3/libcds/src/static/coders",
+    "hdt-cpp-1.3.3/libcds/src/static/mapper",
+    "hdt-cpp-1.3.3/libcds/src/static/permutation",
+    "hdt-cpp-1.3.3/libcds/src/static/sequence",
+    "hdt-cpp-1.3.3/libcds/src/utils"
 ]
 
 # Need to build in c++11 minimum

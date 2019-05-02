@@ -12,8 +12,6 @@ addons:
     - g++-4.8
 before_install:
   - if [ $TRAVIS_OS_NAME == linux ]; then export CXX=g++-4.8; fi
-  - wget https://github.com/rdfhdt/hdt-cpp/archive/v1.3.3.zip
-  - unzip v1.3.3.zip
 install:
   - bash install.sh
 script:

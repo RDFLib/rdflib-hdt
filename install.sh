@@ -8,8 +8,8 @@ command -v wget >/dev/null 2>&1 || { echo >&2 "wget is required for the installa
 command -v unzip >/dev/null 2>&1 || { echo >&2 "wget is required for the installation of pyHDT! Aborting installation..."; exit 1; }
 
 echo "Downloading HDT..."
-wget https://github.com/rdfhdt/hdt-cpp/archive/v1.3.2.zip
-unzip v1.3.2.zip
+wget https://github.com/rdfhdt/hdt-cpp/archive/v1.3.3.zip
+unzip v1.3.3.zip
 
 echo "Installing pybind11..."
 pip install -r requirements.txt
@@ -18,4 +18,4 @@ echo "Installing pyHDT..."
 python setup.py install
 
 echo "Cleaning up..."
-rm -rf hdt-cpp-1.3.2/
+rm -rf hdt-cpp-1.3.3/

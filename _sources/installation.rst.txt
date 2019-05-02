@@ -4,6 +4,7 @@ Installation
 Requirements
 ^^^^^^^^^^^^
 
+* Python *version 3.6.4 or higher*
 * `pip <https://pip.pypa.io/en/stable/>`_
 * **gcc/clang** with **c++11 support**
 * **Python Development headers**

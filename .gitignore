@@ -141,6 +141,6 @@ venv.bak/
 
 # HDT
 *.hdt.index.v*
-hdt-cpp-1.3.2
+hdt-cpp-*
 hdt-cpp.zip
-v1.3.2.zip
+v1.3.*.zip

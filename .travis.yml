@@ -15,19 +15,19 @@ before_install:
   - wget https://github.com/rdfhdt/hdt-cpp/archive/v1.3.3.zip
   - unzip v1.3.3.zip
 install:
-  - pip install -r requirements.txt
-  - pip install pytest sphinx sphinx_rtd_theme
-  - python setup.py install
+  - bash install.sh
 script:
   - pytest
 before_deploy:
   - rm -rf build/
+  - pip install pytest sphinx sphinx_rtd_theme
   - cd docs && make html
 deploy:
 - provider: pypi
   skip_cleanup: true
   user: callidon
   password: $PYPI_PASSWD
+  distributions: "sdist bdist_wheel"
   on:
     tags: true
 - provider: pages

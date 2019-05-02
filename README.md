@@ -8,6 +8,7 @@ Read and query HDT document with ease in Python
 
 # Requirements
 
+* Python *version 3.6.4 or higher*
 * [pip](https://pip.pypa.io/en/stable/)
 * **gcc/clang** with **c++11 support**
 * **Python Development headers**
@@ -46,21 +47,21 @@ from hdt import HDTDocument
 document = HDTDocument("test.hdt")
 
 # Display some metadata about the HDT document itself
-print("nb triples: %i" % document.get_total_triples())
-print("nb subjects: %i" % document.get_nb_subjects())
-print("nb predicates: %i" % document.get_nb_predicates())
-print("nb objects: %i" % document.get_nb_objets())
-print("nb shared subject-object: %i" % document.get_nb_shared())
+print("nb triples: %i" % document.total_triples)
+print("nb subjects: %i" % document.nb_subjects)
+print("nb predicates: %i" % document.nb_predicates)
+print("nb objects: %i" % document.nb_objects)
+print("nb shared subject-object: %i" % document.nb_shared)
 
 # Fetch all triples that matches { ?s ?p ?o }
 # Use empty strings ("") to indicates variables
-(triples, cardinality) = document.search_triples("", "", "")
+triples, cardinality = document.search_triples("", "", "")
 
 print("cardinality of { ?s ?p ?o }: %i" % cardinality)
 for triple in triples:
   print(triple)
 
 # Search also support limit and offset
-(triples, cardinality) = document.search_triples("", "", "", limit=10, offset=100)
+triples, cardinality = document.search_triples("", "", "", limit=10, offset=100)
 # etc ...
 ```

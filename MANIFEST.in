@@ -21,3 +21,4 @@ graft hdt-cpp-1.3.3/libcds/src/static/mapper
 graft hdt-cpp-1.3.3/libcds/src/static/permutation
 graft hdt-cpp-1.3.3/libcds/src/static/sequence
 graft hdt-cpp-1.3.3/libcds/src/utils
+graft hdt-cpp-1.3.3/libcds/src/sparql

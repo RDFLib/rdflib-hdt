@@ -4,7 +4,7 @@ import pytest
 from hdt import HDTDocument, IdentifierPosition
 
 path = "tests/test.hdt"
-document = HDTDocument(path)
+document = HDTDocument(path, False)
 nbTotalTriples = 132
 
 

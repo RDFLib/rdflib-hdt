@@ -50,13 +50,18 @@ inline bool file_exists(const std::string &name) {
 /*!
  * Constructor
  * @param file - Path to HDT file to load
+ * @param indexed -  True if the HDT must be loaded with indexes, False otherwise
  */
-HDTDocument::HDTDocument(std::string file) {
+HDTDocument::HDTDocument(std::string file, bool indexed) {
   hdt_file = file;
   if (!file_exists(file)) {
     throw std::runtime_error("Cannot open HDT file '" + file + "': Not Found!");
   }
-  hdt = HDTManager::mapIndexedHDT(file.c_str());
+  if (indexed) {
+    hdt = HDTManager::mapIndexedHDT(file.c_str());
+  } else {
+    hdt = HDTManager::mapHDT(file.c_str());
+  }
   processor = new QueryProcessor(hdt);
 }
 

@@ -32,7 +32,7 @@ private:
   std::string hdt_file;
   hdt::HDT *hdt;
   hdt::QueryProcessor *processor;
-  HDTDocument(std::string file);
+  HDTDocument(std::string file, bool indexed);
 
 public:
   /*!
@@ -85,8 +85,9 @@ public:
   /*!
    * Static factory method used to create a new HDT Document
    * @param file - Path to the HDT file
+   * @param indexed -  True if the HDT must be loaded with indexes, False otherwise
    */
-  static HDTDocument create(std::string file) { return HDTDocument(file); }
+  static HDTDocument create(std::string file, bool indexed) { return HDTDocument(file, indexed); }
 
   /*!
    * Convert a TripleID to a string RDF triple

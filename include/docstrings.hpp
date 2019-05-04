@@ -39,7 +39,10 @@ const char *IDENTIFIER_POSITION_DOC = R"(
 
 const char *HDT_DOCUMENT_CLASS_DOC = R"(
   An HDTDocument enables to load and query a HDT file.
-  Indexes are automatically generated if missing.
+
+  Constructor:
+    - file ``str``: Path to the HDT file to load.
+    - predicate ``boolean``: True if additional indexes must be loaded, False otherwise.
 )";
 
 const char *HDT_DOCUMENT_GETFILEPATH_DOC = R"(
@@ -194,7 +197,7 @@ const char *HDT_DOCUMENT_CONVERT_ID_DOC = R"(
     - position :class:`hdt.IdentifierPosition`: Identifier position.
 
   Return:
-    The RDF term associated with of the Object Identifier, i.e., either an URI or a RDF literal.
+    The RDF term associated with the Object Identifier, i.e., either an URI or a RDF literal.
 
     .. code-block:: python
 
@@ -213,7 +216,7 @@ const char *HDT_DOCUMENT_CONVERT_TERM_DOC = R"(
     - position :class:`hdt.IdentifierPosition`: Identifier position.
 
   Return:
-    The the Object Identifier associated with the RDF Term
+    The Object Identifier associated with the RDF Term
 
     .. code-block:: python
 

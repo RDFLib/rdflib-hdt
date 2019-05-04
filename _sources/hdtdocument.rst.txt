@@ -16,7 +16,8 @@ Missing indexes are generated automatically, but be careful, as it requires to l
 
   from hdt import HDTDocument
 
-  # Load HDT file. Missing indexes are generated automatically
+  # Load an HDT file.
+  # Missing indexes are generated automatically, add False as the second argument to disable them
   document = HDTDocument("test.hdt")
 
   # Display some metadata about the HDT document itself

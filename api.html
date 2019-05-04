@@ -168,8 +168,14 @@
 <dl class="class">
 <dt id="hdt.HDTDocument">
 <em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">HDTDocument</code><a class="headerlink" href="#hdt.HDTDocument" title="Permalink to this definition">¶</a></dt>
-<dd><p>An HDTDocument enables to load and query a HDT file.
-Indexes are automatically generated if missing.</p>
+<dd><p>An HDTDocument enables to load and query a HDT file.</p>
+<dl class="simple">
+<dt>Constructor:</dt><dd><ul class="simple">
+<li><p>file <code class="docutils literal notranslate"><span class="pre">str</span></code>: Path to the HDT file to load.</p></li>
+<li><p>predicate <code class="docutils literal notranslate"><span class="pre">boolean</span></code>: True if additional indexes must be loaded, False otherwise.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="hdt.HDTDocument.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>self</em>, <em>filePath</em><span class="sig-paren">)</span> &#x2192; hdt.HDTDocument<a class="headerlink" href="#hdt.HDTDocument.__init__" title="Permalink to this definition">¶</a></dt>
@@ -206,7 +212,7 @@ Such identifier are used in TripleID.</p>
 <li><p>position <a class="reference internal" href="#hdt.IdentifierPosition" title="hdt.IdentifierPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.IdentifierPosition</span></code></a>: Identifier position.</p></li>
 </ul>
 </dd>
-<dt>Return:</dt><dd><p>The RDF term associated with of the Object Identifier, i.e., either an URI or a RDF literal.</p>
+<dt>Return:</dt><dd><p>The RDF term associated with the Object Identifier, i.e., either an URI or a RDF literal.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span><span class="p">,</span> <span class="n">IdentifierPosition</span>
 <span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">convert_id</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">IdentifierPosition</span><span class="o">.</span><span class="n">Subject</span><span class="p">))</span>
@@ -227,7 +233,7 @@ Such identifier are used in TripleID.</p>
 <li><p>position <a class="reference internal" href="#hdt.IdentifierPosition" title="hdt.IdentifierPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.IdentifierPosition</span></code></a>: Identifier position.</p></li>
 </ul>
 </dd>
-<dt>Return:</dt><dd><p>The the Object Identifier associated with the RDF Term</p>
+<dt>Return:</dt><dd><p>The Object Identifier associated with the RDF Term</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span><span class="p">,</span> <span class="n">IdentifierPosition</span>
 <span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">convert_term</span><span class="p">(</span><span class="s2">&quot;http://example.org#Alice&quot;</span><span class="p">,</span> <span class="n">IdentifierPosition</span><span class="o">.</span><span class="n">Subject</span><span class="p">))</span>

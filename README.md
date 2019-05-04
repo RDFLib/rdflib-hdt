@@ -43,7 +43,8 @@ cd pyHDT/
 ```python
 from hdt import HDTDocument
 
- # Load an HDT file. Missing indexes are generated automatically
+ # Load an HDT file.
+ # Missing indexes are generated automatically, add False as the second argument to disable them
 document = HDTDocument("test.hdt")
 
 # Display some metadata about the HDT document itself

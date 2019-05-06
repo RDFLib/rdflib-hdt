@@ -14,6 +14,7 @@ graft hdt-cpp-1.3.3/libhdt/src/util
 graft hdt-cpp-1.3.3/libhdt/third
 graft hdt-cpp-1.3.3/libhdt/include/
 graft hdt-cpp-1.3.3/libhdt/src/dictionary/
+graft hdt-cpp-1.3.3/libhdt/src/sparql
 graft hdt-cpp-1.3.3/libcds/include/
 graft hdt-cpp-1.3.3/libcds/src/static/bitsequence
 graft hdt-cpp-1.3.3/libcds/src/static/coders
@@ -21,4 +22,3 @@ graft hdt-cpp-1.3.3/libcds/src/static/mapper
 graft hdt-cpp-1.3.3/libcds/src/static/permutation
 graft hdt-cpp-1.3.3/libcds/src/static/sequence
 graft hdt-cpp-1.3.3/libcds/src/utils
-graft hdt-cpp-1.3.3/libcds/src/sparql

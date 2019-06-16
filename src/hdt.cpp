@@ -80,7 +80,7 @@ PYBIND11_MODULE(hdt, m) {
 
   py::class_<HDTDocument>(m, "HDTDocument", HDT_DOCUMENT_CLASS_DOC)
       .def(py::init(&HDTDocument::create), py::arg("file"),
-                                           py::arg("map") = false,
+                                           py::arg("map") = true,
                                            py::arg("indexed") = true)
       .def_property_readonly("file_path", &HDTDocument::getFilePath,
                              HDT_DOCUMENT_GETFILEPATH_DOC)

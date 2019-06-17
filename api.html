@@ -167,7 +167,7 @@
 <h2>HDTDocument<a class="headerlink" href="#hdtdocument" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="hdt.HDTDocument">
-<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">HDTDocument</code><a class="headerlink" href="#hdt.HDTDocument" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hdt.</code><code class="sig-name descname">HDTDocument</code><a class="headerlink" href="#hdt.HDTDocument" title="Permalink to this definition">¶</a></dt>
 <dd><p>An HDTDocument enables to load and query a HDT file.</p>
 <dl class="simple">
 <dt>Constructor:</dt><dd><ul class="simple">
@@ -178,7 +178,7 @@
 </dl>
 <dl class="method">
 <dt id="hdt.HDTDocument.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>self</em>, <em>filePath</em><span class="sig-paren">)</span> &#x2192; hdt.HDTDocument<a class="headerlink" href="#hdt.HDTDocument.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filePath</em><span class="sig-paren">)</span> &#x2192; hdt.HDTDocument<a class="headerlink" href="#hdt.HDTDocument.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a new <a class="reference internal" href="#hdt.HDTDocument" title="hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.HDTDocument</span></code></a> by the loading the HDT file located in <code class="docutils literal notranslate"><span class="pre">filePath</span></code>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
@@ -203,7 +203,7 @@
 
 <dl class="method">
 <dt id="hdt.HDTDocument.convert_id">
-<code class="descname">convert_id</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>id: int</em>, <em>position: hdt.IdentifierPosition</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#hdt.HDTDocument.convert_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">convert_id</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">id: int</em>, <em class="sig-param">position: hdt.IdentifierPosition</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#hdt.HDTDocument.convert_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform an Object Identifier to a RDF term.
 Such identifier are used in TripleID.</p>
 <dl>
@@ -224,7 +224,7 @@ Such identifier are used in TripleID.</p>
 
 <dl class="method">
 <dt id="hdt.HDTDocument.convert_term">
-<code class="descname">convert_term</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>term: str</em>, <em>position: hdt.IdentifierPosition</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#hdt.HDTDocument.convert_term" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">convert_term</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">term: str</em>, <em class="sig-param">position: hdt.IdentifierPosition</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#hdt.HDTDocument.convert_term" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform an RDF Term to the associated Object Identifier.
 Such identifier are used in TripleID.</p>
 <dl>
@@ -245,7 +245,7 @@ Such identifier are used in TripleID.</p>
 
 <dl class="method">
 <dt id="hdt.HDTDocument.convert_tripleid">
-<code class="descname">convert_tripleid</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: int</em>, <em>predicate: int</em>, <em>object: int</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.HDTDocument.convert_tripleid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">convert_tripleid</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">subject: int</em>, <em class="sig-param">predicate: int</em>, <em class="sig-param">object: int</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.HDTDocument.convert_tripleid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform a RDF triple from a TripleID representation to a string representation.</p>
 <dl>
 <dt>Args:</dt><dd><ul class="simple">
@@ -272,39 +272,39 @@ Such identifier are used in TripleID.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.HDTDocument.file_path">
-<code class="descname">file_path</code><a class="headerlink" href="#hdt.HDTDocument.file_path" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">file_path</code><a class="headerlink" href="#hdt.HDTDocument.file_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the path to the HDT file currently loaded</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.HDTDocument.nb_objects">
-<code class="descname">nb_objects</code><a class="headerlink" href="#hdt.HDTDocument.nb_objects" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">nb_objects</code><a class="headerlink" href="#hdt.HDTDocument.nb_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of objects in the HDT document</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.HDTDocument.nb_predicates">
-<code class="descname">nb_predicates</code><a class="headerlink" href="#hdt.HDTDocument.nb_predicates" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">nb_predicates</code><a class="headerlink" href="#hdt.HDTDocument.nb_predicates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of predicates in the HDT document</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.HDTDocument.nb_shared">
-<code class="descname">nb_shared</code><a class="headerlink" href="#hdt.HDTDocument.nb_shared" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">nb_shared</code><a class="headerlink" href="#hdt.HDTDocument.nb_shared" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of shared subject-object in the HDT document</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.HDTDocument.nb_subjects">
-<code class="descname">nb_subjects</code><a class="headerlink" href="#hdt.HDTDocument.nb_subjects" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">nb_subjects</code><a class="headerlink" href="#hdt.HDTDocument.nb_subjects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of subjects in the HDT document</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.HDTDocument.search_join">
-<code class="descname">search_join</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument, patterns: List[Tuple[str, str, str]]</em><span class="sig-paren">)</span> &#x2192; hdt.JoinIterator<a class="headerlink" href="#hdt.HDTDocument.search_join" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">search_join</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument, patterns: List[Tuple[str, str, str]]</em><span class="sig-paren">)</span> &#x2192; hdt.JoinIterator<a class="headerlink" href="#hdt.HDTDocument.search_join" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a join between a set of triple patterns using an iterator.
 A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object), where SPARQL variables, i.e., join predicates, are prefixed by a <code class="docutils literal notranslate"><span class="pre">?</span></code>.</p>
 <dl>
@@ -332,7 +332,7 @@ A triple pattern itself is a 3-elements <code class="docutils literal notranslat
 
 <dl class="method">
 <dt id="hdt.HDTDocument.search_triples">
-<code class="descname">search_triples</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: str</em>, <em>predicate: str</em>, <em>object: str</em>, <em>limit: int=0</em>, <em>offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">search_triples</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">subject: str</em>, <em class="sig-param">predicate: str</em>, <em class="sig-param">object: str</em>, <em class="sig-param">limit: int=0</em>, <em class="sig-param">offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for RDF triples matching the triple pattern { <code class="docutils literal notranslate"><span class="pre">subject</span></code> <code class="docutils literal notranslate"><span class="pre">predicate</span></code> <code class="docutils literal notranslate"><span class="pre">object</span></code> },
 with an optional <code class="docutils literal notranslate"><span class="pre">limit</span></code> and <code class="docutils literal notranslate"><span class="pre">offset</span></code>.
 Use empty strings (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>) to indicate wildcards.</p>
@@ -365,7 +365,7 @@ the TripleIterator iterates over matching RDF triples.</p>
 
 <dl class="method">
 <dt id="hdt.HDTDocument.search_triples_ids">
-<code class="descname">search_triples_ids</code><span class="sig-paren">(</span><em>self: hdt.HDTDocument</em>, <em>subject: int</em>, <em>predicate: int</em>, <em>object: int</em>, <em>limit: int=0</em>, <em>offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIDIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples_ids" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">search_triples_ids</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">subject: int</em>, <em class="sig-param">predicate: int</em>, <em class="sig-param">object: int</em>, <em class="sig-param">limit: int=0</em>, <em class="sig-param">offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIDIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#hdt.HDTDocument.search_triples" title="hdt.HDTDocument.search_triples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.search_triples()</span></code></a>, but RDF triples are represented as unique ids (from the HDT Dictionnary).
 Use the integer <cite>0</cite> to indicate wildcards.</p>
 <p>Mapping between ids and RDF terms is done using <a class="reference internal" href="#hdt.HDTDocument.convert_id" title="hdt.HDTDocument.convert_id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.convert_id()</span></code></a>, <a class="reference internal" href="#hdt.HDTDocument.convert_term" title="hdt.HDTDocument.convert_term"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.convert_term()</span></code></a> and <a class="reference internal" href="#hdt.HDTDocument.convert_tripleid" title="hdt.HDTDocument.convert_tripleid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.convert_tripleid()</span></code></a>.</p>
@@ -397,9 +397,9 @@ the TripleIDIterator iterates over matching RDF triples IDs.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.HDTDocument.total_triples">
-<code class="descname">total_triples</code><a class="headerlink" href="#hdt.HDTDocument.total_triples" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">total_triples</code><a class="headerlink" href="#hdt.HDTDocument.total_triples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the total number of triples in the HDT document</p>
 </dd></dl>
 
@@ -410,63 +410,63 @@ the TripleIDIterator iterates over matching RDF triples IDs.</p>
 <h2>TripleIterator<a class="headerlink" href="#tripleiterator" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="hdt.TripleIterator">
-<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">TripleIterator</code><a class="headerlink" href="#hdt.TripleIterator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hdt.</code><code class="sig-name descname">TripleIterator</code><a class="headerlink" href="#hdt.TripleIterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>A TripleIterator iterates over triples in a HDT file matching a triple pattern, with an optional limit &amp; offset.</p>
 <p>Such iterator is returned by <a class="reference internal" href="#hdt.HDTDocument.search_triples" title="hdt.HDTDocument.search_triples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.search_triples()</span></code></a>.</p>
 <dl class="method">
 <dt id="hdt.TripleIterator.has_next">
-<code class="descname">has_next</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.TripleIterator.has_next" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has_next</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.TripleIterator.has_next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return true if the iterator still has items to yield, false otherwise.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIterator.limit">
-<code class="descname">limit</code><a class="headerlink" href="#hdt.TripleIterator.limit" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">limit</code><a class="headerlink" href="#hdt.TripleIterator.limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the limit of the iterator, i.e., the maximum number of items the iterator will yield.
 A limit of 0 indicates that the iterator limit is the cardinality of the triple pattern currently evaluated.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIterator.nb_reads">
-<code class="descname">nb_reads</code><a class="headerlink" href="#hdt.TripleIterator.nb_reads" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">nb_reads</code><a class="headerlink" href="#hdt.TripleIterator.nb_reads" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of items read by the iterator until now.
 Do not include any offset, thus the real position of the iterator in the collection of triples can be computed as offset + nb_reads</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.TripleIterator.next">
-<code class="descname">next</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.TripleIterator.next" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.TripleIterator.next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the next matching triple read by the iterator, or raise <code class="docutils literal notranslate"><span class="pre">StopIterator</span></code> if there is no more items to yield.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIterator.object">
-<code class="descname">object</code><a class="headerlink" href="#hdt.TripleIterator.object" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">object</code><a class="headerlink" href="#hdt.TripleIterator.object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the object of the triple pattern currently evaluated.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIterator.offset">
-<code class="descname">offset</code><a class="headerlink" href="#hdt.TripleIterator.offset" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">offset</code><a class="headerlink" href="#hdt.TripleIterator.offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the offset of the iterator, i.e., the number of items the iterator will first skip before yielding.
 An offset of 0 indicates that the iterator will not skip any items.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.TripleIterator.peek">
-<code class="descname">peek</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.TripleIterator.peek" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">peek</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.TripleIterator.peek" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the next matching triple read by the iterator without advancing it, or raise <code class="docutils literal notranslate"><span class="pre">StopIterator</span></code> if there is no more items to yield.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIterator.predicate">
-<code class="descname">predicate</code><a class="headerlink" href="#hdt.TripleIterator.predicate" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">predicate</code><a class="headerlink" href="#hdt.TripleIterator.predicate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the predicate of the triple pattern currently evaluated.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.TripleIterator.size_hint">
-<code class="descname">size_hint</code><span class="sig-paren">(</span><em>self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, bool]<a class="headerlink" href="#hdt.TripleIterator.size_hint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">size_hint</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, bool]<a class="headerlink" href="#hdt.TripleIterator.size_hint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a hint on the cardinality of the triple pattern currently evaluated.
 The iterator’s limit and offset are not taken into account.</p>
 <dl class="simple">
@@ -476,9 +476,9 @@ and the right member is True is the estimation is accurate, False otherwise</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIterator.subject">
-<code class="descname">subject</code><a class="headerlink" href="#hdt.TripleIterator.subject" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">subject</code><a class="headerlink" href="#hdt.TripleIterator.subject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the subject of the triple pattern currently evaluated.</p>
 </dd></dl>
 
@@ -489,64 +489,64 @@ and the right member is True is the estimation is accurate, False otherwise</p>
 <h2>TripleIDIterator<a class="headerlink" href="#tripleiditerator" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="hdt.TripleIDIterator">
-<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">TripleIDIterator</code><a class="headerlink" href="#hdt.TripleIDIterator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hdt.</code><code class="sig-name descname">TripleIDIterator</code><a class="headerlink" href="#hdt.TripleIDIterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>A TripleIDIterator iterates over triples’ IDs in a HDT file matching a triple pattern, with an optional limit &amp; offset.</p>
 <p>Such iterator is returned by <a class="reference internal" href="#hdt.HDTDocument.search_triples_ids" title="hdt.HDTDocument.search_triples_ids"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.search_triples_ids()</span></code></a></p>
 <p>Conversion from a tuple of triple ids into a RDF triple is done using <a class="reference internal" href="#hdt.HDTDocument.convert_tripleid" title="hdt.HDTDocument.convert_tripleid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.convert_tripleid()</span></code></a>.</p>
 <dl class="method">
 <dt id="hdt.TripleIDIterator.has_next">
-<code class="descname">has_next</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.TripleIDIterator.has_next" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has_next</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.TripleIDIterator.has_next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return true if the iterator still has items to yield, false otherwise.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIDIterator.limit">
-<code class="descname">limit</code><a class="headerlink" href="#hdt.TripleIDIterator.limit" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">limit</code><a class="headerlink" href="#hdt.TripleIDIterator.limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the limit of the iterator, i.e., the maximum number of items the iterator will yield.
 A limit of 0 indicates that the iterator limit is the cardinality of the triple pattern currently evaluated.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIDIterator.nb_reads">
-<code class="descname">nb_reads</code><a class="headerlink" href="#hdt.TripleIDIterator.nb_reads" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">nb_reads</code><a class="headerlink" href="#hdt.TripleIDIterator.nb_reads" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of items read by the iterator until now.
 Do not include any offset, thus the real position of the iterator in the collection of triples can be computed as offset + nb_reads</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.TripleIDIterator.next">
-<code class="descname">next</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, int, int]<a class="headerlink" href="#hdt.TripleIDIterator.next" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, int, int]<a class="headerlink" href="#hdt.TripleIDIterator.next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the next matching triple read by the iterator, or raise <code class="docutils literal notranslate"><span class="pre">StopIterator</span></code> if there is no more items to yield.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIDIterator.object">
-<code class="descname">object</code><a class="headerlink" href="#hdt.TripleIDIterator.object" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">object</code><a class="headerlink" href="#hdt.TripleIDIterator.object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the object of the triple pattern currently evaluated.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIDIterator.offset">
-<code class="descname">offset</code><a class="headerlink" href="#hdt.TripleIDIterator.offset" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">offset</code><a class="headerlink" href="#hdt.TripleIDIterator.offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the offset of the iterator, i.e., the number of items the iterator will first skip before yielding.
 An offset of 0 indicates that the iterator will not skip any items.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.TripleIDIterator.peek">
-<code class="descname">peek</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, int, int]<a class="headerlink" href="#hdt.TripleIDIterator.peek" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">peek</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, int, int]<a class="headerlink" href="#hdt.TripleIDIterator.peek" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the next matching triple read by the iterator without advancing it, or raise <code class="docutils literal notranslate"><span class="pre">StopIterator</span></code> if there is no more items to yield.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIDIterator.predicate">
-<code class="descname">predicate</code><a class="headerlink" href="#hdt.TripleIDIterator.predicate" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">predicate</code><a class="headerlink" href="#hdt.TripleIDIterator.predicate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the predicate of the triple pattern currently evaluated.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.TripleIDIterator.size_hint">
-<code class="descname">size_hint</code><span class="sig-paren">(</span><em>self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, bool]<a class="headerlink" href="#hdt.TripleIDIterator.size_hint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">size_hint</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.TripleIDIterator</em><span class="sig-paren">)</span> &#x2192; Tuple[int, bool]<a class="headerlink" href="#hdt.TripleIDIterator.size_hint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a hint on the cardinality of the triple pattern currently evaluated.
 The iterator’s limit and offset are not taken into account.</p>
 <dl class="simple">
@@ -556,9 +556,9 @@ and the right member is True is the estimation is accurate, False otherwise</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="hdt.TripleIDIterator.subject">
-<code class="descname">subject</code><a class="headerlink" href="#hdt.TripleIDIterator.subject" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">subject</code><a class="headerlink" href="#hdt.TripleIDIterator.subject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the subject of the triple pattern currently evaluated.</p>
 </dd></dl>
 
@@ -569,30 +569,30 @@ and the right member is True is the estimation is accurate, False otherwise</p>
 <h2>JoinIterator<a class="headerlink" href="#joiniterator" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="hdt.JoinIterator">
-<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">JoinIterator</code><a class="headerlink" href="#hdt.JoinIterator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hdt.</code><code class="sig-name descname">JoinIterator</code><a class="headerlink" href="#hdt.JoinIterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>A JoinIterator iterates over the set of solution mappings for a join between several triple patterns. It implements the Python iterator protocol and yields sets of solutions mappings.</p>
 <p>Such iterator is returned by <a class="reference internal" href="#hdt.HDTDocument.search_join" title="hdt.HDTDocument.search_join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hdt.HDTDocument.search_join()</span></code></a></p>
 <dl class="method">
 <dt id="hdt.JoinIterator.cardinality">
-<code class="descname">cardinality</code><span class="sig-paren">(</span><em>self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#hdt.JoinIterator.cardinality" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cardinality</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#hdt.JoinIterator.cardinality" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the estimated join cardinality.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.JoinIterator.has_next">
-<code class="descname">has_next</code><span class="sig-paren">(</span><em>self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.JoinIterator.has_next" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has_next</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#hdt.JoinIterator.has_next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return true if the iterator still has items to yield, false otherwise.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.JoinIterator.next">
-<code class="descname">next</code><span class="sig-paren">(</span><em>self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; Set[Tuple[str, str]]<a class="headerlink" href="#hdt.JoinIterator.next" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; Set[Tuple[str, str]]<a class="headerlink" href="#hdt.JoinIterator.next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the next set of solution mappings read by the iterator, or raise <code class="docutils literal notranslate"><span class="pre">StopIterator</span></code> if there is no more items to yield.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hdt.JoinIterator.reset">
-<code class="descname">reset</code><span class="sig-paren">(</span><em>self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#hdt.JoinIterator.reset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.JoinIterator</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#hdt.JoinIterator.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset the join, i.e., move the iterator back to its initial state.</p>
 </dd></dl>
 
@@ -605,7 +605,7 @@ and the right member is True is the estimation is accurate, False otherwise</p>
 <h3>IdentifierPosition<a class="headerlink" href="#identifierposition" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="hdt.IdentifierPosition">
-<em class="property">class </em><code class="descclassname">hdt.</code><code class="descname">IdentifierPosition</code><a class="headerlink" href="#hdt.IdentifierPosition" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hdt.</code><code class="sig-name descname">IdentifierPosition</code><a class="headerlink" href="#hdt.IdentifierPosition" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enum used to indicate the position (subject, predicate or object) of an Object identifier.</p>
 <dl class="simple">
 <dt>Possibles values:</dt><dd><ul class="simple">

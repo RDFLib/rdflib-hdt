@@ -22,8 +22,10 @@ sources = [
     "src/hdt.cpp",
     "src/hdt_document.cpp",
     "src/triple_iterator.cpp",
+    "src/triple_iterator_bytes.cpp",
     "src/tripleid_iterator.cpp",
-    "src/join_iterator.cpp"
+    "src/join_iterator.cpp",
+    "src/join_iterator_bytes.cpp"
 ]
 
 # HDT source files

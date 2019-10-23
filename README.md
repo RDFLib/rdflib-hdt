@@ -97,7 +97,3 @@ for s, p, o in it:
     # try another other codecs
     pass
 ```
-
-# Running the tests
-
-Install first, then install `pytest` then run `pytest tests/ --verbose`

@@ -77,7 +77,8 @@ To handle this we doubled the API of the HDT document by adding:
 - `search_join_bytes(...)` return an iterator of sets of solutions mapping as `py::set(py::bytes, py::bytes)`
 - `convert_tripleid_bytes(...)` return a triple as: `(py::bytes, py::bytes, py::bytes)`
 - `convert_id_bytes(...)` return a `py::bytes`
-**Parameters are the same as the standard version**
+
+**Parameters and documentation are the same as the standard version**
 
 ```python
 from hdt import HDTDocument

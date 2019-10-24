@@ -50,6 +50,19 @@ def test_ids_to_string():
         assert pred == p
         assert obj == o
 
+def test_ids_to_string_bytes():
+    (triples, triplesCard) = document.search_triples_bytes("", "", "")
+    (ids, idsCard) = document.search_triples_ids(0, 0, 0)
+    assert triplesCard == idsCard
+    assert triplesCard == nbTotalTriples
+    for subj, pred, obj in triples:
+        print(subj, pred, obj)
+        sid, pid, oid = next(ids)
+        s, p, o = document.convert_tripleid_bytes(sid, pid, oid)
+        assert subj.decode('utf-8') == s.decode('utf-8')
+        assert pred.decode('utf-8') == p.decode('utf-8')
+        assert obj.decode('utf-8') == o.decode('utf-8')
+
 
 def test_convert_id():
     (triples, triplesCard) = document.search_triples("", "", "")
@@ -62,6 +75,22 @@ def test_convert_id():
             document.convert_id(sid, IdentifierPosition.Subject),
             document.convert_id(pid, IdentifierPosition.Predicate),
             document.convert_id(oid, IdentifierPosition.Object)
+            )
+        assert subj == s
+        assert pred == p
+        assert obj == o
+
+def test_convert_id_bytes():
+    (triples, triplesCard) = document.search_triples_bytes("", "", "")
+    (ids, idsCard) = document.search_triples_ids(0, 0, 0)
+    assert triplesCard == idsCard
+    assert triplesCard == nbTotalTriples
+    for subj, pred, obj in triples:
+        sid, pid, oid = next(ids)
+        s, p, o = (
+            document.convert_id_bytes(sid, IdentifierPosition.Subject),
+            document.convert_id_bytes(pid, IdentifierPosition.Predicate),
+            document.convert_id_bytes(oid, IdentifierPosition.Object)
             )
         assert subj == s
         assert pred == p

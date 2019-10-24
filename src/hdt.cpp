@@ -9,8 +9,10 @@
 #include "docstrings.hpp"
 #include "hdt_document.hpp"
 #include "triple_iterator.hpp"
+#include "triple_iterator_bytes.hpp"
 #include "tripleid_iterator.hpp"
 #include "join_iterator.hpp"
+#include "join_iterator_bytes.hpp"
 
 namespace py = pybind11;
 
@@ -46,6 +48,29 @@ PYBIND11_MODULE(hdt, m) {
                     TRIPLE_ITERATOR_NBREADS_DOC)
       .def("__repr__", &TripleIterator::python_repr);
 
+  py::class_<TripleIteratorBytes>(m, "TripleIteratorBytes", TRIPLE_ITERATOR_CLASS_DOC)
+      .def("next", &TripleIteratorBytes::next, TRIPLE_ITERATOR_NEXT_DOC)
+      .def("__next__", &TripleIteratorBytes::next, TRIPLE_ITERATOR_NEXT_DOC)
+      .def("peek", &TripleIteratorBytes::peek, TRIPLE_ITERATOR_PEEK_DOC)
+      .def("has_next", &TripleIteratorBytes::hasNext, TRIPLE_ITERATOR_HASNEXT_DOC)
+      .def("size_hint", &TripleIteratorBytes::sizeHint, TRIPLE_ITERATOR_SIZE_DOC)
+      .def("__len__", &TripleIteratorBytes::sizeHint,
+           TRIPLE_ITERATOR_SIZE_DOC)
+      .def("__iter__", &TripleIteratorBytes::python_iter)
+      .def_property_readonly("subject", &TripleIteratorBytes::getSubject,
+                             TRIPLE_ITERATOR_GETSUBJECT_DOC)
+      .def_property_readonly("predicate", &TripleIteratorBytes::getPredicate,
+                             TRIPLE_ITERATOR_GETPREDICATE_DOC)
+      .def_property_readonly("object", &TripleIteratorBytes::getObject,
+                             TRIPLE_ITERATOR_GETOBJECT_DOC)
+      .def_property_readonly("limit", &TripleIteratorBytes::getLimit,
+                             TRIPLE_ITERATOR_GETLIMIT_DOC)
+      .def_property_readonly("offset", &TripleIteratorBytes::getOffset,
+                             TRIPLE_ITERATOR_GETOFFSET_DOC)
+      .def_property_readonly("nb_reads", &TripleIteratorBytes::getNbResultsRead,
+                    TRIPLE_ITERATOR_NBREADS_DOC)
+      .def("__repr__", &TripleIteratorBytes::python_repr);
+
   py::class_<TripleIDIterator>(m, "TripleIDIterator", TRIPLE_ID_ITERATOR_CLASS_DOC)
       .def("next", &TripleIDIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
       .def("__next__", &TripleIDIterator::next, TRIPLE_ITERATOR_NEXT_DOC)
@@ -77,6 +102,16 @@ PYBIND11_MODULE(hdt, m) {
     .def("__next__", &JoinIterator::next, JOIN_ITERATOR_NEXT_DOC)
     .def("__iter__", &JoinIterator::python_iter)
     .def("__repr__", &JoinIterator::python_repr);
+
+  py::class_<JoinIteratorBytes>(m, "JoinIteratorBytes", JOIN_ITERATOR_CLASS_DOC)
+    .def("next", &JoinIteratorBytes::next, JOIN_ITERATOR_NEXT_DOC)
+    .def("has_next", &JoinIteratorBytes::hasNext, JOIN_ITERATOR_HAS_NEXT_DOC)
+    .def("cardinality", &JoinIteratorBytes::estimatedCardinality, JOIN_ITERATOR_SIZE_DOC)
+    .def("reset", &JoinIteratorBytes::reset, JOIN_ITERATOR_RESET_DOC)
+    .def("__len__", &JoinIteratorBytes::estimatedCardinality, JOIN_ITERATOR_SIZE_DOC)
+    .def("__next__", &JoinIteratorBytes::next, JOIN_ITERATOR_NEXT_DOC)
+    .def("__iter__", &JoinIteratorBytes::python_iter)
+    .def("__repr__", &JoinIteratorBytes::python_repr);
 
   py::class_<HDTDocument>(m, "HDTDocument", HDT_DOCUMENT_CLASS_DOC)
       .def(py::init(&HDTDocument::create), py::arg("file"),
@@ -110,6 +145,17 @@ PYBIND11_MODULE(hdt, m) {
            py::arg("id"), py::arg("position"))
      .def("convert_term", &HDTDocument::convertTerm, HDT_DOCUMENT_CONVERT_TERM_DOC,
           py::arg("term"), py::arg("position"))
+      // ========= BYTES REPRESENTATION =========
+      .def("search_triples_bytes", &HDTDocument::searchBytes,
+           HDT_DOCUMENT_SEARCH_TRIPLES_DOC, py::arg("subject"),
+           py::arg("predicate"), py::arg("object"), py::arg("limit") = 0,
+           py::arg("offset") = 0)
+      .def("search_join_bytes", &HDTDocument::searchJoinBytes, HDT_DOCUMENT_SEARCH_JOIN_DOC, py::arg("patterns"))
+      .def("convert_tripleid_bytes", &HDTDocument::convertTripleIDBytes,
+           HDT_DOCUMENT_TRIPLES_IDS_TO_STRING_DOC,
+           py::arg("subject"), py::arg("predicate"), py::arg("object"))
+      .def("convert_id_bytes", &HDTDocument::convertIDBytes, HDT_DOCUMENT_CONVERT_ID_DOC,
+           py::arg("id"), py::arg("position"))
       .def("__len__", &HDTDocument::getNbTriples, HDT_DOCUMENT_GETNBTRIPLES_DOC)
       .def("__repr__", &HDTDocument::python_repr);
 

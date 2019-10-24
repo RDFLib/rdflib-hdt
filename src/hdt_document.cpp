@@ -10,7 +10,8 @@
 #include <SingleTriple.hpp>
 #include <fstream>
 #include <pybind11/stl.h>
-
+#include <pybind11/pybind11.h>
+namespace py = pybind11;
 using namespace hdt;
 
 /*!
@@ -312,4 +313,112 @@ JoinIterator * HDTDocument::searchJoin(std::vector<triple> patterns) {
 
   VarBindingString *iterator = processor->searchJoin(joinPatterns, vars);
   return new JoinIterator(iterator);
+}
+
+// ============= BYTES REPRSENTATION ============
+/*!
+ * Search all matching triples for a triple pattern, whith an optional limit and offset. Triple as bytes triples (b'...', b'...', b'...')
+ * Returns a tuple<TripleIterator*, cardinality>
+ * @param subject   - Triple pattern's subject
+ * @param predicate - Triple pattern's predicate
+ * @param object    - Triple pattern's object
+ * @param limit     - (Optional) Maximum number of matching triples to read
+ * @param offset    - (Optional) Number of matching triples to skip
+ * @return A tuple (TripleIterator*, cardinality)
+ */
+search_results_bytes HDTDocument::searchBytes(std::string subject,
+                                   std::string predicate,
+                                   std::string object,
+                                   unsigned int limit,
+                                   unsigned int offset) {
+  unsigned int idSubject = 0;
+  unsigned int idPredicate = 0;
+  unsigned int idObject = 0;
+
+  if (!subject.empty()) {
+    idSubject = hdt->getDictionary()->stringToId(subject, hdt::SUBJECT);
+  }
+
+  if (!predicate.empty()) {
+    idPredicate = hdt->getDictionary()->stringToId(predicate, hdt::PREDICATE);
+  }
+
+  if (!object.empty()) {
+    idObject = hdt->getDictionary()->stringToId(object, hdt::OBJECT);
+  }
+
+  TripleIDIterator *it;
+  size_t cardinality = 0;
+
+  // if a non-variable term was not found in the dictionnary, then the search yield nothing
+  if (((!subject.empty()) && idSubject == 0) || ((!predicate.empty()) && idPredicate == 0) || ((!object.empty()) && idObject == 0)) {
+    it = new TripleIDIterator(new IteratorTripleID(), subject, predicate, object, limit, offset);
+  } else {
+    // build a TripleIDIterator to fetch results
+    TripleID tp(idSubject, idPredicate, idObject);
+    IteratorTripleID *source = hdt->getTriples()->search(tp);
+    cardinality = source->estimatedNumResults();
+    applyOffset<IteratorTripleID>(source, offset, cardinality);
+    it = new TripleIDIterator(source, subject, predicate, object, limit, offset);
+  }
+  // wraps the TripleIDIterator in order to convert OID triples back to RDF triples
+  TripleIteratorBytes *resultIterator = new TripleIteratorBytes(it, hdt->getDictionary());
+  return std::make_tuple(resultIterator, cardinality);
+}
+
+/**
+ * Evaluate a join between a set of triple patterns using a JoinIterator.
+ * @param  patterns - Set of triple patterns
+ * @return A JoinIterator* used to evaluated the join.
+ */
+JoinIteratorBytes * HDTDocument::searchJoinBytes(std::vector<triple> patterns) {
+  set<string> vars {};
+  vector<TripleString> joinPatterns {};
+  std::string subj, pred, obj;
+
+  for (auto it = patterns.begin(); it != patterns.end(); it++) {
+    // unpack pattern
+    std::tie(subj, pred, obj) = *it;
+    // add variables
+    if (subj.at(0) == '?') {
+      vars.insert(subj);
+    }
+    if (pred.at(0) == '?') {
+      vars.insert(pred);
+    }
+    if (obj.at(0) == '?') {
+      vars.insert(obj);
+    }
+    // build join pattern
+    TripleString pattern(subj, pred, obj);
+    joinPatterns.push_back(pattern);
+  }
+
+  VarBindingString *iterator = processor->searchJoin(joinPatterns, vars);
+  return new JoinIteratorBytes(iterator);
+}
+
+/**
+ * Convert an Object Identifier into the equivalent URI/Literal value
+ * @param  id  - Object Identifier
+ * @param  pos - Identifier position (subject, predicate or object)
+ * @return The URI/Literal equivalent to the Object Identifier
+ */
+py::bytes HDTDocument::convertIDBytes(unsigned int id, IdentifierPosition pos) {
+  return  py::bytes(HDTDocument::convertID(id, pos));
+}
+
+/*!
+ * Convert a TripleID to a string RDF triple
+ * @param  subject   - Triple's subject
+ * @param  predicate - Triple's predicate
+ * @param  object    - Triple's object
+ * @return The associated RDF triple
+ */
+triple_bytes HDTDocument::convertTripleIDBytes(unsigned int subject, unsigned int predicate,
+                                unsigned int object) {
+  return std::make_tuple(
+      py::bytes(hdt->getDictionary()->idToString(subject, hdt::SUBJECT)),
+      py::bytes(hdt->getDictionary()->idToString(predicate, hdt::PREDICATE)),
+      py::bytes(hdt->getDictionary()->idToString(object, hdt::OBJECT)));
 }

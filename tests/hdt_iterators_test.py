@@ -20,6 +20,26 @@ def test_read_document_base():
         assert obj is not None
     assert triples.nb_reads == cardinality
 
+def test_read_document_base_bytes():
+    (triples, cardinality) = document.search_triples_bytes("", "", "")
+    assert triples.subject == "?s"
+    assert triples.predicate == "?p"
+    assert triples.object == "?o"
+    assert cardinality == nbTotalTriples
+    for subj, pred, obj in triples:
+        assert isinstance(subj, bytes)
+        assert isinstance(pred, bytes)
+        assert isinstance(obj, bytes)
+        try:
+            s, p, o = subj.decode('utf-8'), pred.decode('utf-8'), obj.decode('utf-8')
+        except Exception as err:
+            # with the test.hdt file we shouldnt have any problem
+            raise err
+        assert subj is not None
+        assert pred is not None
+        assert obj is not None
+    assert triples.nb_reads == cardinality
+
 
 empty_triples = [
     ("http://example.org#toto", "", ""),
@@ -60,6 +80,30 @@ def test_read_document_limit():
         assert subj is not None
         assert pred is not None
         assert obj is not None
+    assert nbItems == 10
+    assert triples.nb_reads == 10
+
+def test_read_document_bytes_peek():
+    nbItems = 0
+    (triples, cardinality) = document.search_triples_bytes("", "", "", limit=10)
+    assert triples.limit == 10
+    assert cardinality == nbTotalTriples
+    peek = triples.peek()
+    for subj, pred, obj in triples:
+        nbItems += 1
+        assert isinstance(subj, bytes)
+        assert isinstance(pred, bytes)
+        assert isinstance(obj, bytes)
+        assert subj == peek[0]
+        assert pred == peek[1]
+        assert obj == peek[2]
+        assert subj is not None
+        assert pred is not None
+        assert obj is not None
+        try:
+            peek = triples.peek()
+        except:
+            pass
     assert nbItems == 10
     assert triples.nb_reads == 10
 

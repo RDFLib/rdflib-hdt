@@ -1,6 +1,6 @@
 /**
  * hdt_types.hpp
- * Author: Thomas MINIER - MIT License 2017-2019
+ * Author: Thomas MINIER, Arnaud Grall - MIT License 2017-2019
  */
 
 #ifndef PYHDT_TYPES_HPP
@@ -10,6 +10,8 @@
 #include <string>
 #include <tuple>
 #include <set>
+#include <pybind11/pybind11.h>
+namespace py = pybind11;
 
 /**
  * Indictates the position of an Object Identifier
@@ -39,5 +41,11 @@ typedef std::tuple<size_t, bool> size_hint;
 typedef std::tuple<std::string, std::string> single_binding;
 
 typedef std::set<single_binding> *solution_bindings;
+
+// ============== BYTES REPRESENTATION ==============
+// A RDF Triple. RDF terms are represented as simple bytes by HDT.
+typedef std::tuple<py::bytes, py::bytes, py::bytes> triple_bytes;
+// A Set of solutions bindings for the join iterator
+typedef py::set solution_bindings_bytes;
 
 #endif /* PYHDT_TYPES_HPP */

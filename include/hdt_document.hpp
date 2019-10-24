@@ -6,19 +6,27 @@
 #ifndef PYHDT_DOCUMENT_HPP
 #define PYHDT_DOCUMENT_HPP
 
+#include <pybind11/pybind11.h>
 #include "HDT.hpp"
 #include "QueryProcessor.hpp"
 #include "pyhdt_types.hpp"
 #include "triple_iterator.hpp"
+#include "triple_iterator_bytes.hpp"
 #include "tripleid_iterator.hpp"
 #include "join_iterator.hpp"
+#include "join_iterator_bytes.hpp"
 #include <list>
 #include <string>
 #include <vector>
+namespace py = pybind11;
 
 // The result of a search for a triple pattern in a HDT document:
 // a tuple (matching RDF triples, nb of matching RDF triples)
 typedef std::tuple<TripleIterator *, size_t> search_results;
+
+// The result of a search for a triple pattern in a HDT document:
+// a tuple (matching RDF triples, nb of matching RDF triples)
+typedef std::tuple<TripleIteratorBytes *, size_t> search_results_bytes;
 
 // Same as seach_results, but for an iterator over triple ids
 typedef std::tuple<TripleIDIterator *, size_t> search_results_ids;
@@ -152,6 +160,45 @@ public:
    * @return A JoinIterator* used to evaluated the join.
    */
   JoinIterator * searchJoin(std::vector<triple> patterns);
+
+  // ============== BYTES REPRESENTATION ==============
+  // Author: Arnaud GRALL - MIT License 2017-2019
+  /*!
+   * Search all matching triples for a triple pattern, whith an optional limit and offset. Returns bytes instead of string
+   * Returns a tuple<TripleIterator*, cardinality>
+   * @param subject   - Triple pattern's subject
+   * @param predicate - Triple pattern's predicate
+   * @param object    - Triple pattern's object
+   * @param limit     - (Optional) Maximum number of matching triples to read
+   * @param offset    - (Optional) Number of matching triples to skip
+   * @return A tuple (TripleIterator*, cardinality)
+   */
+  search_results_bytes searchBytes(std::string subject, std::string predicate,
+                        std::string object, unsigned int limit = 0,
+                        unsigned int offset = 0);
+  /**
+   * Evaluate a join between a set of triple patterns using a JoinIterator.
+   * @param  patterns - Set of triple patterns
+   * @return A JoinIterator* used to evaluated the join.
+   */
+  JoinIteratorBytes * searchJoinBytes(std::vector<triple> patterns);
+  /*!
+   * Convert a TripleID to a RDF triple as bytes
+   * @param  subject   - Triple's subject
+   * @param  predicate - Triple's predicate
+   * @param  object    - Triple's object
+   * @return The associated RDF triple
+   */
+  triple_bytes convertTripleIDBytes(unsigned int subject, unsigned int predicate,
+                     unsigned int object);
+
+  /**
+   * Convert an Object Identifier into the equivalent an RDF term as bytes
+   * @param  id  - Object Identifier
+   * @param  pos - Identifier position (subject, predicate or object)
+   * @return The an RDF term equivalent to the Object Identifier
+   */
+  py::bytes convertIDBytes(unsigned int id, IdentifierPosition pos);
 };
 
 #endif /* PYHDT_DOCUMENT_HPP */

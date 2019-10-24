@@ -99,3 +99,40 @@ For example, ``("ex:2", "ex:type", "ex:Person") < ("ex:1", "ex:type", "ex:Person
 because their triple ids counterparts are ``(1, 2, 3)`` and ``(2, 2, 3)``.
 
 For more details about this topic, please refer to the `HDT journal article <http://www.imap.websemanticsjournal.org/preprints/index.php/ps/article/viewFile/328/333>`_.
+
+Handling non UTF-8 strings in python
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If the HDT document has been encoded with a non UTF-8 encoding the
+previous code won’t work correctly and will result in a
+``UnicodeDecodeError``. More details on how to convert string to str
+from c++ to python `here`_
+
+To handle this we doubled the API of the HDT document by adding:
+
+- ``search_triples_bytes(...)`` return an iterator of triples as ``(py::bytes, py::bytes, py::bytes)``
+- ``search_join_bytes(...)`` return an iterator of sets of solutions mapping as ``py::set(py::bytes, py::bytes)``
+- ``convert_tripleid_bytes(...)`` return a triple as: ``(py::bytes, py::bytes, py::bytes)``
+- ``convert_id_bytes(...)`` return a ``py::bytes``
+
+**Parameters and documentation are the same as the standard version**
+
+.. code:: python
+
+  from hdt import HDTDocument
+
+   # Load an HDT file.
+   # Missing indexes are generated automatically, add False as the second argument to disable them
+  document = HDTDocument("test.hdt")
+  it = document.search_triple_bytes("", "", "")
+
+  for s, p, o in it:
+    print(s, p, o) # print b'...', b'...', b'...'
+    # now decode it, or handle any error
+    try:
+      s, p, o = s.decode('UTF-8'), p.decode('UTF-8'), o.decode('UTF-8')
+    except UnicodeDecodeError as err:
+      # try another other codecs
+      pass
+
+.. _here: https://pybind11.readthedocs.io/en/stable/advanced/cast/strings.html

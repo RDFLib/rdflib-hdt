@@ -92,6 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#searching-for-triple-ids">Searching for triple IDs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#join-evaluation">Join evaluation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ordering">Ordering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-non-utf-8-strings-in-python">Handling non UTF-8 strings in python</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API documentation</a></li>
@@ -246,6 +247,38 @@ However, this order is <strong>not</strong> an order on string values, but an or
 For example, <code class="docutils literal notranslate"><span class="pre">(&quot;ex:2&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span> <span class="pre">&lt;</span> <span class="pre">(&quot;ex:1&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code>,
 because their triple ids counterparts are <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code> and <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.</p>
 <p>For more details about this topic, please refer to the <a class="reference external" href="http://www.imap.websemanticsjournal.org/preprints/index.php/ps/article/viewFile/328/333">HDT journal article</a>.</p>
+</div>
+<div class="section" id="handling-non-utf-8-strings-in-python">
+<h2>Handling non UTF-8 strings in python<a class="headerlink" href="#handling-non-utf-8-strings-in-python" title="Permalink to this headline">¶</a></h2>
+<p>If the HDT document has been encoded with a non UTF-8 encoding the
+previous code won’t work correctly and will result in a
+<code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code>. More details on how to convert string to str
+from c++ to python <a class="reference external" href="https://pybind11.readthedocs.io/en/stable/advanced/cast/strings.html">here</a></p>
+<p>To handle this we doubled the API of the HDT document by adding:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">search_triples_bytes(...)</span></code> return an iterator of triples as <code class="docutils literal notranslate"><span class="pre">(py::bytes,</span> <span class="pre">py::bytes,</span> <span class="pre">py::bytes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_join_bytes(...)</span></code> return an iterator of sets of solutions mapping as <code class="docutils literal notranslate"><span class="pre">py::set(py::bytes,</span> <span class="pre">py::bytes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convert_tripleid_bytes(...)</span></code> return a triple as: <code class="docutils literal notranslate"><span class="pre">(py::bytes,</span> <span class="pre">py::bytes,</span> <span class="pre">py::bytes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convert_id_bytes(...)</span></code> return a <code class="docutils literal notranslate"><span class="pre">py::bytes</span></code></p></li>
+</ul>
+<p><strong>Parameters and documentation are the same as the standard version</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+
+ <span class="c1"># Load an HDT file.</span>
+ <span class="c1"># Missing indexes are generated automatically, add False as the second argument to disable them</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+<span class="n">it</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triple_bytes</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="c1"># print b&#39;...&#39;, b&#39;...&#39;, b&#39;...&#39;</span>
+  <span class="c1"># now decode it, or handle any error</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">),</span> <span class="n">p</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">),</span> <span class="n">o</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+  <span class="k">except</span> <span class="ne">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="c1"># try another other codecs</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
 </div>
 </div>
 

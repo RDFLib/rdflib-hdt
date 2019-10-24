@@ -223,6 +223,27 @@ Such identifier are used in TripleID.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="hdt.HDTDocument.convert_id_bytes">
+<code class="sig-name descname">convert_id_bytes</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">id: int</em>, <em class="sig-param">position: hdt.IdentifierPosition</em><span class="sig-paren">)</span> &#x2192; bytes<a class="headerlink" href="#hdt.HDTDocument.convert_id_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform an Object Identifier to a RDF term.
+Such identifier are used in TripleID.</p>
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>id <code class="docutils literal notranslate"><span class="pre">int</span></code>: Object identifier.</p></li>
+<li><p>position <a class="reference internal" href="#hdt.IdentifierPosition" title="hdt.IdentifierPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.IdentifierPosition</span></code></a>: Identifier position.</p></li>
+</ul>
+</dd>
+<dt>Return:</dt><dd><p>The RDF term associated with the Object Identifier, i.e., either an URI or a RDF literal.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span><span class="p">,</span> <span class="n">IdentifierPosition</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">convert_id</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">IdentifierPosition</span><span class="o">.</span><span class="n">Subject</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="hdt.HDTDocument.convert_term">
 <code class="sig-name descname">convert_term</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">term: str</em>, <em class="sig-param">position: hdt.IdentifierPosition</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#hdt.HDTDocument.convert_term" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform an RDF Term to the associated Object Identifier.
@@ -246,6 +267,35 @@ Such identifier are used in TripleID.</p>
 <dl class="method">
 <dt id="hdt.HDTDocument.convert_tripleid">
 <code class="sig-name descname">convert_tripleid</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">subject: int</em>, <em class="sig-param">predicate: int</em>, <em class="sig-param">object: int</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="headerlink" href="#hdt.HDTDocument.convert_tripleid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a RDF triple from a TripleID representation to a string representation.</p>
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>subject <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the subject.</p></li>
+<li><p>predicate <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the predicate.</p></li>
+<li><p>obj <code class="docutils literal notranslate"><span class="pre">int</span></code>: unique ID of the object.</p></li>
+</ul>
+</dd>
+<dt>Return:</dt><dd><p>A triple in string representation, i.e., a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fetch all triples that matches { ?s foaf:name ?o }</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">convert_term</span><span class="p">(</span><span class="s2">&quot;http://xmlns.com/foaf/0.1/&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples_ids</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="c1"># will print Object identifiers, i.e., integers</span>
+  <span class="c1"># convert a triple ID to a string format</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">convert_tripleid</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.HDTDocument.convert_tripleid_bytes">
+<code class="sig-name descname">convert_tripleid_bytes</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">subject: int</em>, <em class="sig-param">predicate: int</em>, <em class="sig-param">object: int</em><span class="sig-paren">)</span> &#x2192; Tuple[bytes, bytes, bytes]<a class="headerlink" href="#hdt.HDTDocument.convert_tripleid_bytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform a RDF triple from a TripleID representation to a string representation.</p>
 <dl>
 <dt>Args:</dt><dd><ul class="simple">
@@ -331,8 +381,69 @@ A triple pattern itself is a 3-elements <code class="docutils literal notranslat
 </dd></dl>
 
 <dl class="method">
+<dt id="hdt.HDTDocument.search_join_bytes">
+<code class="sig-name descname">search_join_bytes</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument, patterns: List[Tuple[str, str, str]]</em><span class="sig-paren">)</span> &#x2192; hdt.JoinIteratorBytes<a class="headerlink" href="#hdt.HDTDocument.search_join_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a join between a set of triple patterns using an iterator.
+A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object), where SPARQL variables, i.e., join predicates, are prefixed by a <code class="docutils literal notranslate"><span class="pre">?</span></code>.</p>
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>patterns <code class="docutils literal notranslate"><span class="pre">set</span></code>: set of triple patterns.</p></li>
+</ul>
+</dd>
+<dt>Return:</dt><dd><p>A <a class="reference internal" href="#hdt.JoinIterator" title="hdt.JoinIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.JoinIterator</span></code></a>, which can be consumed as a Python iterator to evaluates the join.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># find all actors with their names in the HDT document</span>
+<span class="n">tp_a</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;?s&quot;</span><span class="p">,</span> <span class="s2">&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;</span><span class="p">,</span> <span class="s2">&quot;http://example.org#Actor&quot;</span><span class="p">)</span>
+<span class="n">tp_b</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;?s&quot;</span><span class="p">,</span> <span class="s2">&quot;http://xmlns.com/foaf/0.1/name&quot;</span><span class="p">,</span> <span class="s2">&quot;?name&quot;</span><span class="p">)</span>
+<span class="n">iterator</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_join</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">tp_a</span><span class="p">,</span> <span class="n">tp_b</span><span class="p">]))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;estimated join cardinality : </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">mappings</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">mappings</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="hdt.HDTDocument.search_triples">
 <code class="sig-name descname">search_triples</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">subject: str</em>, <em class="sig-param">predicate: str</em>, <em class="sig-param">object: str</em>, <em class="sig-param">limit: int=0</em>, <em class="sig-param">offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIterator, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for RDF triples matching the triple pattern { <code class="docutils literal notranslate"><span class="pre">subject</span></code> <code class="docutils literal notranslate"><span class="pre">predicate</span></code> <code class="docutils literal notranslate"><span class="pre">object</span></code> },
+with an optional <code class="docutils literal notranslate"><span class="pre">limit</span></code> and <code class="docutils literal notranslate"><span class="pre">offset</span></code>.
+Use empty strings (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>) to indicate wildcards.</p>
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>subject <code class="docutils literal notranslate"><span class="pre">str</span></code>: The subject of the triple pattern to seach for.</p></li>
+<li><p>predicate <code class="docutils literal notranslate"><span class="pre">str</span></code>: The predicate of the triple pattern to seach for.</p></li>
+<li><p>obj <code class="docutils literal notranslate"><span class="pre">str</span></code>: The object of the triple pattern ot seach for.</p></li>
+<li><p>limit <code class="docutils literal notranslate"><span class="pre">int</span></code> <code class="docutils literal notranslate"><span class="pre">optional</span></code>: Maximum number of triples to search for.</p></li>
+<li><p>offset <code class="docutils literal notranslate"><span class="pre">int</span></code> <code class="docutils literal notranslate"><span class="pre">optional</span></code>: Number of matching triples to skip before returning results.</p></li>
+</ul>
+</dd>
+<dt>Return:</dt><dd><p>A 2-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (<a class="reference internal" href="#hdt.TripleIterator" title="hdt.TripleIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdt.TripleIterator</span></code></a>, estimated pattern cardinality), where
+the TripleIterator iterates over matching RDF triples.</p>
+<p>A RDF triple itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fetch all triples that matches { ?s ?p ?o }</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;cardinality of { ?s ?p ?o }: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cardinality</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">triple</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">triple</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hdt.HDTDocument.search_triples_bytes">
+<code class="sig-name descname">search_triples_bytes</code><span class="sig-paren">(</span><em class="sig-param">self: hdt.HDTDocument</em>, <em class="sig-param">subject: str</em>, <em class="sig-param">predicate: str</em>, <em class="sig-param">object: str</em>, <em class="sig-param">limit: int=0</em>, <em class="sig-param">offset: int=0</em><span class="sig-paren">)</span> &#x2192; Tuple[hdt.TripleIteratorBytes, int]<a class="headerlink" href="#hdt.HDTDocument.search_triples_bytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for RDF triples matching the triple pattern { <code class="docutils literal notranslate"><span class="pre">subject</span></code> <code class="docutils literal notranslate"><span class="pre">predicate</span></code> <code class="docutils literal notranslate"><span class="pre">object</span></code> },
 with an optional <code class="docutils literal notranslate"><span class="pre">limit</span></code> and <code class="docutils literal notranslate"><span class="pre">offset</span></code>.
 Use empty strings (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>) to indicate wildcards.</p>

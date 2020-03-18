@@ -1,6 +1,6 @@
 # setup.py
 # Author: Thomas MINIER - MIT License 2017-2019
-from setuptools import setup, Extension
+from setuptools import find_packages, setup, Extension
 from os import listdir
 import pybind11
 
@@ -70,8 +70,11 @@ include_dirs = [
 extra_compile_args = ["-std=c++11"]
 
 # build HDT extension
-hdt_extension = Extension("hdt", sources=sources, include_dirs=include_dirs,
-                          extra_compile_args=extra_compile_args, language='c++')
+hdt_extension = Extension("hdt",
+                          sources=sources,
+                          include_dirs=include_dirs,
+                          extra_compile_args=extra_compile_args,
+                          language='c++')
 
 setup(
     name="rdflib_hdt",
@@ -85,5 +88,6 @@ setup(
     license="MIT",
     install_requires=[PYBIND_VERSION],
     setup_requires=[PYBIND_VERSION],
+    packages=find_packages(exclude=["tests"]),
     ext_modules=[hdt_extension]
 )

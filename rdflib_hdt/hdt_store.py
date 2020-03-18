@@ -1,5 +1,5 @@
 from rdflib_hdt.hdt_document import HDTDocument
-from rdflib import store
+from rdflib.store import Store
 
 
 def empty():
@@ -7,7 +7,7 @@ def empty():
     yield
 
 
-class HDTStore(store):
+class HDTStore(Store):
     def __init__(self, configuration=None, identifier=None):
         self._hdt_document = None
 

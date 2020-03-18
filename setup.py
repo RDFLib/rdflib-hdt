@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 from os import listdir
 import pybind11
 
-__pyhdt_version__ = "2.3"
+__rdflib_hdt_version__ = "1.0"
 
 PYBIND_VERSION = 'pybind11==2.2.4'
 
@@ -74,14 +74,14 @@ hdt_extension = Extension("hdt", sources=sources, include_dirs=include_dirs,
                           extra_compile_args=extra_compile_args, language='c++')
 
 setup(
-    name="hdt",
-    version=__pyhdt_version__,
+    name="rdflib_hdt",
+    version=__rdflib_hdt_version__,
     author="Thomas Minier",
     author_email="thomas.minier@univ-nantes.fr",
     url="https://github.com/Callidon/pyHDT",
-    description="Read and query HDT document with ease in Python",
+    description="A Store back-end for rdflib to allow for reading and querying HDT documents",
     long_description=long_description,
-    keywords=["hdt", "rdf", "semantic web", "search"],
+    keywords=["rdflib", "hdt", "rdf", "semantic web", "search"],
     license="MIT",
     install_requires=[PYBIND_VERSION],
     setup_requires=[PYBIND_VERSION],

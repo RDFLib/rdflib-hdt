@@ -40,7 +40,33 @@ cd pyHDT/
 
 # Getting started
 
-You can use the `rdflib-hdt` library in two modes: as a HDT doculent or as an rdflib Graph
+You can use the `rdflib-hdt` library in two modes: as an rdflib Graph or as a raw HDT document
+
+## Graph usage
+
+```python
+from rdflib_hdt import HDTGraph
+from rdflib.namespace import FOAF
+
+# Load an HDT file.
+# Missing indexes are generated automatically, add False as the second argument to disable them
+graph = HDTGraph("test.hdt")
+
+# Display some metadata about the HDT document itself
+print(f"number of triples: {len(graph)}")
+print(f"number of subjects: ${graph.nb_subjects}")
+print(f"number of predicates: {graph.nb_predicates}")
+print(f"number of objects: {graph.nb_objects}")
+print(f"number of shared subject-object: {graph.nb_shared}")
+
+# Fetch all triples that matches { ?s foaf:name ?o }
+# Use None to indicates variables
+triples = graph.triples((None, FOAF("name"), None))
+
+print(f"cardinality of (?s foaf:name ?o): {len(triples)}")
+for s, p, o in triples:
+  print(triple)
+```
 
 ## HDT Document usage
 
@@ -69,32 +95,6 @@ for s, p, o in triples:
 # Search also support limit and offset
 triples, cardinality = document.search_triples((None, FOAF("name"), None), limit=10, offset=100)
 # etc ...
-```
-
-## Graph usage
-
-```python
-from rdflib_hdt import HDTGraph
-from rdflib.namespace import FOAF
-
-# Load an HDT file.
-# Missing indexes are generated automatically, add False as the second argument to disable them
-graph = HDTGraph("test.hdt")
-
-# Display some metadata about the HDT document itself
-print(f"number of triples: {len(graph)}")
-print(f"number of subjects: ${graph.nb_subjects}")
-print(f"number of predicates: {graph.nb_predicates}")
-print(f"number of objects: {graph.nb_objects}")
-print(f"number of shared subject-object: {graph.nb_shared}")
-
-# Fetch all triples that matches { ?s foaf:name ?o }
-# Use None to indicates variables
-triples = graph.triples((None, FOAF("name"), None))
-
-print(f"cardinality of (?s foaf:name ?o): {len(triples)}")
-for s, p, o in triples:
-  print(triple)
 ```
 
 # Handling non UTF-8 strings in python

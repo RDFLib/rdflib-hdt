@@ -56,7 +56,6 @@ def test_ids_to_string_bytes():
     assert triplesCard == idsCard
     assert triplesCard == nbTotalTriples
     for subj, pred, obj in triples:
-        print(subj, pred, obj)
         sid, pid, oid = next(ids)
         s, p, o = document.convert_tripleid_bytes(sid, pid, oid)
         assert subj.decode('utf-8') == s.decode('utf-8')

@@ -14,28 +14,28 @@ def test_missing_file():
 
 
 def test_file_path():
-    assert document.file_path == path
+    assert document.file_path == path, f"THe HDT Document filepath should be {path}"
 
 
 def test_total_triples():
-    assert document.total_triples == nbTotalTriples
-    assert len(document) == nbTotalTriples
+    assert document.total_triples == nbTotalTriples, f"The HDT Document should contains {nbTotalTriples} RDF triples"
+    assert len(document) == nbTotalTriples, f"The HDT Document __len__ magic function should returns {nbTotalTriples} RDF triples"
 
 
 def test_nb_subjects():
-    assert document.nb_subjects == 4
+    assert document.nb_subjects == 4, f"The HDT Document should contains 4 subjects"
 
 
 def tests_nb_predicates():
-    assert document.nb_predicates == 3
+    assert document.nb_predicates == 3, f"The HDT Document should contains 3 predicates"
 
 
 def tests_nb_objects():
-    assert document.nb_objects == 112
+    assert document.nb_objects == 112, f"The HDT Document should contains 112 objects"
 
 
 def tests_nb_shared():
-    assert document.nb_shared == 0
+    assert document.nb_shared == 0, f"The HDT Document should contains 0 shared subject-objects"
 
 
 def test_ids_to_string():
@@ -49,6 +49,7 @@ def test_ids_to_string():
         assert subj == s
         assert pred == p
         assert obj == o
+
 
 def test_ids_to_string_bytes():
     (triples, triplesCard) = document.search_triples_bytes("", "", "")
@@ -74,10 +75,11 @@ def test_convert_id():
             document.convert_id(sid, IdentifierPosition.Subject),
             document.convert_id(pid, IdentifierPosition.Predicate),
             document.convert_id(oid, IdentifierPosition.Object)
-            )
+        )
         assert subj == s
         assert pred == p
         assert obj == o
+
 
 def test_convert_id_bytes():
     (triples, triplesCard) = document.search_triples_bytes("", "", "")

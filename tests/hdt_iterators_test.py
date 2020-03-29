@@ -83,6 +83,7 @@ def test_read_document_limit():
     assert nbItems == 10
     assert triples.nb_reads == 10
 
+
 def test_read_document_bytes_peek():
     nbItems = 0
     (triples, cardinality) = document.search_triples_bytes("", "", "", limit=10)
@@ -102,7 +103,7 @@ def test_read_document_bytes_peek():
         assert obj is not None
         try:
             peek = triples.peek()
-        except:
+        except StopIteration:
             pass
     assert nbItems == 10
     assert triples.nb_reads == 10

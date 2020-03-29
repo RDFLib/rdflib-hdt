@@ -18,6 +18,7 @@ def test_basic_join():
         assert ('?s', 'http://example.org/s1') in b or ('?s', 'http://example.org/s2') in b
     assert cpt == 2
 
+
 def test_basic_join_bytes():
     join_iter = document.search_join_bytes([
         ("?s", "http://example.org/p1", "http://example.org/o001"),

@@ -1,6 +1,6 @@
 # rdflib-hdt
 
-![Build status](https://github.com/RDFLib/rdflib-hdt/workflows/Python%20integration%20tests/badge.svg?branch=master) [![Documentation Status](https://readthedocs.org/projects/pyhdt/badge/?version=latest)](https://callidon.github.io/pyHDT) [![PyPI version](https://badge.fury.io/py/hdt.svg)](https://badge.fury.io/py/hdt)
+![Python tests](https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg) [![Documentation Status](https://readthedocs.org/projects/pyhdt/badge/?version=latest)](https://callidon.github.io/pyHDT) [![PyPI version](https://badge.fury.io/py/hdt.svg)](https://badge.fury.io/py/hdt)
 
 A Store back-end for [rdflib](https://github.com/RDFLib) to allow for reading and querying HDT documents.
 

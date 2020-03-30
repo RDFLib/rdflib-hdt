@@ -66,3 +66,20 @@ def test_rdflib_graph_search(query, expected_length):
         if query_o is not None:
             assert o == query_o, f"The expected RDF triple subject's is {query_o}"
     assert nb_triples == expected_length, f"The expected number of matches for {query} is {expected_length}"
+
+
+def test_rdflib_sparql_query():
+    graph = Graph(store=store)
+    sparql_query = """
+    PREFIX ex: <http://example.org/>
+    SELECT * WHERE {
+        ?s ex:p1 ?o
+    }
+    """
+    qres = graph.query(sparql_query)
+
+    nb_bindings = 0
+    for row in qres:
+        nb_bindings += 1
+
+    assert nb_bindings == 110, f"The query should yield 110 set of solution mappings"

@@ -34,11 +34,27 @@ class HDTStore(Store):
         return self._hdt_document.is_safe()
 
     def __len__(self) -> int:
-        """The number of RDF triples in the store"""
+        """The number of RDF triples in the HDT store"""
         return self._hdt_document.total_triples
 
+    def nb_subjects(self) -> int:
+        """The number of subjects in the HDT store"""
+        return self._hdt_document.nb_subjects
+
+    def nb_predicates(self) -> int:
+        """The number of predicates in the HDT store"""
+        return self._hdt_document.nb_predicates
+
+    def nb_objects(self) -> int:
+        """The number of objects in the HDT store"""
+        return self._hdt_document.nb_objects
+
+    def nb_shared(self) -> int:
+        """The number of shared subject-object in the HDT store"""
+        return self._hdt_document.nb_shared
+
     def triples(self, pattern, context) -> Iterable[Tuple[Term, Term, Term]]:
-        """Search for a triple pattern in a HDT document.
+        """Search for a triple pattern in a HDT store.
 
         Args:
           - pattern: The triple pattern (s, p, o) to search for

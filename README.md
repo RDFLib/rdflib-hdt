@@ -27,7 +27,7 @@ Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **stron
 ## PyPi installation (recommended)
 
 ```
-pip install hdt
+pip install rdflib_hdt
 ```
 
 ## Manual installation
@@ -45,26 +45,27 @@ You can use the `rdflib-hdt` library in two modes: as an rdflib Graph or as a ra
 ## Graph usage
 
 ```python
-from rdflib_hdt import HDTGraph
+from rdflib import Graph
+from rdflib_hdt import HDTStore
 from rdflib.namespace import FOAF
 
-# Load an HDT file.
-# Missing indexes are generated automatically, add False as the second argument to disable them
-graph = HDTGraph("test.hdt")
+# Load an HDT file. Missing indexes are generated automatically
+# You can provide the index file by putting them in the same directory than the HDT file.
+store = HDTGraph("test.hdt")
 
 # Display some metadata about the HDT document itself
-print(f"number of triples: {len(graph)}")
-print(f"number of subjects: ${graph.nb_subjects}")
-print(f"number of predicates: {graph.nb_predicates}")
-print(f"number of objects: {graph.nb_objects}")
-print(f"number of shared subject-object: {graph.nb_shared}")
+print(f"Number of RDF triples: {len(store)}")
+print(f"Number of subjects: ${store.nb_subjects}")
+print(f"Number of predicates: {store.nb_predicates}")
+print(f"Number of objects: {store.nb_objects}")
+print(f"Number of shared subject-object: {store.nb_shared}")
+
+# Create an RDFlib Graph with the HDT document as a backend
+graph = Graph(store=store)
 
 # Fetch all triples that matches { ?s foaf:name ?o }
 # Use None to indicates variables
-triples = graph.triples((None, FOAF("name"), None))
-
-print(f"cardinality of (?s foaf:name ?o): {len(triples)}")
-for s, p, o in triples:
+for s, p, o in graph.triples((None, FOAF("name"), None)):
   print(triple)
 ```
 
@@ -73,26 +74,26 @@ for s, p, o in triples:
 ```python
 from rdflib_hdt import Document
 
- # Load an HDT file.
- # Missing indexes are generated automatically, add False as the second argument to disable them
+# Load an HDT file. Missing indexes are generated automatically.
+# You can provide the index file by putting them in the same directory than the HDT file.
 document = Document("test.hdt")
 
 # Display some metadata about the HDT document itself
-print(f"number of triples: {document.total_triples}")
-print(f"number of subjects: ${document.nb_subjects}")
-print(f"number of predicates: {document.nb_predicates}")
-print(f"number of objects: {document.nb_objects}")
-print(f"number of shared subject-object: {document.nb_shared}")
+print(f"Number of RDF triples: {document.total_triples}")
+print(f"Number of subjects: ${document.nb_subjects}")
+print(f"Number of predicates: {document.nb_predicates}")
+print(f"Number of objects: {document.nb_objects}")
+print(f"Number of shared subject-object: {document.nb_shared}")
 
 # Fetch all triples that matches { ?s foaf:name ?o }
 # Use None to indicates variables
 triples, cardinality = document.search_triples((None, FOAF("name"), None))
 
-print(f"cardinality of (?s foaf:name ?o): {cardinality}")
+print(f"Cardinality of (?s foaf:name ?o): {cardinality}")
 for s, p, o in triples:
   print(triple)
 
-# Search also support limit and offset
+# The search also support limit and offset
 triples, cardinality = document.search_triples((None, FOAF("name"), None), limit=10, offset=100)
 # etc ...
 ```

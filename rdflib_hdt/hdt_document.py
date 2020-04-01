@@ -52,9 +52,7 @@ class HDTDocument(hdt.HDTDocument):
         """Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use `Node` for SPARQL variables.
 
         Args:
-          - subject: The subject of the triple pattern to seach for.
-          - predicate: The predicate of the triple pattern to seach for.
-          - obj: The object of the triple pattern ot seach for.
+          - query: The triple pattern (s, p, o) to search for. Use `None` to indicate wildecards.
           - limit: (optional) Maximum number of triples to search for.
           - offset: (optional) Number of matching triples to skip before returning results.
 

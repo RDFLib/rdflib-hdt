@@ -6,11 +6,6 @@ from rdflib_hdt.hdt_document import HDTDocument
 from rdflib.store import Store
 
 
-def empty():
-    return
-    yield
-
-
 class HDTStore(Store):
     """An implementation of a Store over a HDT document.
 
@@ -35,15 +30,44 @@ class HDTStore(Store):
         """The number of RDF triples in the store"""
         return self._hdt_document.total_triples
 
-    def triples(self, query, context):
-        """Search for a triple pattern in a HDT document"""
-        triples, cardinality = self._hdt_document.search(query)
+    def triples(self, pattern, context):
+        """Search for a triple pattern in a HDT document.
+
+        Args:
+            - pattern: The triple pattern (s, p, o) to search for
+            - context: The query execution context
+
+        Returns:
+            A generator of RDF triples matching the input triple pattern
+        """
+        triples, cardinality = self._hdt_document.search(pattern)
         should_stop = False
         while not should_stop:
             try:
-                yield next(triples), empty()
+                yield next(triples), None
             except UnicodeDecodeError as e:
                 if not self._safe_mode:
                     raise e
             except StopIteration:
                 should_stop = True
+
+    def create(self, configuration):
+        raise TypeError('The HDT store is read only')
+
+    def destroy(self, configuration):
+        raise TypeError('The HDT store is read only')
+
+    def commit(self):
+        raise TypeError('The HDT store is read only')
+
+    def rollback(self):
+        raise TypeError('The HDT store is read only')
+
+    def add(self, _, context=None, quoted=False):
+        raise TypeError('The HDT store is read only')
+
+    def addN(self, quads):
+        raise TypeError('The HDT store is read only')
+
+    def remove(self, _, context):
+        raise TypeError('The HDT store is read only')

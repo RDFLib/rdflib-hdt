@@ -2,11 +2,11 @@
 rdflib_hdt.hdt_document
 =======================
 """
-import hdt
-from rdflib import URIRef, Literal
-from rdflib.util import from_n3
 from typing import Iterable, Optional, Tuple, Union
 
+import hdt
+from rdflib import Literal, URIRef
+from rdflib.util import from_n3
 
 Term = Union[URIRef, Literal]
 SearchQuery = Tuple[Optional[Term], Optional[Term], Optional[Term]]
@@ -20,18 +20,55 @@ def term_to_rdflib(term: str) -> Term:
         return URIRef(term)
 
 
-def triple_to_rdflib(triple: Tuple[str, str, str]) -> Tuple[Term, Term, Term]:
-    """Convert an HDT Triple into its RDFlib representation"""
-    s, p, o = triple
-    return (term_to_rdflib(s), term_to_rdflib(p), term_to_rdflib(o))
-
-
 def rdflib_to_hdt(term: Term) -> str:
     """Convert an RDFlib term into an HDT representation"""
     value = term.n3()
     if value.startswith('<') and value.endswith('>'):
         return value[1: len(value) - 1]
     return value
+
+
+class HDTIterator:
+    """An iterator to converts HDT matching triples to RDFlib data model.
+
+    Args:
+      - input: Input iterator that produces RDF triples with RDF terms in string format.
+      - cardinality: Estimate cardinality of the input iterator.
+      - safe_mode: True if Unicode errors should be ignored, False otherwise.
+    """
+    def __init__(self, input: Iterable[Tuple[str, str, str]], cardinality: int, safe_mode=True):
+        super(HDTIterator, self).__init__()
+        self._input = input
+        self._cardinality = cardinality
+        self._safe_mode = safe_mode
+
+    def __len__(self):
+        """The estimated number of matchinf RDF triples"""
+        return self._cardinality
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        """Support for the Python 2.x iterator protocol"""
+        return self.next()
+
+    def next(self) -> Tuple[Term, Term, Term]:
+        """Produce a new RDF triple following the Python iterator protocol"""
+        try:
+            triple = next(self._input)
+            if triple is None:
+                raise StopIteration()
+            s, p, o = triple
+            return (term_to_rdflib(s), term_to_rdflib(p), term_to_rdflib(o))
+        except UnicodeDecodeError as e:
+            # crash if not in safe mode
+            if not self._safe_mode:
+                raise e
+            # otherwise, try to read a valid RDF triple from the input
+            return self.next()
+        except StopIteration as e:
+            raise e
 
 
 class HDTDocument(hdt.HDTDocument):
@@ -41,14 +78,20 @@ class HDTDocument(hdt.HDTDocument):
     which align it with the RDFlib data model.
 
     Args:
-        - path: Absolute path to the HDT file to load.
-        - mapped: True if the document must be mapped on disk, False to load it in-memory.
-        - indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes will be generated at startup.
+      - path: Absolute path to the HDT file to load.
+      - mapped: True if the document must be mapped on disk, False to load it in-memory.
+      - indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes will be generated at startup.
+      - safe_mode: True if Unicode errors should be ignored, False otherwise.
     """
-    def __init__(self, path: str, mapped: bool = True, indexed: bool = True):
+    def __init__(self, path: str, mapped: bool = True, indexed: bool = True, safe_mode=True):
         super(HDTDocument, self).__init__(path, mapped, indexed)
+        self._safe_mode = safe_mode
 
-    def search(self, query: SearchQuery, limit=0, offset=0) -> Tuple[Iterable[Tuple[Term, Term, Term]], int]:
+    def is_safe(self) -> bool:
+        """Returnd True if the HDT document ignores Unicode errors, False otherwise"""
+        return self._safe_mode
+
+    def search(self, query: SearchQuery, limit=0, offset=0) -> Tuple[HDTIterator, int]:
         """Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use `Node` for SPARQL variables.
 
         Args:
@@ -64,4 +107,5 @@ class HDTDocument(hdt.HDTDocument):
         pred = rdflib_to_hdt(query[1]) if query[1] is not None else ""
         obj = rdflib_to_hdt(query[2]) if query[2] is not None else ""
         triples, cardinality = super().search_triples(subj, pred, obj, limit=limit, offset=offset)
-        return map(triple_to_rdflib, triples), cardinality
+        iterator = HDTIterator(triples, cardinality, safe_mode=self._safe_mode)
+        return iterator, cardinality

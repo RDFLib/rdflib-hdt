@@ -6,8 +6,6 @@ import pybind11
 
 __rdflib_hdt_version__ = "1.0"
 
-PYBIND_VERSION = 'pybind11==2.2.4'
-
 with open('README.rst') as file:
     long_description = file.read()
 
@@ -81,13 +79,11 @@ setup(
     version=__rdflib_hdt_version__,
     author="Thomas Minier",
     author_email="thomas.minier@univ-nantes.fr",
-    url="https://github.com/Callidon/pyHDT",
+    url="https://github.com/RDFLib/rdflib-hdt",
     description="A Store back-end for rdflib to allow for reading and querying HDT documents",
     long_description=long_description,
     keywords=["rdflib", "hdt", "rdf", "semantic web", "search"],
     license="MIT",
-    # install_requires=[PYBIND_VERSION],
-    # setup_requires=[PYBIND_VERSION],
     packages=find_packages(exclude=["tests"]),
     ext_modules=[hdt_extension]
 )

@@ -4,7 +4,7 @@
 
 A Store back-end for [rdflib](https://github.com/RDFLib) to allow for reading and querying HDT documents.
 
-[Online Documentation](https://callidon.github.io/pyHDT)
+[Online Documentation](https://rdflib.dev/rdflib-hdt/)
 
 # Requirements
 
@@ -15,22 +15,23 @@ A Store back-end for [rdflib](https://github.com/RDFLib) to allow for reading an
 > You should have the `Python.h` header available on your system.   
 > For example, for Python 3.6, install the `python3.6-dev` package on Debian/Ubuntu systems.
 
-Then, install the [pybind11 library](http://pybind11.readthedocs.io/en/stable/)
-```
-pip install pybind11
-```
-
 # Installation
 
-Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**
+Installation in using [pipenv](https://github.com/pypa/pipenv) or a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**
 
 ## PyPi installation (recommended)
 
-```
+```bash
+# you can install using pip
 pip install rdflib_hdt
+
+# or you can use pipenv
+pipenv install rdflib_hdt
 ```
 
 ## Manual installation
+
+**Requirement:** [pipenv](https://github.com/pypa/pipenv) 
 
 ```
 git clone https://github.com/Callidon/pyHDT
@@ -40,9 +41,9 @@ cd pyHDT/
 
 # Getting started
 
-You can use the `rdflib-hdt` library in two modes: as an rdflib Graph or as a raw HDT document
+You can use the `rdflib-hdt` library in two modes: as an rdflib Graph or as a raw HDT document.
 
-## Graph usage
+## Graph usage (recommended)
 
 ```python
 from rdflib import Graph

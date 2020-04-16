@@ -86,8 +86,8 @@ setup(
     long_description=long_description,
     keywords=["rdflib", "hdt", "rdf", "semantic web", "search"],
     license="MIT",
-    install_requires=[PYBIND_VERSION],
-    setup_requires=[PYBIND_VERSION],
+    # install_requires=[PYBIND_VERSION],
+    # setup_requires=[PYBIND_VERSION],
     packages=find_packages(exclude=["tests"]),
     ext_modules=[hdt_extension]
 )

@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+pybind11 = "==2.2.4"
+rdflib = "==4.2.2"
+
+[dev-packages]
+pytest = "==5.4.1"
+flake8 = "*"
+
+[requires]
+python_version = "3.7"

@@ -4,7 +4,7 @@ HDTDocument
 Loading HDT files
 ^^^^^^^^^^^^^^^^^
 
-The main class for manipulating HDT Dicument using pyHDT is ``HDTDocument``.
+The main class for directly manipulating HDT document using rdflib_hdt is ``HDTDocument``.
 Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.
 
 For example, if you load a file */home/awesome-user/test.hdt*, HDTDocument will look for the index file
@@ -14,41 +14,42 @@ Missing indexes are generated automatically, but be careful, as it requires to l
 
 .. code-block:: python
 
-  from hdt import HDTDocument
+  from rdflib_hdt import HDTDocument
 
   # Load an HDT file.
   # Missing indexes are generated automatically, add False as the second argument to disable them
   document = HDTDocument("test.hdt")
 
   # Display some metadata about the HDT document itself
-  print("nb triples: %i" % document.total_triples)
-  print("nb subjects: %i" % document.nb_subjects)
-  print("nb predicates: %i" % document.nb_predicates)
-  print("nb objects: %i" % document.nb_objets)
-  print("nb shared subject-object: %i" % document.nb_shared)
+  print(f"Number of RDF triples: {document.total_triples}")
+  print(f"Number of subjects: ${document.nb_subjects}")
+  print(f"Number of predicates: {document.nb_predicates}")
+  print(f"Number of objects: {document.nb_objects}")
+  print(f"Number of shared subject-object: {document.nb_shared}")
 
 
 Searching for triples
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You can search for all RDF triples in the HDT file matching a triple pattern using `search_triples`.
+You can search for all RDF triples in the HDT file matching a triple pattern using `search`.
 It returns a 2-element tuple, with an *iterator* over the matching RDF triples and the estimated triple pattern *cardinality*.
 
 .. code-block:: python
 
-  from hdt import HDTDocument
+  from rdflib.namespace import FOAF
+  from rdflib_hdt import HDTDocument
   document = HDTDocument("test.hdt")
 
-  # Fetch all triples that matches { ?s ?p ?o }
-  # Use empty strings ("") to indicates variables
-  (triples, cardinality) = document.search_triples("", "", "")
+  # Fetch all triples that matches { ?s foaf:name ?o }
+  # Use None to indicates variables
+  triples, cardinality = document.search((None, FOAF("name"), None))
 
-  print("cardinality of { ?s ?p ?o }: %i" % cardinality)
-  for triple in triples:
+  print(f"Cardinality of (?s foaf:name ?o): {cardinality}")
+  for s, p, o in triples:
     print(triple)
 
-  # Search also support limit and offset
-  (triples, cardinality) = document.search_triples("", "", "", limit=10, offset=100)
+  # The search also support limit and offset
+  triples, cardinality = document.search((None, FOAF("name"), None), limit=10, offset=100)
   # etc ...
 
 Searching for triple IDs

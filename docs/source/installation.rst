@@ -12,32 +12,29 @@ Requirements
 You must have the `Python.h` header available on your system.
 For example, for Python 3.4, install the `python3.4-dev` package on Debian/Ubuntu systems.
 
-Then, install the `pybind11
-library <http://pybind11.readthedocs.io/en/stable/>`__
-
-::
-
-    pip install pybind11
-
 Installation
 ^^^^^^^^^^^^^
 
-Installation in a `virtualenv <https://virtualenv.pypa.io/en/stable/>`_ is **strongly advised!**
+Installation using `pipenv <https://github.com/pypa/pipenv>`_ or a `virtualenv <https://virtualenv.pypa.io/en/stable/>`_ is **strongly advised!**
 
-Installation with pip
--------------------------
-
-::
-
-    pip install hdt
-
-
-Manual installation
--------------------------
+PyPi installation (recommended)
+-------------------------------
 
 .. code-block:: bash
 
-  git clone --recursive https://github.com/Callidon/pyHDT
-  cd pyHDT/
-  pip install -r requirements.txt
-  python setup.py install
+   # you can install using pip
+   pip install rdflib_hdt
+
+   # or you can use pipenv
+   pipenv install rdflib_hdt
+
+Manual installation
+-------------------
+
+**Requirement:** `pipenv <https://github.com/pypa/pipenv>`_ 
+
+.. code-block:: bash
+
+   git clone https://github.com/Callidon/pyHDT
+   cd pyHDT/
+   ./install.sh

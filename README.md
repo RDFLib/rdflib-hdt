@@ -1,6 +1,6 @@
 # rdflib-hdt
 
-![Python tests](https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg) [![Documentation Status](https://readthedocs.org/projects/pyhdt/badge/?version=latest)](https://callidon.github.io/pyHDT) [![PyPI version](https://badge.fury.io/py/hdt.svg)](https://badge.fury.io/py/hdt)
+![Python tests](https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg) [![PyPI version](https://badge.fury.io/py/hdt.svg)](https://badge.fury.io/py/hdt)
 
 A Store back-end for [rdflib](https://github.com/RDFLib) to allow for reading and querying HDT documents.
 
@@ -17,7 +17,7 @@ A Store back-end for [rdflib](https://github.com/RDFLib) to allow for reading an
 
 # Installation
 
-Installation in using [pipenv](https://github.com/pypa/pipenv) or a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**
+Installation using [pipenv](https://github.com/pypa/pipenv) or a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**
 
 ## PyPi installation (recommended)
 
@@ -74,6 +74,7 @@ for s, p, o in graph.triples((None, FOAF("name"), None)):
 
 ```python
 from rdflib_hdt import Document
+from rdflib.namespace import FOAF
 
 # Load an HDT file. Missing indexes are generated automatically.
 # You can provide the index file by putting them in the same directory than the HDT file.
@@ -88,14 +89,14 @@ print(f"Number of shared subject-object: {document.nb_shared}")
 
 # Fetch all triples that matches { ?s foaf:name ?o }
 # Use None to indicates variables
-triples, cardinality = document.search_triples((None, FOAF("name"), None))
+triples, cardinality = document.search((None, FOAF("name"), None))
 
 print(f"Cardinality of (?s foaf:name ?o): {cardinality}")
 for s, p, o in triples:
   print(triple)
 
 # The search also support limit and offset
-triples, cardinality = document.search_triples((None, FOAF("name"), None), limit=10, offset=100)
+triples, cardinality = document.search((None, FOAF("name"), None), limit=10, offset=100)
 # etc ...
 ```
 

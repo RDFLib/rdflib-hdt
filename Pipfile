@@ -10,6 +10,8 @@ rdflib = "==4.2.2"
 [dev-packages]
 pytest = "==5.4.1"
 flake8 = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
 
 [requires]
 python_version = "3.7"

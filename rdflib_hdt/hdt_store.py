@@ -58,10 +58,9 @@ class HDTStore(Store):
 
         Args:
           - pattern: The triple pattern (s, p, o) to search for
-         - context: The query execution context
+          - context: The query execution context
 
-        Returns:
-          A generator that produces RDF triples matching the input triple pattern
+        Returns: A generator that produces RDF triples matching the input triple pattern.
         """
         iterator, cardinality = self._hdt_document.search(pattern)
         for triple in iterator:

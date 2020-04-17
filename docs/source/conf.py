@@ -46,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'pyHDT'
-copyright = '2018, Thomas Minier'
+project = 'rdflib-hdt'
+copyright = '2018-2020, Thomas Minier'
 author = 'Thomas Minier'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -114,7 +114,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'pyHDTdoc'
+htmlhelp_basename = 'rdflibHDTdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pyHDT.tex', 'pyHDT Documentation',
+    (master_doc, 'rdflibHDT.tex', 'pyHDT Documentation',
      'Thomas Minier', 'manual'),
 ]
 
@@ -151,7 +151,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pyhdt', 'pyHDT Documentation',
+    (master_doc, 'rdflibHDT', 'pyHDT Documentation',
      [author], 1)
 ]
 
@@ -162,7 +162,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'pyHDT', 'pyHDT Documentation',
-     author, 'pyHDT', 'One line description of project.',
+    (master_doc, 'rdflibHDT', 'rdflib-dht Documentation',
+     author, 'rdflibHDT', 'One line description of project.',
      'Miscellaneous'),
 ]

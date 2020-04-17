@@ -1,4 +1,4 @@
-|Build Status| |Documentation Status| |PyPI version|
+|Build Status| |PyPI version|
 
 
 A Store back-end for `rdflib <https://github.com/RDFLib>`_ to allow for reading and querying HDT documents.
@@ -22,7 +22,7 @@ Requirements
 Installation
 ============
 
-Installation in using `pipenv <https://github.com/pypa/pipenv>`_ or a `virtualenv <https://virtualenv.pypa.io/en/stable/>`_ is **strongly advised!**
+Installation using `pipenv <https://github.com/pypa/pipenv>`_ or a `virtualenv <https://virtualenv.pypa.io/en/stable/>`_ is **strongly advised!**
 
 PyPi installation (recommended)
 -------------------------------
@@ -144,8 +144,6 @@ To handle this, we doubled the API of the HDT document by adding:
        pass
 
 .. |Build Status| image:: https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg
-   :target: https://travis-ci.org/Callidon/pyHDT
-.. |Documentation Status| image:: https://readthedocs.org/projects/pyhdt/badge/?version=latest
-   :target: https://callidon.github.io/pyHDT
+   :target: https://github.com/RDFLib/rdflib-hdt/actions?query=workflow%3A%22Python+tests%22
 .. |PyPI version| image:: https://badge.fury.io/py/hdt.svg
    :target: https://badge.fury.io/py/hdt

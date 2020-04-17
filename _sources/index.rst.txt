@@ -1,7 +1,9 @@
-pyHDT: Read and query HDT document with ease in Python
+Read and query HDT document with rdflib
 ======================================================
 
-|Build Status| |Documentation Status| |PyPI version|
+|Build Status| |PyPI version|
+
+A Store back-end for `rdflib <https://github.com/RDFLib>`_ to allow for reading and querying HDT documents.
 
 Getting started
 ==================
@@ -20,9 +22,7 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-.. |Build Status| image:: https://travis-ci.org/Callidon/pyHDT.svg?branch=master
-   :target: https://travis-ci.org/Callidon/pyHDT
-.. |Documentation Status| image:: https://readthedocs.org/projects/pyhdt/badge/?version=latest
-   :target: https://callidon.github.io/pyHDT
+.. |Build Status| image:: https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg
+   :target: https://github.com/RDFLib/rdflib-hdt/actions?query=workflow%3A%22Python+tests%22
 .. |PyPI version| image:: https://badge.fury.io/py/hdt.svg
    :target: https://badge.fury.io/py/hdt

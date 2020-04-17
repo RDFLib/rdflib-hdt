@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pyHDT: Read and query HDT document with ease in Python &mdash; pyHDT 1.0.0 documentation</title>
+  <title>Read and query HDT document with rdflib &mdash; rdflib-hdt 1.0.0 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -49,7 +49,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> pyHDT
+            <a href="#" class="icon icon-home"> rdflib-hdt
           
 
           
@@ -101,7 +101,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">pyHDT</a>
+          <a href="#">rdflib-hdt</a>
         
       </nav>
 
@@ -132,7 +132,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>pyHDT: Read and query HDT document with ease in Python</li>
+      <li>Read and query HDT document with rdflib</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -151,9 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pyhdt-read-and-query-hdt-document-with-ease-in-python">
-<h1>pyHDT: Read and query HDT document with ease in Python<a class="headerlink" href="#pyhdt-read-and-query-hdt-document-with-ease-in-python" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://travis-ci.org/Callidon/pyHDT"><img alt="Build Status" src="https://travis-ci.org/Callidon/pyHDT.svg?branch=master" /></a> <a class="reference external" href="https://callidon.github.io/pyHDT"><img alt="Documentation Status" src="https://readthedocs.org/projects/pyhdt/badge/?version=latest" /></a> <a class="reference external" href="https://badge.fury.io/py/hdt"><img alt="PyPI version" src="https://badge.fury.io/py/hdt.svg" /></a></p>
+  <div class="section" id="read-and-query-hdt-document-with-rdflib">
+<h1>Read and query HDT document with rdflib<a class="headerlink" href="#read-and-query-hdt-document-with-rdflib" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/RDFLib/rdflib-hdt/actions?query=workflow%3A%22Python+tests%22"><img alt="Build Status" src="https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg" /></a> <a class="reference external" href="https://badge.fury.io/py/hdt"><img alt="PyPI version" src="https://badge.fury.io/py/hdt.svg" /></a></p>
+<p>A Store back-end for <a class="reference external" href="https://github.com/RDFLib">rdflib</a> to allow for reading and querying HDT documents.</p>
 </div>
 <div class="section" id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
@@ -162,7 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="installation.html#installation-with-pip">Installation with pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#pypi-installation-recommended">PyPi installation (recommended)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installation.html#manual-installation">Manual installation</a></li>
 </ul>
 </li>
@@ -178,14 +179,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#hdtstore">HDTStore</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#hdtdocument">HDTDocument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#tripleiterator">TripleIterator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#tripleiditerator">TripleIDIterator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#joiniterator">JoinIterator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#enumerations">Enumerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#identifierposition">IdentifierPosition</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#hdtiterator">HDTIterator</a></li>
 </ul>
 </li>
 </ul>
@@ -218,7 +214,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Thomas Minier
+        &copy; Copyright 2018-2020, Thomas Minier
 
     </p>
   </div>

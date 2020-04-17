@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; pyHDT 1.0.0 documentation</title>
+  <title>Installation &mdash; rdflib-hdt 1.0.0 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="HDTDocument" href="hdtdocument.html" />
-    <link rel="prev" title="pyHDT: Read and query HDT document with ease in Python" href="index.html" /> 
+    <link rel="prev" title="Read and query HDT document with rdflib" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -50,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pyHDT
+            <a href="index.html" class="icon icon-home"> rdflib-hdt
           
 
           
@@ -88,7 +88,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#installation-with-pip">Installation with pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pypi-installation-recommended">PyPi installation (recommended)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#manual-installation">Manual installation</a></li>
 </ul>
 </li>
@@ -110,7 +110,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pyHDT</a>
+          <a href="index.html">rdflib-hdt</a>
         
       </nav>
 
@@ -172,27 +172,26 @@
 </ul>
 <p>You must have the <cite>Python.h</cite> header available on your system.
 For example, for Python 3.4, install the <cite>python3.4-dev</cite> package on Debian/Ubuntu systems.</p>
-<p>Then, install the <a class="reference external" href="http://pybind11.readthedocs.io/en/stable/">pybind11
-library</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pybind11</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="id1">
 <h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>Installation in a <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> is <strong>strongly advised!</strong></p>
-<div class="section" id="installation-with-pip">
-<h3>Installation with pip<a class="headerlink" href="#installation-with-pip" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">hdt</span>
+<p>Installation using <a class="reference external" href="https://github.com/pypa/pipenv">pipenv</a> or a <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> is <strong>strongly advised!</strong></p>
+<div class="section" id="pypi-installation-recommended">
+<h3>PyPi installation (recommended)<a class="headerlink" href="#pypi-installation-recommended" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># you can install using pip</span>
+pip install rdflib_hdt
+
+<span class="c1"># or you can use pipenv</span>
+pipenv install rdflib_hdt
 </pre></div>
 </div>
 </div>
 <div class="section" id="manual-installation">
 <h3>Manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone --recursive https://github.com/Callidon/pyHDT
+<p><strong>Requirement:</strong> <a class="reference external" href="https://github.com/pypa/pipenv">pipenv</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Callidon/pyHDT
 <span class="nb">cd</span> pyHDT/
-pip install -r requirements.txt
-python setup.py install
+./install.sh
 </pre></div>
 </div>
 </div>
@@ -210,7 +209,7 @@ python setup.py install
         <a href="hdtdocument.html" class="btn btn-neutral float-right" title="HDTDocument" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="pyHDT: Read and query HDT document with ease in Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Read and query HDT document with rdflib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -219,7 +218,7 @@ python setup.py install
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Thomas Minier
+        &copy; Copyright 2018-2020, Thomas Minier
 
     </p>
   </div>

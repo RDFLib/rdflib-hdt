@@ -38,3 +38,13 @@ jobs:
     - name: Test with pytest
       run: |
         pipenv run pytest
+    - name: Prepare release on PyPi
+      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+      run: |
+        ./build-release.sh
+    - name: Publish package on PyPi
+      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        user: __token__
+        password: ${{ secrets.pypi_password }}

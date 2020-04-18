@@ -8,10 +8,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>HDTDocument &mdash; rdflib-hdt 1.0.0 documentation</title>
+  <title>Usage &mdash; rdflib-hdt 1.0.0 documentation</title>
   
 
   
+  
+    <link rel="shortcut icon" href="_static/rdflib_logo.png"/>
   
   
   
@@ -86,7 +88,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">HDTDocument</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#loading-hdt-files">Loading HDT files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#searching-for-triples">Searching for triples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#searching-for-triple-ids">Searching for triple IDs</a></li>
@@ -141,7 +143,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>HDTDocument</li>
+      <li>Usage</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -160,8 +162,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hdtdocument">
-<h1>HDTDocument<a class="headerlink" href="#hdtdocument" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="loading-hdt-files">
 <h2>Loading HDT files<a class="headerlink" href="#loading-hdt-files" title="Permalink to this headline">¶</a></h2>
 <p>The main class for directly manipulating HDT document using rdflib_hdt is <code class="docutils literal notranslate"><span class="pre">HDTDocument</span></code>.
@@ -210,11 +212,11 @@ It returns a 2-element tuple, with an <em>iterator</em> over the matching RDF tr
 <h2>Searching for triple IDs<a class="headerlink" href="#searching-for-triple-ids" title="Permalink to this headline">¶</a></h2>
 <p>A typical HDT document encodes a triple’s subject, predicate and object as unique integers, named <strong>TripleID</strong>.
 For example, the triple <code class="docutils literal notranslate"><span class="pre">(&quot;ex:Toto&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code> can be encoded as <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.
-An <code class="docutils literal notranslate"><span class="pre">HDTDocument</span></code> allows for searching RDF triples in this format, using the <code class="docutils literal notranslate"><span class="pre">search_triple_ids</span></code> method, which works exactly like the classic <code class="docutils literal notranslate"><span class="pre">search_triple</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
+An <code class="docutils literal notranslate"><span class="pre">HDTDocument</span></code> allows for searching RDF triples and retrieving them in this format, using the <code class="docutils literal notranslate"><span class="pre">search_ids</span></code> method, which takes the same parameters as the <code class="docutils literal notranslate"><span class="pre">search</span></code> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdflib_hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
 <span class="n">document</span> <span class="o">=</span> <span class="n">HDTDocument</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
 
-<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_triples_ids</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_ids</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
   <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="c1"># will print 3-element tuples of integers</span>

@@ -1,4 +1,4 @@
-HDTDocument
+Usage
 ===========
 
 Loading HDT files
@@ -57,14 +57,14 @@ Searching for triple IDs
 
 A typical HDT document encodes a triple's subject, predicate and object as unique integers, named **TripleID**.
 For example, the triple ``("ex:Toto", "ex:type", "ex:Person")`` can be encoded as ``(1, 2, 3)``.
-An ``HDTDocument`` allows for searching RDF triples in this format, using the ``search_triple_ids`` method, which works exactly like the classic ``search_triple``.
+An ``HDTDocument`` allows for searching RDF triples and retrieving them in this format, using the ``search_ids`` method, which takes the same parameters as the ``search`` method.
 
 .. code-block:: python
 
-  from hdt import HDTDocument
+  from rdflib_hdt import HDTDocument
   document = HDTDocument("test.hdt")
 
-  (triples, cardinality) = document.search_triples_ids("", "", "")
+  (triples, cardinality) = document.search_ids((None, None, None)
 
   for s, p, o in triples:
     print(s, p, o) # will print 3-element tuples of integers

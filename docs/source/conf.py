@@ -96,6 +96,10 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# If given, this must be the name of an image file (path relative to the configuration directory) that is the favicon of the docs.
+# Modern browsers use this as the icon for tabs, windows and bookmarks.
+html_favicon = '_static/rdflib_logo.png'
+
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #

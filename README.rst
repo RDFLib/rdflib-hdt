@@ -127,22 +127,23 @@ An HDT document also provides support for evaluating joins over a set of triples
 .. code-block:: python
 
   from rdflib_hdt import HDTDocument
-  from rdflib import URIRef, Variable
+  from rdflib import Variable
   from rdflib.namespace import FOAF, RDF
-
+  
   document = HDTDocument("test.hdt")
-
-  # find all actors with their names in the HDT document
-  tp_a = (Variable("s"), RDF("type"), URIRef("http://example.org#Actor"))
-  tp_b = (Variable("s"), FOAF("name"), Variable("name"))
-  query = set([tp_a, tp_b])
-
+  
+  # find the names of two entities that know each other
+  tp_a = (Variable("a"), FOAF("knows"), Variable("b"))
+  tp_b = (Variable("a"), FOAF("name"), Variable("name"))
+  tp_c = (Variable("b"), FOAF("name"), Variable("friend"))
+  query = set([tp_a, tp_b, tp_c])
+  
   iterator = document.search_join(query)
   print(f"Estimated join cardinality: {len(iterator)}")
-
+  
   # Join results are produced as ResultRow, like in the RDFlib SPARQL API
   for row in iterator:
-    print(row)
+   print(f"{row.name} knows {row.friend}")
 
 Handling non UTF-8 strings in python
 ====================================

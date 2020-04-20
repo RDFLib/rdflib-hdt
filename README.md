@@ -51,8 +51,8 @@ from rdflib_hdt import HDTStore
 from rdflib.namespace import FOAF
 
 # Load an HDT file. Missing indexes are generated automatically
-# You can provide the index file by putting them in the same directory than the HDT file.
-store = HDTGraph("test.hdt")
+# You can provide the index file by putting it in the same directory as the HDT file.
+store = HDTStore("test.hdt")
 
 # Display some metadata about the HDT document itself
 print(f"Number of RDF triples: {len(store)}")
@@ -90,7 +90,7 @@ from rdflib_hdt import HDTDocument
 from rdflib.namespace import FOAF
 
 # Load an HDT file. Missing indexes are generated automatically.
-# You can provide the index file by putting them in the same directory than the HDT file.
+# You can provide the index file by putting it in the same directory as the HDT file.
 document = HDTDocument("test.hdt")
 
 # Display some metadata about the HDT document itself

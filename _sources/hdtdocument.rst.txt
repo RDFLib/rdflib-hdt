@@ -79,15 +79,20 @@ An HDT document also provides support for evaluating joins over a set of triples
 
 .. code-block:: python
 
-  from hdt import HDTDocument
+  from rdflib_hdt import HDTDocument
+  from rdflib import URIRef, Variable
+  from rdflib.namespace import FOAF, RDF
+
   document = HDTDocument("test.hdt")
 
   # find all actors with their names in the HDT document
-  tp_a = ("?s", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://example.org#Actor")
-  tp_b = ("?s", "http://xmlns.com/foaf/0.1/name", "?name")
+  tp_a = (Variable("s"), RDF("type"), URIRef("http://example.org#Actor"))
+  tp_b = (Variable("s"), FOAF("name"), Variable("name"))
   iterator = document.search_join(set([tp_a, tp_b]))
 
-  print("estimated join cardinality : %i" % len(iterator))
+  print(f"Estimated join cardinality: {len(iterator)}")
+
+  # print all results
   for mappings in iterator:
     print(mappings)
 

@@ -88,13 +88,14 @@ An HDT document also provides support for evaluating joins over a set of triples
   # find all actors with their names in the HDT document
   tp_a = (Variable("s"), RDF("type"), URIRef("http://example.org#Actor"))
   tp_b = (Variable("s"), FOAF("name"), Variable("name"))
-  iterator = document.search_join(set([tp_a, tp_b]))
+  query = set([tp_a, tp_b])
 
+  iterator = document.search_join(query)
   print(f"Estimated join cardinality: {len(iterator)}")
 
-  # print all results
-  for mappings in iterator:
-    print(mappings)
+  # Join results are produced as ResultRow, like in the RDFlib SPARQL API
+  for row in iterator:
+    print(row)
 
 Ordering
 ^^^^^^^^^^^

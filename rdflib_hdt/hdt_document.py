@@ -5,7 +5,7 @@ rdflib_hdt.hdt_document
 from typing import Optional, Tuple, Union
 
 import hdt
-from rdflib_hdt.iterators import HDTIterator
+from rdflib_hdt.iterators import HDTIterator, HDTJoinIterator
 from rdflib_hdt.mapping import rdflib_to_hdt, term_to_rdflib
 from rdflib_hdt.types import BGP, SearchQuery, Term
 
@@ -58,7 +58,7 @@ class HDTDocument(hdt.HDTDocument):
         pred = rdflib_to_hdt(query[1]) if query[1] is not None else ""
         obj = rdflib_to_hdt(query[2]) if query[2] is not None else ""
         triples, cardinality = super().search_triples(subj, pred, obj, limit=limit, offset=offset)
-        iterator = HDTIterator(triples, cardinality, safe_mode=self._safe_mode)
+        iterator = HDTIterator(triples, safe_mode=self._safe_mode)
         return iterator, cardinality
 
     def search_ids(self, query: Union[Optional[int], Optional[int], Optional[int]], limit=0, offset=0) -> Tuple[hdt.TripleIDIterator, int]:
@@ -84,13 +84,13 @@ class HDTDocument(hdt.HDTDocument):
 
     def search_join(self, patterns: BGP) -> hdt.JoinIterator:
         """Evaluate a join between a set of triple patterns using an iterator.
-        A triple pattern itself is a 3-elements ``tuple`` (subject, predicate, object).
+        A triple pattern itself is a 3-elements ``tuple`` (subject, predicate, object) of RDFlib terms with at least a SPARQl variable.
 
         Argument: A set of triple patterns.
 
         Return:
-            A :class:`rdflib_hdt.JoinIterator`, which can be consumed as a Python iterator to evaluates the join.
+            A :class:`rdflib_hdt.HDTJoinIterator` which produces :class:`rdflib.query.Results`, per the Python iteration protocol.
         """
         bgp = [(rdflib_to_hdt(s), rdflib_to_hdt(p), rdflib_to_hdt(o)) for s, p, o in patterns]
         join_iterator = super().search_join(bgp)
-        return join_iterator
+        return HDTJoinIterator(join_iterator, safe_mode=self._safe_mode)

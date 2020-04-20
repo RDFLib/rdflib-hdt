@@ -78,17 +78,30 @@ Graph usage (recommended)
    # Use None to indicates variables
    for s, p, o in graph.triples((None, FOAF("name"), None)):
      print(triple)
+   
+   # You can also execute SPARQL queries using the regular RDFlib API
+   # see https://rdflib.readthedocs.io/en/stable/intro_to_sparql.html for more details
+   qres = graph.query("""
+      PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+      SELECT ?name ?friend WHERE {
+      ?a foaf:knows ?b.
+      ?a foaf:name ?name.
+      ?b foaf:name ?friend.
+      }""")
+
+   for row in qres:
+   print(f"{row.name} knows {row.friend}")
 
 HDT Document usage
 ------------------
 
 .. code-block:: python
 
-   from rdflib_hdt import Document
+   from rdflib_hdt import HDTDocument
 
    # Load an HDT file. Missing indexes are generated automatically.
    # You can provide the index file by putting them in the same directory than the HDT file.
-   document = Document("test.hdt")
+   document = HDTDocument("test.hdt")
 
    # Display some metadata about the HDT document itself
    print(f"Number of RDF triples: {document.total_triples}")
@@ -109,6 +122,28 @@ HDT Document usage
    triples, cardinality = document.search_triples((None, FOAF("name"), None), limit=10, offset=100)
    # etc ...
 
+An HDT document also provides support for evaluating joins over a set of triples patterns.
+
+.. code-block:: python
+
+  from rdflib_hdt import HDTDocument
+  from rdflib import URIRef, Variable
+  from rdflib.namespace import FOAF, RDF
+
+  document = HDTDocument("test.hdt")
+
+  # find all actors with their names in the HDT document
+  tp_a = (Variable("s"), RDF("type"), URIRef("http://example.org#Actor"))
+  tp_b = (Variable("s"), FOAF("name"), Variable("name"))
+  query = set([tp_a, tp_b])
+
+  iterator = document.search_join(query)
+  print(f"Estimated join cardinality: {len(iterator)}")
+
+  # Join results are produced as ResultRow, like in the RDFlib SPARQL API
+  for row in iterator:
+    print(row)
+
 Handling non UTF-8 strings in python
 ====================================
 
@@ -127,21 +162,19 @@ To handle this, we doubled the API of the HDT document by adding:
 
 .. code-block:: python
 
-   from hdt import HDTDocument
+   from rdflib_hdt import HDTDocument
 
-    # Load an HDT file.
-    # Missing indexes are generated automatically, add False as the second argument to disable them
    document = HDTDocument("test.hdt")
    it = document.search_triple_bytes("", "", "")
 
    for s, p, o in it:
-     print(s, p, o) # print b'...', b'...', b'...'
-     # now decode it, or handle any error
-     try:
-       s, p, o = s.decode('UTF-8'), p.decode('UTF-8'), o.decode('UTF-8')
-     except UnicodeDecodeError as err:
-       # try another other codecs
-       pass
+   print(s, p, o) # print b'...', b'...', b'...'
+   # now decode it, or handle any error
+   try:
+      s, p, o = s.decode('UTF-8'), p.decode('UTF-8'), o.decode('UTF-8')
+   except UnicodeDecodeError as err:
+      # try another other codecs, ignore error, etc
+      pass
 
 .. |Build Status| image:: https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg
    :target: https://github.com/RDFLib/rdflib-hdt/actions?query=workflow%3A%22Python+tests%22

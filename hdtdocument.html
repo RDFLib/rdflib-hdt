@@ -238,13 +238,14 @@ An <code class="docutils literal notranslate"><span class="pre">HDTDocument</spa
 <span class="c1"># find all actors with their names in the HDT document</span>
 <span class="n">tp_a</span> <span class="o">=</span> <span class="p">(</span><span class="n">Variable</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">),</span> <span class="n">RDF</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">),</span> <span class="n">URIRef</span><span class="p">(</span><span class="s2">&quot;http://example.org#Actor&quot;</span><span class="p">))</span>
 <span class="n">tp_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">Variable</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">),</span> <span class="n">FOAF</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span>
-<span class="n">iterator</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_join</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">tp_a</span><span class="p">,</span> <span class="n">tp_b</span><span class="p">]))</span>
+<span class="n">query</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">tp_a</span><span class="p">,</span> <span class="n">tp_b</span><span class="p">])</span>
 
+<span class="n">iterator</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">search_join</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated join cardinality: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># print all results</span>
-<span class="k">for</span> <span class="n">mappings</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">mappings</span><span class="p">)</span>
+<span class="c1"># Join results are produced as ResultRow, like in the RDFlib SPARQL API</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

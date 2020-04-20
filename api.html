@@ -337,10 +337,10 @@ the iterator is a generator of matching RDF triples. A RDF triple itself is a 3-
 <dt id="rdflib_hdt.HDTDocument.search_join">
 <code class="sig-name descname">search_join</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">patterns</span><span class="p">:</span> <span class="n">Set<span class="p">[</span>Union<span class="p">[</span>rdflib.term.URIRef<span class="p">, </span>rdflib.term.Literal<span class="p">, </span>rdflib.term.Variable<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; hdt.JoinIterator<a class="headerlink" href="#rdflib_hdt.HDTDocument.search_join" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a join between a set of triple patterns using an iterator.
-A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object).</p>
+A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object) of RDFlib terms with at least a SPARQl variable.</p>
 <p>Argument: A set of triple patterns.</p>
 <dl class="simple">
-<dt>Return:</dt><dd><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.JoinIterator</span></code>, which can be consumed as a Python iterator to evaluates the join.</p>
+<dt>Return:</dt><dd><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTJoinIterator</span></code> which produces <code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib.query.Results</span></code>, per the Python iteration protocol.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -352,12 +352,11 @@ A triple pattern itself is a 3-elements <code class="docutils literal notranslat
 <h2>HDTIterator<a class="headerlink" href="#hdtiterator" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="rdflib_hdt.HDTIterator">
-<em class="property">class </em><code class="sig-prename descclassname">rdflib_hdt.</code><code class="sig-name descname">HDTIterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>Tuple<span class="p">[</span>str<span class="p">, </span>str<span class="p">, </span>str<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">cardinality</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">safe_mode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdflib_hdt.HDTIterator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">rdflib_hdt.</code><code class="sig-name descname">HDTIterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span><span class="p">:</span> <span class="n">hdt.TripleIterator</span></em>, <em class="sig-param"><span class="n">safe_mode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdflib_hdt.HDTIterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>An iterator to converts HDT matching triples to RDFlib data model.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
 <li><p>input: Input iterator that produces RDF triples with RDF terms in string format.</p></li>
-<li><p>cardinality: Estimate cardinality of the input iterator.</p></li>
 <li><p>safe_mode: True if Unicode errors should be ignored, False otherwise.</p></li>
 </ul>
 </dd>

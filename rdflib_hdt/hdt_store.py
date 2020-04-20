@@ -2,14 +2,12 @@
 rdflib_hdt.hdt_store
 =======================
 """
-from typing import Iterable, Optional, Tuple, Union
+from typing import Iterable
 
-from rdflib import Literal, URIRef
 from rdflib.store import Store
-from rdflib_hdt.hdt_document import HDTDocument
 
-Term = Union[URIRef, Literal]
-SearchQuery = Tuple[Optional[Term], Optional[Term], Optional[Term]]
+from rdflib_hdt.hdt_document import HDTDocument
+from rdflib_hdt.types import Triple
 
 
 class HDTStore(Store):
@@ -30,7 +28,7 @@ class HDTStore(Store):
         self._hdt_document = HDTDocument(path, mapped=mapped, indexed=indexed, safe_mode=safe_mode)
 
     def is_safe(self) -> bool:
-        """Returnd True if the HDT store ignores Unicode errors, False otherwise"""
+        """Return True if the HDT store ignores Unicode errors, False otherwise"""
         return self._hdt_document.is_safe()
 
     def __len__(self) -> int:
@@ -53,7 +51,7 @@ class HDTStore(Store):
         """The number of shared subject-object in the HDT store"""
         return self._hdt_document.nb_shared
 
-    def triples(self, pattern, context) -> Iterable[Tuple[Term, Term, Term]]:
+    def triples(self, pattern, context) -> Iterable[Triple]:
         """Search for a triple pattern in a HDT store.
 
         Args:

@@ -21,3 +21,10 @@ HDTIterator
 
 .. autoclass:: HDTIterator
   :members:
+
+
+HDTJoinIterator
+-----------
+
+.. autoclass:: HDTJoinIterator
+  :members:

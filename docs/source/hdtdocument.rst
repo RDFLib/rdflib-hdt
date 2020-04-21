@@ -64,13 +64,13 @@ An ``HDTDocument`` allows for searching RDF triples and retrieving them in this 
   from rdflib_hdt import HDTDocument
   document = HDTDocument("test.hdt")
 
-  (triples, cardinality) = document.search_ids((None, None, None)
+  (triples, cardinality) = document.search_ids((None, None, None))
 
   for s, p, o in triples:
     print(s, p, o) # will print 3-element tuples of integers
 
     # convert a triple ID to a string format
-    print(document.convert_tripleid(s, p, o))
+    print(document.from_tripleid(s, p, o))
 
 Join evaluation
 ^^^^^^^^^^^^^^^

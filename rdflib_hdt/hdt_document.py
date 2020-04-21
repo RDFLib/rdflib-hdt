@@ -30,17 +30,34 @@ class HDTDocument(hdt.HDTDocument):
         """Return True if the HDT document ignores Unicode errors, False otherwise"""
         return self._safe_mode
 
-    def convert_tripleid(self, triple_id: Union[int, int, int]) -> Term:
-        """Transform a RDF triple from a TripleID representation to a string representation.
+    def from_tripleid(self, triple_id: Union[int, int, int]) -> Term:
+        """Transform a RDF triple from a TripleID representation to a RDFlib representation.
 
         Argument:
           - triple_id: 3-tuple of IDs (s, p, o)
 
         Return:
-            A triple in RDFlib representation, i.e., a 3-elements ``tuple`` (subject, predicate, object)
+            A triple in RDFlib representation, i.e., a 3-tuple of RDFlib terms.
         """
         s, p, o = super().convert_tripleid(triple_id[0], triple_id[1], triple_id[2])
         return (term_to_rdflib(s), term_to_rdflib(p), term_to_rdflib(o))
+
+    def to_tripleid(self, triple: SearchQuery) -> Tuple[int, int, int]:
+        """Transform a triple (pattern) from a RDFlib representation to a TripleID.
+
+        It can be used to transform a RDFlib query before feeding it
+        into the :meth`rdflib_hdt.HDTDocument.search_ids` method.
+
+        Argument:
+          - triple: 3-tuple of RDF Terms. Use `None` to indicate wildcards.
+
+        Return:
+            A triple in TripleID representation, i.e., a 3-tuple of integers
+        """
+        subj = super().convert_term(rdflib_to_hdt(triple[0]), hdt.Subject) if triple[0] is not None else 0
+        pred = super().convert_term(rdflib_to_hdt(triple[1]), hdt.Predicate) if triple[1] is not None else 0
+        obj = super().convert_term(rdflib_to_hdt(triple[2]), hdt.Object) if triple[2] is not None else 0
+        return (subj, pred, obj)
 
     def search(self, query: SearchQuery, limit=0, offset=0) -> Tuple[HDTIterator, int]:
         """Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use `Node` for SPARQL variables.
@@ -66,7 +83,7 @@ class HDTDocument(hdt.HDTDocument):
 
         Use `None` to indicate wildcards.
 
-        Mapping between ids and RDF terms is done using :meth:`rdflib_hdt.HDTDocument.convert_tripleid`, :meth:`rdflib_hdt.HDTDocument.convert_id`, and :meth:`rdflib_hdt.HDTDocument.convert_term`.
+        Mapping between ids and RDF terms is done using the :meth:`rdflib_hdt.HDTDocument.from_tripleid`, :meth:`rdflib_hdt.HDTDocument.to_tripleid`, and :meth:`rdflib_hdt.HDTDocument.term_to_id` methods.
 
         Args:
           - query: A tuple of triple patterns IDs (s, p, o) to search for. Use `None` to indicate wildecards.

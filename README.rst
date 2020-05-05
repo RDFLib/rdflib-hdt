@@ -1,5 +1,6 @@
 |Build Status| |PyPI version|
 
+|rdflib-htd logo|
 
 A Store back-end for `rdflib <https://github.com/RDFLib>`_ to allow for reading and querying HDT documents.
 
@@ -180,4 +181,6 @@ To handle this, we doubled the API of the HDT document by adding:
 .. |Build Status| image:: https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg
    :target: https://github.com/RDFLib/rdflib-hdt/actions?query=workflow%3A%22Python+tests%22
 .. |PyPI version| image:: https://badge.fury.io/py/hdt.svg
+   :target: https://badge.fury.io/py/hdt
+.. |rdflib-htd logo| image:: docs/source/_static/rdflib-hdt-250.png
    :target: https://badge.fury.io/py/hdt

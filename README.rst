@@ -150,7 +150,7 @@ An HDT document also provides support for evaluating joins over a set of triples
   
   # Join results are produced as ResultRow, like in the RDFlib SPARQL API
   for row in iterator:
-   print(f"{row.name} knows {row.friend}")
+     print(f"{row.name} knows {row.friend}")
 
 Handling non UTF-8 strings in python
 ====================================

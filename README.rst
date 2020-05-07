@@ -97,7 +97,7 @@ the RDFlib SPARQL query engine in the context of HDT documents.
    }""")
 
    for row in qres:
-   print(f"{row.name} knows {row.friend}")
+     print(f"{row.name} knows {row.friend}")
 
 HDT Document usage
 ------------------

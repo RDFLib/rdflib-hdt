@@ -1,6 +1,6 @@
-|Build Status| |PyPI version|
-
 |rdflib-htd logo|
+
+|Build Status| |PyPI version|
 
 A Store back-end for `rdflib <https://github.com/RDFLib>`_ to allow for reading and querying HDT documents.
 

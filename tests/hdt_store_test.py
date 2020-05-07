@@ -1,7 +1,7 @@
 # hdt_store_test.py
 # Author: Thomas MINIER - MIT License 2017-2020
 import pytest
-from rdflib_hdt import HDTStore
+from rdflib_hdt import HDTStore, optimize_sparql
 from rdflib import Graph, URIRef, Literal
 
 path = "tests/test.hdt"
@@ -69,6 +69,7 @@ def test_rdflib_graph_search(query, expected_length):
 
 
 def test_rdflib_sparql_query():
+    optimize_sparql()
     graph = Graph(store=store)
     sparql_query = """
     PREFIX ex: <http://example.org/>

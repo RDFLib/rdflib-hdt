@@ -27,6 +27,11 @@ class HDTStore(Store):
         super(HDTStore, self).__init__(configuration=configuration, identifier=identifier)
         self._hdt_document = HDTDocument(path, mapped=mapped, indexed=indexed, safe_mode=safe_mode)
 
+    @property
+    def hdt_document(self) -> HDTDocument:
+        """The HDT document used to read and query the HDT file"""
+        return self._hdt_document
+
     def is_safe(self) -> bool:
         """Return True if the HDT store ignores Unicode errors, False otherwise"""
         return self._hdt_document.is_safe()
@@ -35,18 +40,22 @@ class HDTStore(Store):
         """The number of RDF triples in the HDT store"""
         return self._hdt_document.total_triples
 
+    @property
     def nb_subjects(self) -> int:
         """The number of subjects in the HDT store"""
         return self._hdt_document.nb_subjects
 
+    @property
     def nb_predicates(self) -> int:
         """The number of predicates in the HDT store"""
         return self._hdt_document.nb_predicates
 
+    @property
     def nb_objects(self) -> int:
         """The number of objects in the HDT store"""
         return self._hdt_document.nb_objects
 
+    @property
     def nb_shared(self) -> int:
         """The number of shared subject-object in the HDT store"""
         return self._hdt_document.nb_shared

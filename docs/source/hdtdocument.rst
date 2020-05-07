@@ -22,7 +22,7 @@ Missing indexes are generated automatically, but be careful, as it requires to l
 
   # Display some metadata about the HDT document itself
   print(f"Number of RDF triples: {document.total_triples}")
-  print(f"Number of subjects: ${document.nb_subjects}")
+  print(f"Number of subjects: {document.nb_subjects}")
   print(f"Number of predicates: {document.nb_predicates}")
   print(f"Number of objects: {document.nb_objects}")
   print(f"Number of shared subject-object: {document.nb_shared}")
@@ -127,7 +127,7 @@ To handle this we doubled the API of the HDT document by adding:
 
 .. code:: python
 
-  from hdt import HDTDocument
+  from rdflib_hdt import HDTDocument
 
    # Load an HDT file.
    # Missing indexes are generated automatically, add False as the second argument to disable them

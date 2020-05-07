@@ -66,28 +66,34 @@ Graph usage (recommended)
 
    # Display some metadata about the HDT document itself
    print(f"Number of RDF triples: {len(store)}")
-   print(f"Number of subjects: ${store.nb_subjects}")
+   print(f"Number of subjects: {store.nb_subjects}")
    print(f"Number of predicates: {store.nb_predicates}")
    print(f"Number of objects: {store.nb_objects}")
    print(f"Number of shared subject-object: {store.nb_shared}")
 
-   # Create an RDFlib Graph with the HDT document as a backend
-   graph = Graph(store=store)
 
-   # Fetch all triples that matches { ?s foaf:name ?o }
-   # Use None to indicates variables
-   for s, p, o in graph.triples((None, FOAF("name"), None)):
-     print(triple)
-   
-   # You can also execute SPARQL queries using the regular RDFlib API
-   # see https://rdflib.readthedocs.io/en/stable/intro_to_sparql.html for more details
+Using the RDFlib API, you can also `execute SPARQL queries <https://rdflib.readthedocs.io/en/stable/intro_to_sparql.html>`_ over an HDT document.
+If you do so, we recommend that you first call the ``optimize_sparql`` function, which optimize
+the RDFlib SPARQL query engine in the context of HDT documents.
+
+.. code-block:: python
+
+   from rdflib import Graph
+   from rdflib_hdt import HDTStore, optimize_sparql
+
+   # Calling this function optimizes the RDFlib SPARQL engine for HDT documents
+   optimize_sparql()
+
+   graph = Graph(store=HDTStore("test.hdt"))
+
+   # You can execute SPARQL queries using the regular RDFlib API
    qres = graph.query("""
-      PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-      SELECT ?name ?friend WHERE {
+   PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+   SELECT ?name ?friend WHERE {
       ?a foaf:knows ?b.
       ?a foaf:name ?name.
       ?b foaf:name ?friend.
-      }""")
+   }""")
 
    for row in qres:
    print(f"{row.name} knows {row.friend}")
@@ -105,7 +111,7 @@ HDT Document usage
 
    # Display some metadata about the HDT document itself
    print(f"Number of RDF triples: {document.total_triples}")
-   print(f"Number of subjects: ${document.nb_subjects}")
+   print(f"Number of subjects: {document.nb_subjects}")
    print(f"Number of predicates: {document.nb_predicates}")
    print(f"Number of objects: {document.nb_objects}")
    print(f"Number of shared subject-object: {document.nb_shared}")

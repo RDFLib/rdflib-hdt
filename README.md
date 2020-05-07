@@ -1,3 +1,5 @@
+![](docs/source/_static/rdflib-hdt-250.png)
+
 # rdflib-hdt
 
 ![Python tests](https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg) [![PyPI version](https://badge.fury.io/py/hdt.svg)](https://badge.fury.io/py/hdt)

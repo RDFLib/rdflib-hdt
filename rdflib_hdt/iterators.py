@@ -2,7 +2,7 @@
 rdflib_hdt.iterators
 =======================
 
-This module contains iterators that wraps native HDT iterator to the RDFlib data model.
+This module contains iterators that wraps native HDT iterators to the RDFlib data model.
 """
 
 from rdflib.query import ResultRow
@@ -13,7 +13,7 @@ from rdflib_hdt.types import Triple
 
 
 class HDTIterator:
-    """An iterator to converts HDT matching triples to RDFlib data model.
+    """An iterator that converts HDT matching triples to the RDFlib data model.
 
     Args:
       - input: Input iterator that produces RDF triples with RDF terms in string format.
@@ -25,18 +25,18 @@ class HDTIterator:
         self._safe_mode = safe_mode
 
     def __len__(self):
-        """The estimated number of matching RDF triples"""
+        """The estimated number of matching RDF triples."""
         return len(self._input)
 
     def __iter__(self):
         return self
 
     def __next__(self) -> Triple:
-        """Support for the Python 2.x iterator protocol"""
+        """Fallback implementation for the Python 2.x iterator protocol."""
         return self.next()
 
     def next(self) -> Triple:
-        """Produce a new RDF triple following the Python iterator protocol"""
+        """Produce a new RDF triple, per the Python iterator protocol."""
         try:
             triple = next(self._input)
             if triple is None:
@@ -44,7 +44,7 @@ class HDTIterator:
             s, p, o = triple
             return (term_to_rdflib(s), term_to_rdflib(p), term_to_rdflib(o))
         except UnicodeDecodeError as e:
-            # crash if not in safe mode
+            # crash if safe mode is off
             if not self._safe_mode:
                 raise e
             # otherwise, try to read a valid RDF triple from the input
@@ -54,7 +54,7 @@ class HDTIterator:
 
 
 class HDTJoinIterator:
-    """An iterator to converts HDT join results to the RDFlib data model.
+    """An iterator that converts HDT join results to the RDFlib data model.
 
     Args:
       - input: Input iterator that yields join results
@@ -66,18 +66,18 @@ class HDTJoinIterator:
         self._safe_mode = safe_mode
 
     def __len__(self):
-        """The estimated number of join results"""
+        """The estimated number of join results."""
         return len(self._input)
 
     def __iter__(self):
         return self
 
     def __next__(self) -> ResultRow:
-        """Support for the Python 2.x iterator protocol"""
+        """Fallback implementation for the Python 2.x iterator protocol."""
         return self.next()
 
     def next(self) -> ResultRow:
-        """Produce a new row of results following the Python iterator protocol"""
+        """Produce a new row of results, per the Python iterator protocol."""
         try:
             row = dict()
             variables = list()
@@ -89,7 +89,7 @@ class HDTJoinIterator:
                 row[rdf_key] = rdf_value
             return ResultRow(row, variables)
         except UnicodeDecodeError as e:
-            # crash if not in safe mode
+            # crash if safe mode is off
             if not self._safe_mode:
                 raise e
             # otherwise, try to read a valid RDF triple from the input

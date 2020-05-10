@@ -1,7 +1,7 @@
 """
 rdflib_hdt.sparql_opt
 =======================
-Provides functions to overrides the RDFlib SPARQL evaluator for HDT documents
+Provides functions to overrides the RDFlib SPARQL evaluator for HDT documents.
 """
 import rdflib.plugins.sparql.evaluate as sparql_evaluate
 from rdflib import Variable
@@ -12,7 +12,7 @@ from rdflib_hdt.types import BGP
 
 
 def optimize_sparql():
-    """Overrides the RDFlib SPARQL engine to optimize SPARQL query execution over HDT documents"""
+    """Overrides the RDFlib SPARQL engine to optimize SPARQL query execution over HDT documents."""
     # copy the default RDFlib function for evaluating Basic Graph Patterns
     rdflib_evalBGP = sparql_evaluate.evalBGP
 

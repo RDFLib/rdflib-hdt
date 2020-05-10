@@ -13,13 +13,15 @@ from rdflib_hdt.types import BGP, SearchQuery, Term
 class HDTDocument(hdt.HDTDocument):
     """An HDT document, in read-only mode.
 
-    This is a wrapper over the original hdt.HDTDocument class,
-    which align it with the RDFlib data model.
+    This class is a wrapper over the original hdt.HDTDocument class,
+    which aligns it with the RDFlib data model.
+
+    .. warning:: By default, an HDTDocument discards RDF Terms with invalid UTF-8 encoding. You can change this behavior with the `safe_mode` parameter of the constructor.
 
     Args:
       - path: Absolute path to the HDT file to load.
-      - mapped: True if the document must be mapped on disk, False to load it in-memory.
-      - indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes will be generated at startup.
+      - mapped: True if the document must be mapped on disk, False to load it in memory.
+      - indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes are automatically generated at startup.
       - safe_mode: True if Unicode errors should be ignored, False otherwise.
     """
     def __init__(self, path: str, mapped: bool = True, indexed: bool = True, safe_mode=True):
@@ -27,11 +29,11 @@ class HDTDocument(hdt.HDTDocument):
         self._safe_mode = safe_mode
 
     def is_safe(self) -> bool:
-        """Return True if the HDT document ignores Unicode errors, False otherwise"""
+        """Return True if the HDT document ignores Unicode errors, False otherwise."""
         return self._safe_mode
 
     def from_tripleid(self, triple_id: Union[int, int, int]) -> Term:
-        """Transform a RDF triple from a TripleID representation to a RDFlib representation.
+        """Transform an RDF triple from a TripleID representation to an RDFlib representation.
 
         Argument:
           - triple_id: 3-tuple of IDs (s, p, o)
@@ -43,9 +45,9 @@ class HDTDocument(hdt.HDTDocument):
         return (term_to_rdflib(s), term_to_rdflib(p), term_to_rdflib(o))
 
     def to_tripleid(self, triple: SearchQuery) -> Tuple[int, int, int]:
-        """Transform a triple (pattern) from a RDFlib representation to a TripleID.
+        """Transform a triple (pattern) from an RDFlib representation to a TripleID.
 
-        It can be used to transform a RDFlib query before feeding it
+        It can be used to transform an RDFlib query before feeding it
         into the :meth`rdflib_hdt.HDTDocument.search_ids` method.
 
         Argument:
@@ -60,16 +62,16 @@ class HDTDocument(hdt.HDTDocument):
         return (subj, pred, obj)
 
     def search(self, query: SearchQuery, limit=0, offset=0) -> Tuple[HDTIterator, int]:
-        """Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use `Node` for SPARQL variables.
+        """Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use `None` for wildcards/variables.
 
         Args:
-          - query: The triple pattern (s, p, o) to search for. Use `None` to indicate wildecards.
-          - limit: (optional) Maximum number of triples to search for.
+          - query: The triple pattern (s, p, o) to search. Use `None` to indicate wildcards/variables.
+          - limit: (optional) Maximum number of triples to search.
           - offset: (optional) Number of matching triples to skip before returning results.
 
         Return:
             A 2-elements tuple (iterator, estimated pattern cardinality), where
-            the iterator is a generator of matching RDF triples. A RDF triple itself is a 3-elements tuple (subject, predicate, object) of RDF terms (in rdflib format).
+            the iterator is a generator of matching RDF triples. An RDF triple itself is a 3-elements tuple (subject, predicate, object) of RDF terms (in rdflib format).
         """
         subj = rdflib_to_hdt(query[0]) if query[0] is not None else ""
         pred = rdflib_to_hdt(query[1]) if query[1] is not None else ""
@@ -79,20 +81,18 @@ class HDTDocument(hdt.HDTDocument):
         return iterator, cardinality
 
     def search_ids(self, query: Union[Optional[int], Optional[int], Optional[int]], limit=0, offset=0) -> Tuple[hdt.TripleIDIterator, int]:
-        """Same as :meth:`rdflib_hdt.HDTDocument.search_triples`, but RDF triples are represented as unique ids (from the HDT Dictionnary).
-
-        Use `None` to indicate wildcards.
+        """Same as :meth:`rdflib_hdt.HDTDocument.search_triples`, but RDF triples are represented as unique ids (from the HDT Dictionnary). Use `None` or `0` to indicate wildcards/variables.
 
         Mapping between ids and RDF terms is done using the :meth:`rdflib_hdt.HDTDocument.from_tripleid`, :meth:`rdflib_hdt.HDTDocument.to_tripleid`, and :meth:`rdflib_hdt.HDTDocument.term_to_id` methods.
 
         Args:
-          - query: A tuple of triple patterns IDs (s, p, o) to search for. Use `None` to indicate wildecards.
-          - limit: (optional) Maximum number of triples to search for.
+          - query: A tuple of triple patterns IDs (s, p, o) to search. Use `None` or `0` to indicate wildcards/variables.
+          - limit: (optional) Maximum number of triples to search.
           - offset: (optional) Number of matching triples to skip before returning results.
 
         Return:
             A 2-elements tuple (iterator, estimated pattern cardinality), where
-            the iterator is a generator of matching RDF triples. A RDF triple itself is a 3-elements tuple (subject, predicate, object) of IDs (positive integers from the HDT Dictionnary).
+            the iterator is a generator of matching RDF triples. An RDF triple itself is a 3-elements tuple (subject, predicate, object) of IDs (positive integers from the HDT Dictionnary).
         """
         subj = query[0] if query[0] is not None else 0
         pred = query[1] if query[1] is not None else 0
@@ -101,7 +101,7 @@ class HDTDocument(hdt.HDTDocument):
 
     def search_join(self, patterns: BGP) -> hdt.JoinIterator:
         """Evaluate a join between a set of triple patterns using an iterator.
-        A triple pattern itself is a 3-elements ``tuple`` (subject, predicate, object) of RDFlib terms with at least a SPARQl variable.
+        A triple pattern itself is a 3-elements ``tuple`` (subject, predicate, object) of RDFlib terms with at least one SPARQL variable.
 
         Argument: A set of triple patterns.
 

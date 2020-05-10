@@ -170,13 +170,13 @@
 <p>It is heavily inspired by the work from &#64;FlorianLudwig (<a class="reference external" href="https://github.com/RDFLib/rdflib/issues/894">https://github.com/RDFLib/rdflib/issues/894</a>)</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>By default, the HDTStore discards RDF Terms with invalid UTF-8 encoding. You can change this behaviour with the <cite>safe-mode</cite> parameter of the constructor.</p>
+<p>By default, an HDTStore discards RDF Terms with invalid UTF-8 encoding. You can change this behavior with the <cite>safe_mode</cite> parameter of the constructor.</p>
 </div>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
 <li><p>path: Absolute path to the HDT file to load.</p></li>
-<li><p>mapped: True if the document must be mapped on disk, False to load it in-memory.</p></li>
-<li><p>indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes will be generated at startup.</p></li>
+<li><p>mapped: True if the document must be mapped on disk, False to load it in memory.</p></li>
+<li><p>indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes are automatically generated at startup.</p></li>
 <li><p>safe_mode: True if Unicode errors should be ignored, False otherwise.</p></li>
 </ul>
 </dd>
@@ -211,37 +211,37 @@ configuration string.</p>
 <dl class="py method">
 <dt id="rdflib_hdt.HDTStore.hdt_document">
 <em class="property">property </em><code class="sig-name descname">hdt_document</code><a class="headerlink" href="#rdflib_hdt.HDTStore.hdt_document" title="Permalink to this definition">¶</a></dt>
-<dd><p>The HDT document used to read and query the HDT file</p>
+<dd><p>The HDT document used to read and query the HDT file.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="rdflib_hdt.HDTStore.is_safe">
 <code class="sig-name descname">is_safe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#rdflib_hdt.HDTStore.is_safe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return True if the HDT store ignores Unicode errors, False otherwise</p>
+<dd><p>Return True if the HDT store ignores Unicode errors, False otherwise.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="rdflib_hdt.HDTStore.nb_objects">
 <em class="property">property </em><code class="sig-name descname">nb_objects</code><a class="headerlink" href="#rdflib_hdt.HDTStore.nb_objects" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of objects in the HDT store</p>
+<dd><p>The number of objects in the HDT store.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="rdflib_hdt.HDTStore.nb_predicates">
 <em class="property">property </em><code class="sig-name descname">nb_predicates</code><a class="headerlink" href="#rdflib_hdt.HDTStore.nb_predicates" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of predicates in the HDT store</p>
+<dd><p>The number of predicates in the HDT store.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="rdflib_hdt.HDTStore.nb_shared">
 <em class="property">property </em><code class="sig-name descname">nb_shared</code><a class="headerlink" href="#rdflib_hdt.HDTStore.nb_shared" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of shared subject-object in the HDT store</p>
+<dd><p>The number of shared subject-object in the HDT store.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="rdflib_hdt.HDTStore.nb_subjects">
 <em class="property">property </em><code class="sig-name descname">nb_subjects</code><a class="headerlink" href="#rdflib_hdt.HDTStore.nb_subjects" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of subjects in the HDT store</p>
+<dd><p>The number of subjects in the HDT store.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -256,12 +256,12 @@ configuration string.</p>
 <dd><p>Search for a triple pattern in a HDT store.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>pattern: The triple pattern (s, p, o) to search for</p></li>
-<li><p>context: The query execution context</p></li>
+<li><p>pattern: The triple pattern (s, p, o) to search.</p></li>
+<li><p>context: The query execution context.</p></li>
 </ul>
 </dd>
 </dl>
-<p>Returns: A generator that produces RDF triples matching the input triple pattern.</p>
+<p>Returns: An iterator that produces RDF triples matching the input triple pattern.</p>
 </dd></dl>
 
 </dd></dl>
@@ -273,13 +273,17 @@ configuration string.</p>
 <dt id="rdflib_hdt.HDTDocument">
 <em class="property">class </em><code class="sig-prename descclassname">rdflib_hdt.</code><code class="sig-name descname">HDTDocument</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">mapped</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">indexed</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">safe_mode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdflib_hdt.HDTDocument" title="Permalink to this definition">¶</a></dt>
 <dd><p>An HDT document, in read-only mode.</p>
-<p>This is a wrapper over the original hdt.HDTDocument class,
-which align it with the RDFlib data model.</p>
+<p>This class is a wrapper over the original hdt.HDTDocument class,
+which aligns it with the RDFlib data model.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>By default, an HDTDocument discards RDF Terms with invalid UTF-8 encoding. You can change this behavior with the <cite>safe_mode</cite> parameter of the constructor.</p>
+</div>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
 <li><p>path: Absolute path to the HDT file to load.</p></li>
-<li><p>mapped: True if the document must be mapped on disk, False to load it in-memory.</p></li>
-<li><p>indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes will be generated at startup.</p></li>
+<li><p>mapped: True if the document must be mapped on disk, False to load it in memory.</p></li>
+<li><p>indexed: True if the document must be indexed. Indexed must be located in the same directory as the HDT file. Missing indexes are automatically generated at startup.</p></li>
 <li><p>safe_mode: True if Unicode errors should be ignored, False otherwise.</p></li>
 </ul>
 </dd>
@@ -287,7 +291,7 @@ which align it with the RDFlib data model.</p>
 <dl class="py method">
 <dt id="rdflib_hdt.HDTDocument.from_tripleid">
 <code class="sig-name descname">from_tripleid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">triple_id</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>rdflib.term.URIRef<span class="p">, </span>rdflib.term.Literal<span class="p">]</span><a class="headerlink" href="#rdflib_hdt.HDTDocument.from_tripleid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform a RDF triple from a TripleID representation to a RDFlib representation.</p>
+<dd><p>Transform an RDF triple from a TripleID representation to an RDFlib representation.</p>
 <dl class="simple">
 <dt>Argument:</dt><dd><ul class="simple">
 <li><p>triple_id: 3-tuple of IDs (s, p, o)</p></li>
@@ -301,22 +305,22 @@ which align it with the RDFlib data model.</p>
 <dl class="py method">
 <dt id="rdflib_hdt.HDTDocument.is_safe">
 <code class="sig-name descname">is_safe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#rdflib_hdt.HDTDocument.is_safe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return True if the HDT document ignores Unicode errors, False otherwise</p>
+<dd><p>Return True if the HDT document ignores Unicode errors, False otherwise.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="rdflib_hdt.HDTDocument.search">
 <code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n">Tuple[Union[rdflib.term.URIRef, rdflib.term.Literal, None], Union[rdflib.term.URIRef, rdflib.term.Literal, None], Union[rdflib.term.URIRef, rdflib.term.Literal, None]]</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>rdflib_hdt.iterators.HDTIterator<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#rdflib_hdt.HDTDocument.search" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use <cite>Node</cite> for SPARQL variables.</p>
+<dd><p>Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use <cite>None</cite> for wildcards/variables.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>query: The triple pattern (s, p, o) to search for. Use <cite>None</cite> to indicate wildecards.</p></li>
-<li><p>limit: (optional) Maximum number of triples to search for.</p></li>
+<li><p>query: The triple pattern (s, p, o) to search. Use <cite>None</cite> to indicate wildcards/variables.</p></li>
+<li><p>limit: (optional) Maximum number of triples to search.</p></li>
 <li><p>offset: (optional) Number of matching triples to skip before returning results.</p></li>
 </ul>
 </dd>
 <dt>Return:</dt><dd><p>A 2-elements tuple (iterator, estimated pattern cardinality), where
-the iterator is a generator of matching RDF triples. A RDF triple itself is a 3-elements tuple (subject, predicate, object) of RDF terms (in rdflib format).</p>
+the iterator is a generator of matching RDF triples. An RDF triple itself is a 3-elements tuple (subject, predicate, object) of RDF terms (in rdflib format).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -324,18 +328,17 @@ the iterator is a generator of matching RDF triples. A RDF triple itself is a 3-
 <dl class="py method">
 <dt id="rdflib_hdt.HDTDocument.search_ids">
 <code class="sig-name descname">search_ids</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>hdt.TripleIDIterator<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#rdflib_hdt.HDTDocument.search_ids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Same as <code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.search_triples()</span></code>, but RDF triples are represented as unique ids (from the HDT Dictionnary).</p>
-<p>Use <cite>None</cite> to indicate wildcards.</p>
+<dd><p>Same as <code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.search_triples()</span></code>, but RDF triples are represented as unique ids (from the HDT Dictionnary). Use <cite>None</cite> or <cite>0</cite> to indicate wildcards/variables.</p>
 <p>Mapping between ids and RDF terms is done using the <a class="reference internal" href="#rdflib_hdt.HDTDocument.from_tripleid" title="rdflib_hdt.HDTDocument.from_tripleid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.from_tripleid()</span></code></a>, <a class="reference internal" href="#rdflib_hdt.HDTDocument.to_tripleid" title="rdflib_hdt.HDTDocument.to_tripleid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.to_tripleid()</span></code></a>, and <code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.term_to_id()</span></code> methods.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>query: A tuple of triple patterns IDs (s, p, o) to search for. Use <cite>None</cite> to indicate wildecards.</p></li>
-<li><p>limit: (optional) Maximum number of triples to search for.</p></li>
+<li><p>query: A tuple of triple patterns IDs (s, p, o) to search. Use <cite>None</cite> or <cite>0</cite> to indicate wildcards/variables.</p></li>
+<li><p>limit: (optional) Maximum number of triples to search.</p></li>
 <li><p>offset: (optional) Number of matching triples to skip before returning results.</p></li>
 </ul>
 </dd>
 <dt>Return:</dt><dd><p>A 2-elements tuple (iterator, estimated pattern cardinality), where
-the iterator is a generator of matching RDF triples. A RDF triple itself is a 3-elements tuple (subject, predicate, object) of IDs (positive integers from the HDT Dictionnary).</p>
+the iterator is a generator of matching RDF triples. An RDF triple itself is a 3-elements tuple (subject, predicate, object) of IDs (positive integers from the HDT Dictionnary).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -344,7 +347,7 @@ the iterator is a generator of matching RDF triples. A RDF triple itself is a 3-
 <dt id="rdflib_hdt.HDTDocument.search_join">
 <code class="sig-name descname">search_join</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">patterns</span><span class="p">:</span> <span class="n">Set<span class="p">[</span>Union<span class="p">[</span>rdflib.term.URIRef<span class="p">, </span>rdflib.term.Literal<span class="p">, </span>rdflib.term.Variable<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; hdt.JoinIterator<a class="headerlink" href="#rdflib_hdt.HDTDocument.search_join" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a join between a set of triple patterns using an iterator.
-A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object) of RDFlib terms with at least a SPARQl variable.</p>
+A triple pattern itself is a 3-elements <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (subject, predicate, object) of RDFlib terms with at least one SPARQL variable.</p>
 <p>Argument: A set of triple patterns.</p>
 <dl class="simple">
 <dt>Return:</dt><dd><p>A <a class="reference internal" href="#rdflib_hdt.HDTJoinIterator" title="rdflib_hdt.HDTJoinIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTJoinIterator</span></code></a> which produces <code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib.query.Results</span></code>, per the Python iteration protocol.</p>
@@ -355,8 +358,8 @@ A triple pattern itself is a 3-elements <code class="docutils literal notranslat
 <dl class="py method">
 <dt id="rdflib_hdt.HDTDocument.to_tripleid">
 <code class="sig-name descname">to_tripleid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">triple</span><span class="p">:</span> <span class="n">Tuple[Union[rdflib.term.URIRef, rdflib.term.Literal, None], Union[rdflib.term.URIRef, rdflib.term.Literal, None], Union[rdflib.term.URIRef, rdflib.term.Literal, None]]</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#rdflib_hdt.HDTDocument.to_tripleid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform a triple (pattern) from a RDFlib representation to a TripleID.</p>
-<p>It can be used to transform a RDFlib query before feeding it
+<dd><p>Transform a triple (pattern) from an RDFlib representation to a TripleID.</p>
+<p>It can be used to transform an RDFlib query before feeding it
 into the :meth`rdflib_hdt.HDTDocument.search_ids` method.</p>
 <dl class="simple">
 <dt>Argument:</dt><dd><ul class="simple">
@@ -376,7 +379,7 @@ into the :meth`rdflib_hdt.HDTDocument.search_ids` method.</p>
 <dl class="py class">
 <dt id="rdflib_hdt.HDTIterator">
 <em class="property">class </em><code class="sig-prename descclassname">rdflib_hdt.</code><code class="sig-name descname">HDTIterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span><span class="p">:</span> <span class="n">hdt.TripleIterator</span></em>, <em class="sig-param"><span class="n">safe_mode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdflib_hdt.HDTIterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>An iterator to converts HDT matching triples to RDFlib data model.</p>
+<dd><p>An iterator that converts HDT matching triples to the RDFlib data model.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
 <li><p>input: Input iterator that produces RDF triples with RDF terms in string format.</p></li>
@@ -387,7 +390,7 @@ into the :meth`rdflib_hdt.HDTDocument.search_ids` method.</p>
 <dl class="py method">
 <dt id="rdflib_hdt.HDTIterator.next">
 <code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Union<span class="p">[</span>rdflib.term.URIRef<span class="p">, </span>rdflib.term.Literal<span class="p">]</span><span class="p">, </span>Union<span class="p">[</span>rdflib.term.URIRef<span class="p">, </span>rdflib.term.Literal<span class="p">]</span><span class="p">, </span>Union<span class="p">[</span>rdflib.term.URIRef<span class="p">, </span>rdflib.term.Literal<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#rdflib_hdt.HDTIterator.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Produce a new RDF triple following the Python iterator protocol</p>
+<dd><p>Produce a new RDF triple, per the Python iterator protocol.</p>
 </dd></dl>
 
 </dd></dl>
@@ -398,7 +401,7 @@ into the :meth`rdflib_hdt.HDTDocument.search_ids` method.</p>
 <dl class="py class">
 <dt id="rdflib_hdt.HDTJoinIterator">
 <em class="property">class </em><code class="sig-prename descclassname">rdflib_hdt.</code><code class="sig-name descname">HDTJoinIterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span><span class="p">:</span> <span class="n">hdt.JoinIterator</span></em>, <em class="sig-param"><span class="n">safe_mode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdflib_hdt.HDTJoinIterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>An iterator to converts HDT join results to the RDFlib data model.</p>
+<dd><p>An iterator that converts HDT join results to the RDFlib data model.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
 <li><p>input: Input iterator that yields join results</p></li>
@@ -409,7 +412,7 @@ into the :meth`rdflib_hdt.HDTDocument.search_ids` method.</p>
 <dl class="py method">
 <dt id="rdflib_hdt.HDTJoinIterator.next">
 <code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; rdflib.query.ResultRow<a class="headerlink" href="#rdflib_hdt.HDTJoinIterator.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Produce a new row of results following the Python iterator protocol</p>
+<dd><p>Produce a new row of results, per the Python iterator protocol.</p>
 </dd></dl>
 
 </dd></dl>

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4ebf15b82d3c04373fa44b86c473d9e9b782120e1015533b3a753a2b79886c1a"
+            "sha256": "b00b04968478c4faa74499d7dbeaafdd85c4e26905043d85f77051e5d088b1a1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -40,11 +40,11 @@
         },
         "rdflib": {
             "hashes": [
-                "sha256:58d5994610105a457cff7fdfe3d683d87786c5028a45ae032982498a7e913d6f",
-                "sha256:da1df14552555c5c7715d8ce71c08f404c988c58a1ecd38552d0da4fc261280d"
+                "sha256:78149dd49d385efec3b3adfbd61c87afaf1281c30d3fcaf1b323b34f603fb155",
+                "sha256:88208ea971a87886d60ae2b1a4b2cdc263527af0454c422118d43fe64b357877"
             ],
             "index": "pypi",
-            "version": "==4.2.2"
+            "version": "==5.0.0"
         },
         "six": {
             "hashes": [
@@ -252,10 +252,10 @@
         },
         "pytz": {
             "hashes": [
-                "sha256:1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d",
-                "sha256:b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be"
+                "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed",
+                "sha256:c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048"
             ],
-            "version": "==2019.3"
+            "version": "==2020.1"
         },
         "requests": {
             "hashes": [
@@ -280,11 +280,11 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:50972d83b78990fd61d0d3fe8620814cae53db29443e92c13661bc43dff46ec8",
-                "sha256:8411878f4768ec2a8896b844d68070204f9354a831b37937989c2e559d29dffc"
+                "sha256:62edfd92d955b868d6c124c0942eba966d54b5f3dcb4ded39e65f74abac3f572",
+                "sha256:f5505d74cf9592f3b997380f9bdb2d2d0320ed74dd69691e3ee0644b956b8d83"
             ],
             "index": "pypi",
-            "version": "==3.0.1"
+            "version": "==3.0.3"
         },
         "sphinx-rtd-theme": {
             "hashes": [

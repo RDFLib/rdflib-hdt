@@ -4,13 +4,13 @@ from setuptools import find_packages, setup, Extension
 from os import listdir
 import pybind11
 
-__rdflib_hdt_version__ = "1.0"
+__rdflib_hdt_version__ = "2.0"
 
 with open('README.rst') as file:
     long_description = file.read()
 
 
-def list_files(path, extension=".cpp", exclude="S.cpp"):
+def list_files(path: str, extension=".cpp", exclude="S.cpp"):
     """List paths to all files that ends with a given extension"""
     return ["%s/%s" % (path, f) for f in listdir(path) if f.endswith(extension) and (not f.endswith(exclude))]
 
@@ -46,7 +46,7 @@ sources += list_files("hdt-cpp-1.3.3/libhdt/src/triples")
 sources += list_files("hdt-cpp-1.3.3/libhdt/src/util")
 sources += list_files("hdt-cpp-1.3.3/libhdt/src/sparql")
 
-# pybind11 + pyHDT + libcds +  HDT-lib headers
+# pybind11 + pyHDT + libcds + HDT-lib headers
 include_dirs = [
     pybind11.get_include(),
     pybind11.get_include(True),
@@ -78,7 +78,7 @@ setup(
     name="rdflib_hdt",
     version=__rdflib_hdt_version__,
     author="Thomas Minier",
-    author_email="thomas.minier@univ-nantes.fr",
+    author_email="tminier01@gmail.com",
     url="https://github.com/RDFLib/rdflib-hdt",
     description="A Store back-end for rdflib to allow for reading and querying HDT documents",
     long_description=long_description,

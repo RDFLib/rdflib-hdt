@@ -12,6 +12,7 @@ HDTStore
 -----------
 
 .. autoclass:: HDTStore
+  :show-inheritance:
   :members:
 
 HDTDocument
@@ -19,6 +20,14 @@ HDTDocument
 
 .. autoclass:: HDTDocument
   :members:
+
+  .. autoattribute:: nb_subjects
+
+  .. autoattribute:: nb_predicates
+
+  .. autoattribute:: nb_objects
+
+  .. autoattribute:: nb_shared
 
 
 HDTIterator

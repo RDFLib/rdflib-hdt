@@ -218,6 +218,12 @@ the RDFlib SPARQL query engine in the context of HDT documents.</p>
   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> knows </span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">friend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calling the <a class="reference internal" href="api.html#rdflib_hdt.optimize_sparql" title="rdflib_hdt.optimize_sparql"><code class="xref py py-func docutils literal notranslate"><span class="pre">rdflib_hdt.optimize_sparql()</span></code></a> function triggers a global modification of the RDFlib SPARQL engine.
+However, executing SPARQL queries against non HDT documents will continue to work as before,
+so you can safely call this function at the beginning of your code.</p>
+</div>
 </div>
 </div>
 

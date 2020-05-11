@@ -3,6 +3,11 @@ API documentation
 
 .. currentmodule:: rdflib_hdt
 
+Global functions
+----------------
+
+.. autofunction:: optimize_sparql
+
 HDTStore
 -----------
 
@@ -24,7 +29,7 @@ HDTIterator
 
 
 HDTJoinIterator
------------
+---------------
 
 .. autoclass:: HDTJoinIterator
   :members:

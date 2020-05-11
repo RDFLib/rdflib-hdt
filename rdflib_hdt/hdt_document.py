@@ -48,7 +48,7 @@ class HDTDocument(hdt.HDTDocument):
         """Transform a triple (pattern) from an RDFlib representation to a TripleID.
 
         It can be used to transform an RDFlib query before feeding it
-        into the :meth`rdflib_hdt.HDTDocument.search_ids` method.
+        into the :py:meth:`rdflib_hdt.HDTDocument.search_ids` method.
 
         Argument:
           - triple: 3-tuple of RDF Terms. Use `None` to indicate wildcards.
@@ -83,7 +83,7 @@ class HDTDocument(hdt.HDTDocument):
     def search_ids(self, query: Union[Optional[int], Optional[int], Optional[int]], limit=0, offset=0) -> Tuple[hdt.TripleIDIterator, int]:
         """Same as :meth:`rdflib_hdt.HDTDocument.search_triples`, but RDF triples are represented as unique ids (from the HDT Dictionnary). Use `None` or `0` to indicate wildcards/variables.
 
-        Mapping between ids and RDF terms is done using the :meth:`rdflib_hdt.HDTDocument.from_tripleid`, :meth:`rdflib_hdt.HDTDocument.to_tripleid`, and :meth:`rdflib_hdt.HDTDocument.term_to_id` methods.
+        Mapping between ids and RDF terms is done using the :meth:`rdflib_hdt.HDTDocument.from_tripleid`, :py:meth:`rdflib_hdt.HDTDocument.to_tripleid`, and :meth:`rdflib_hdt.HDTDocument.term_to_id` methods.
 
         Args:
           - query: A tuple of triple patterns IDs (s, p, o) to search. Use `None` or `0` to indicate wildcards/variables.
@@ -106,7 +106,7 @@ class HDTDocument(hdt.HDTDocument):
         Argument: A set of triple patterns.
 
         Return:
-            A :class:`rdflib_hdt.HDTJoinIterator` which produces :class:`rdflib.query.Results`, per the Python iteration protocol.
+            A :py:class:`rdflib_hdt.HDTJoinIterator` which produces :py:class:`rdflib.query.Results`, per the Python iteration protocol.
         """
         bgp = [(rdflib_to_hdt(s), rdflib_to_hdt(p), rdflib_to_hdt(o)) for s, p, o in patterns]
         join_iterator = super().search_join(bgp)

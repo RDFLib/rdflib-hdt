@@ -12,7 +12,13 @@ from rdflib_hdt.types import BGP
 
 
 def optimize_sparql():
-    """Overrides the RDFlib SPARQL engine to optimize SPARQL query execution over HDT documents."""
+    """Overrides the RDFlib SPARQL engine to optimize SPARQL query execution over HDT documents.
+
+    .. note::
+      Calling this function triggers a global modification of the RDFlib SPARQL engine.
+      However, executing SPARQL queries against non HDT documents will continue to work as before,
+      so you can safely call this function at the beginning of your code.
+    """
     # copy the default RDFlib function for evaluating Basic Graph Patterns
     rdflib_evalBGP = sparql_evaluate.evalBGP
 

@@ -1,3 +1,5 @@
+|rdflib-htd logo|
+
 Read and query HDT document with rdflib
 ======================================================
 
@@ -12,6 +14,7 @@ Getting started
    :maxdepth: 3
 
    installation
+   hdtstore
    hdtdocument
    api
 
@@ -25,4 +28,6 @@ Indices and tables
 .. |Build Status| image:: https://github.com/RDFLib/rdflib-hdt/workflows/Python%20tests/badge.svg
    :target: https://github.com/RDFLib/rdflib-hdt/actions?query=workflow%3A%22Python+tests%22
 .. |PyPI version| image:: https://badge.fury.io/py/hdt.svg
+   :target: https://badge.fury.io/py/hdt
+.. |rdflib-htd logo| image:: _static/rdflib-hdt-250.png
    :target: https://badge.fury.io/py/hdt

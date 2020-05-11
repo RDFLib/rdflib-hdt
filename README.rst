@@ -188,5 +188,5 @@ To handle this, we doubled the API of the HDT document by adding:
    :target: https://github.com/RDFLib/rdflib-hdt/actions?query=workflow%3A%22Python+tests%22
 .. |PyPI version| image:: https://badge.fury.io/py/hdt.svg
    :target: https://badge.fury.io/py/hdt
-.. |rdflib-htd logo| image:: docs/source/_static/rdflib-hdt-250.png
+.. |rdflib-htd logo| image:: https://github.com/RDFLib/rdflib-hdt/blob/master/docs/source/_static/rdflib-hdt-250.png
    :target: https://badge.fury.io/py/hdt

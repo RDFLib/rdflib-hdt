@@ -4,7 +4,7 @@ from setuptools import find_packages, setup, Extension
 from os import listdir
 import pybind11
 
-__rdflib_hdt_version__ = "2.0"
+__rdflib_hdt_version__ = "3.0"
 
 with open('README.rst') as file:
     long_description = file.read()

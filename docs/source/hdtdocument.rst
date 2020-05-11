@@ -35,7 +35,9 @@ Searching for triples
 ^^^^^^^^^^^^^^^^^^^^^^
 
 You can search for all RDF triples in the HDT file matching a triple pattern using :py:meth:`rdflib_hdt.HDTDocument.search`.
-It returns a 2-element tuple, with an *iterator* over the matching RDF triples and the estimated triple pattern *cardinality*.
+It returns a 2-element tuple: an :py:class:`rdflib_hdt.HDTIterator` over the matching RDF triples and the estimated triple pattern *cardinality*.
+
+.. note:: The :py:meth:`rdflib_hdt.HDTDocument.search` method also accepts ``limit`` and ``offset`` parameters, to perform range queries over the matchinf RDF triples.
 
 .. code-block:: python
 
@@ -62,6 +64,8 @@ A typical HDT document encodes a triple's subject, predicate and object as uniqu
 For example, the triple ``("ex:Toto", "ex:type", "ex:Person")`` can be encoded as ``(1, 2, 3)``.
 An :py:class:`rdflib_hdt.HDTDocument` allows for searching RDF triples and retrieving them in this format, using the :py:meth:`rdflib_hdt.HDTDocument.search_ids` method, which takes the same parameters as the :py:meth:`rdflib_hdt.HDTDocument.search` method.
 
+.. note:: You can transform RDF terms or RDF triples to/from TripleIDs using the :meth:`rdflib_hdt.HDTDocument.from_tripleid`, :py:meth:`rdflib_hdt.HDTDocument.to_tripleid`, :meth:`rdflib_hdt.HDTDocument.term_to_id`, and :meth:`rdflib_hdt.HDTDocument.id_to_term` methods.
+
 .. code-block:: python
 
   from rdflib_hdt import HDTDocument
@@ -73,7 +77,10 @@ An :py:class:`rdflib_hdt.HDTDocument` allows for searching RDF triples and retri
     print(s, p, o) # will print 3-element tuples of integers
 
     # convert a triple ID to a string format
-    print(document.from_tripleid(s, p, o))
+    print(f"TripleID {(s, p, o)} = RDF Triple {document.from_tripleid(s, p, o)}")
+
+    # print only the subject
+    print(f"ID {s} = Term {document.id_to_term(s, 0)}")
 
 Join evaluation
 ^^^^^^^^^^^^^^^

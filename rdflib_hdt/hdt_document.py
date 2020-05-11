@@ -10,6 +10,11 @@ from rdflib_hdt.mapping import rdflib_to_hdt, term_to_rdflib
 from rdflib_hdt.types import BGP, SearchQuery, Term
 
 
+class TermKindError(NameError):
+    """An error raised when an invalid Term position identifier is used"""
+    pass
+
+
 class HDTDocument(hdt.HDTDocument):
     """An HDT document, in read-only mode.
 
@@ -61,6 +66,51 @@ class HDTDocument(hdt.HDTDocument):
         obj = super().convert_term(rdflib_to_hdt(triple[2]), hdt.Object) if triple[2] is not None else 0
         return (subj, pred, obj)
 
+    def term_to_id(self, term: Term, kind: int) -> int:
+        """Transform a RDF term from an RDFlib representation to an unique ID, as used in a TripleID.
+
+        It can be used in interaction with the :py:meth:`rdflib_hdt.HDTDocument.search_ids` method.
+
+        Argument:
+          - term: The RDF term to transform.
+          - kind: The term position: `0` for subjects, `1` for predicates and `2` for objects.
+
+        Return:
+            An ID representation of the RDF Term.
+        """
+        str_term = rdflib_to_hdt(term) if term is not None else 0
+        if kind == 0:
+            return super().convert_term(str_term, hdt.IdentifierPosition.Subject)
+        elif kind == 1:
+            return super().convert_term(str_term, hdt.IdentifierPosition.Predicate)
+        elif kind == 2:
+            return super().convert_term(str_term, hdt.IdentifierPosition.Object)
+        else:
+            raise TermKindError(f"The position {kind} is not a valid Term kind (0 for subjects, 1 for predicates and 2 for objects)")
+
+    def id_to_term(self, term_id: int, kind: int) -> Term:
+        """Transform a RDF term from an unique ID, as used in a TripleID, to an RDFlib representation.
+
+        It can be used in interaction with the :py:meth:`rdflib_hdt.HDTDocument.search_ids` method.
+
+        Argument:
+          - term_id: The Term ID to transform.
+          - kind: The term position: `0` for subjects, `1` for predicates and `2` for objects.
+
+        Return:
+            An RDFlib representation of the RDF Term.
+        """
+        term = None
+        if kind == 0:
+            term = super().convert_id(term_id, hdt.IdentifierPosition.Subject)
+        elif kind == 1:
+            term = super().convert_id(term_id, hdt.IdentifierPosition.Predicate)
+        elif kind == 2:
+            term = super().convert_id(term_id, hdt.IdentifierPosition.Object)
+        else:
+            raise TermKindError(f"The position {kind} is not a valid Term kind (0 for subjects, 1 for predicates and 2 for objects)")
+        return term_to_rdflib(term)
+
     def search(self, query: SearchQuery, limit=0, offset=0) -> Tuple[HDTIterator, int]:
         """Search for RDF triples matching the query triple pattern, with an optional limit and offset. Use `None` for wildcards/variables.
 
@@ -83,7 +133,7 @@ class HDTDocument(hdt.HDTDocument):
     def search_ids(self, query: Union[Optional[int], Optional[int], Optional[int]], limit=0, offset=0) -> Tuple[hdt.TripleIDIterator, int]:
         """Same as :meth:`rdflib_hdt.HDTDocument.search_triples`, but RDF triples are represented as unique ids (from the HDT Dictionnary). Use `None` or `0` to indicate wildcards/variables.
 
-        Mapping between ids and RDF terms is done using the :meth:`rdflib_hdt.HDTDocument.from_tripleid`, :py:meth:`rdflib_hdt.HDTDocument.to_tripleid`, and :meth:`rdflib_hdt.HDTDocument.term_to_id` methods.
+        Mapping between ids and RDF terms is done using the :meth:`rdflib_hdt.HDTDocument.from_tripleid`, :py:meth:`rdflib_hdt.HDTDocument.to_tripleid`, :meth:`rdflib_hdt.HDTDocument.term_to_id`, and :meth:`rdflib_hdt.HDTDocument.id_to_term` methods.
 
         Args:
           - query: A tuple of triple patterns IDs (s, p, o) to search. Use `None` or `0` to indicate wildcards/variables.

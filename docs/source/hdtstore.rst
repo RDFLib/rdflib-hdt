@@ -59,3 +59,8 @@ the RDFlib SPARQL query engine in the context of HDT documents.
 
    for row in qres:
      print(f"{row.name} knows {row.friend}")
+
+.. note::
+      Calling the :py:func:`rdflib_hdt.optimize_sparql` function triggers a global modification of the RDFlib SPARQL engine.
+      However, executing SPARQL queries against non HDT documents will continue to work as before,
+      so you can safely call this function at the beginning of your code.

@@ -5,8 +5,7 @@ Loading HDT files
 ^^^^^^^^^^^^^^^^^
 
 The main class for directly manipulating HDT document using rdflib_hdt is :py:class:`rdflib_hdt.HDTDocument`.
-Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.
-
+Upon creation, it searches for an index file in the same directory than the HDT file you wish to load.
 For example, if you load a file */home/awesome-user/test.hdt*, :py:class:`rdflib_hdt.HDTDocument` will look for the index file
 */home/awesome-user/test.hdt.index.v1-1*.
 
@@ -60,7 +59,7 @@ It returns a 2-element tuple: an :py:class:`rdflib_hdt.HDTIterator` over the mat
 Searching for triple IDs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A typical HDT document encodes a triple's subject, predicate and object as unique integers, named **TripleID**.
+A typical HDT document encodes a triple's subject, predicate, and object as unique integers, named **TripleID**.
 For example, the triple ``("ex:Toto", "ex:type", "ex:Person")`` can be encoded as ``(1, 2, 3)``.
 An :py:class:`rdflib_hdt.HDTDocument` allows for searching RDF triples and retrieving them in this format, using the :py:meth:`rdflib_hdt.HDTDocument.search_ids` method, which takes the same parameters as the :py:meth:`rdflib_hdt.HDTDocument.search` method.
 
@@ -111,7 +110,7 @@ An HDT document also provides support for evaluating joins over a set of triples
 Ordering
 ^^^^^^^^^^^
 
-When searching for triples (either in string or triple id format), results are returned ordred by (subject, predicate, object).
+When searching for triples (either in a string or TripleID format), results are ordered by (subject, predicate, object).
 However, this order is **not** an order on string values, but an order on **triple ids**.
 For example, ``("ex:2", "ex:type", "ex:Person") < ("ex:1", "ex:type", "ex:Person")``,
 because their triple ids counterparts are ``(1, 2, 3)`` and ``(2, 2, 3)``.
@@ -121,19 +120,16 @@ For more details about this topic, please refer to the `HDT journal article <htt
 Handling non UTF-8 strings in Python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the HDT document has been encoded with a non UTF-8 encoding the
-previous code won’t work correctly and will result in a
-``UnicodeDecodeError``. More details on how to convert string to str
+If the HDT document is encoded without valid UTF-8 encoding and it does not run in *safe mode*, querying the document may raise an
+``UnicodeDecodeError``. More details on how to convert string
 from C++ to Python `here`_
 
-To handle this we doubled the API of the HDT document by adding:
+To allow fine control over string conversion in this case, we doubled the API of the HDT document by adding the following methods (Parameters and documentation are the same as their standard counterparts).
 
 - :py:meth:`rdflib_hdt.HDTDocument.search_triples_bytes` returns an iterator of triples as ``(py::bytes, py::bytes, py::bytes)``
 - :py:meth:`rdflib_hdt.HDTDocument.search_join_bytes` returns an iterator of sets of solutions mapping as ``py::set(py::bytes, py::bytes)``
 - :py:meth:`rdflib_hdt.HDTDocument.convert_tripleid_bytes` returns a triple as: ``(py::bytes, py::bytes, py::bytes)``
 - :py:meth:`rdflib_hdt.HDTDocument.convert_id_bytes` returns a ``py::bytes``
-
-**Parameters and documentation are the same as the standard version**
 
 .. code:: python
 

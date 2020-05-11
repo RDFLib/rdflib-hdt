@@ -5,8 +5,7 @@ Getting started
 ---------------
 
 The primary way of using ``rdflib-hdt`` is the :py:class:`rdflib_hdt.HDTStore` class.
-Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.
-
+Upon creation, it searches for an index file in the same directory than the HDT file you wish to load.
 For example, if you load a file */home/awesome-user/test.hdt*, :py:class:`rdflib_hdt.HDTDocument` will look for the index file
 */home/awesome-user/test.hdt.index.v1-1*.
 
@@ -62,5 +61,5 @@ the RDFlib SPARQL query engine in the context of HDT documents.
 
 .. note::
       Calling the :py:func:`rdflib_hdt.optimize_sparql` function triggers a global modification of the RDFlib SPARQL engine.
-      However, executing SPARQL queries against non HDT documents will continue to work as before,
+      However, executing SPARQL queries using other RDFlib stores will continue to work as before,
       so you can safely call this function at the beginning of your code.

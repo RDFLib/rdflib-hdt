@@ -16,7 +16,7 @@ def optimize_sparql():
 
     .. note::
       Calling this function triggers a global modification of the RDFlib SPARQL engine.
-      However, executing SPARQL queries against non HDT documents will continue to work as before,
+      However, executing SPARQL queries using other RDFlib stores will continue to work as before,
       so you can safely call this function at the beginning of your code.
     """
     # copy the default RDFlib function for evaluating Basic Graph Patterns

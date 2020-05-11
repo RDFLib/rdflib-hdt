@@ -168,8 +168,8 @@
 <div class="section" id="loading-hdt-files">
 <h2>Loading HDT files<a class="headerlink" href="#loading-hdt-files" title="Permalink to this headline">¶</a></h2>
 <p>The main class for directly manipulating HDT document using rdflib_hdt is <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="rdflib_hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument</span></code></a>.
-Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.</p>
-<p>For example, if you load a file <em>/home/awesome-user/test.hdt</em>, <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="rdflib_hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument</span></code></a> will look for the index file
+Upon creation, it searches for an index file in the same directory than the HDT file you wish to load.
+For example, if you load a file <em>/home/awesome-user/test.hdt</em>, <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="rdflib_hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument</span></code></a> will look for the index file
 <em>/home/awesome-user/test.hdt.index.v1-1</em>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -222,7 +222,7 @@ It returns a 2-element tuple: an <a class="reference internal" href="api.html#rd
 </div>
 <div class="section" id="searching-for-triple-ids">
 <h2>Searching for triple IDs<a class="headerlink" href="#searching-for-triple-ids" title="Permalink to this headline">¶</a></h2>
-<p>A typical HDT document encodes a triple’s subject, predicate and object as unique integers, named <strong>TripleID</strong>.
+<p>A typical HDT document encodes a triple’s subject, predicate, and object as unique integers, named <strong>TripleID</strong>.
 For example, the triple <code class="docutils literal notranslate"><span class="pre">(&quot;ex:Toto&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code> can be encoded as <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.
 An <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="rdflib_hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument</span></code></a> allows for searching RDF triples and retrieving them in this format, using the <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument.search_ids" title="rdflib_hdt.HDTDocument.search_ids"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.search_ids()</span></code></a> method, which takes the same parameters as the <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument.search" title="rdflib_hdt.HDTDocument.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.search()</span></code></a> method.</p>
 <div class="admonition note">
@@ -271,7 +271,7 @@ An <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="r
 </div>
 <div class="section" id="ordering">
 <h2>Ordering<a class="headerlink" href="#ordering" title="Permalink to this headline">¶</a></h2>
-<p>When searching for triples (either in string or triple id format), results are returned ordred by (subject, predicate, object).
+<p>When searching for triples (either in a string or TripleID format), results are ordered by (subject, predicate, object).
 However, this order is <strong>not</strong> an order on string values, but an order on <strong>triple ids</strong>.
 For example, <code class="docutils literal notranslate"><span class="pre">(&quot;ex:2&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span> <span class="pre">&lt;</span> <span class="pre">(&quot;ex:1&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code>,
 because their triple ids counterparts are <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code> and <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.</p>
@@ -279,18 +279,16 @@ because their triple ids counterparts are <code class="docutils literal notransl
 </div>
 <div class="section" id="handling-non-utf-8-strings-in-python">
 <h2>Handling non UTF-8 strings in Python<a class="headerlink" href="#handling-non-utf-8-strings-in-python" title="Permalink to this headline">¶</a></h2>
-<p>If the HDT document has been encoded with a non UTF-8 encoding the
-previous code won’t work correctly and will result in a
-<code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code>. More details on how to convert string to str
+<p>If the HDT document is encoded without valid UTF-8 encoding and it does not run in <em>safe mode</em>, querying the document may raise an
+<code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code>. More details on how to convert string
 from C++ to Python <a class="reference external" href="https://pybind11.readthedocs.io/en/stable/advanced/cast/strings.html">here</a></p>
-<p>To handle this we doubled the API of the HDT document by adding:</p>
+<p>To allow fine control over string conversion in this case, we doubled the API of the HDT document by adding the following methods (Parameters and documentation are the same as their standard counterparts).</p>
 <ul class="simple">
 <li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.search_triples_bytes()</span></code> returns an iterator of triples as <code class="docutils literal notranslate"><span class="pre">(py::bytes,</span> <span class="pre">py::bytes,</span> <span class="pre">py::bytes)</span></code></p></li>
 <li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.search_join_bytes()</span></code> returns an iterator of sets of solutions mapping as <code class="docutils literal notranslate"><span class="pre">py::set(py::bytes,</span> <span class="pre">py::bytes)</span></code></p></li>
 <li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.convert_tripleid_bytes()</span></code> returns a triple as: <code class="docutils literal notranslate"><span class="pre">(py::bytes,</span> <span class="pre">py::bytes,</span> <span class="pre">py::bytes)</span></code></p></li>
 <li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.convert_id_bytes()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">py::bytes</span></code></p></li>
 </ul>
-<p><strong>Parameters and documentation are the same as the standard version</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdflib_hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
 
  <span class="c1"># Load an HDT file.</span>

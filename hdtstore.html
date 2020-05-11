@@ -164,8 +164,8 @@
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>The primary way of using <code class="docutils literal notranslate"><span class="pre">rdflib-hdt</span></code> is the <a class="reference internal" href="api.html#rdflib_hdt.HDTStore" title="rdflib_hdt.HDTStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTStore</span></code></a> class.
-Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.</p>
-<p>For example, if you load a file <em>/home/awesome-user/test.hdt</em>, <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="rdflib_hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument</span></code></a> will look for the index file
+Upon creation, it searches for an index file in the same directory than the HDT file you wish to load.
+For example, if you load a file <em>/home/awesome-user/test.hdt</em>, <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="rdflib_hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument</span></code></a> will look for the index file
 <em>/home/awesome-user/test.hdt.index.v1-1</em>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -221,7 +221,7 @@ the RDFlib SPARQL query engine in the context of HDT documents.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Calling the <a class="reference internal" href="api.html#rdflib_hdt.optimize_sparql" title="rdflib_hdt.optimize_sparql"><code class="xref py py-func docutils literal notranslate"><span class="pre">rdflib_hdt.optimize_sparql()</span></code></a> function triggers a global modification of the RDFlib SPARQL engine.
-However, executing SPARQL queries against non HDT documents will continue to work as before,
+However, executing SPARQL queries using other RDFlib stores will continue to work as before,
 so you can safely call this function at the beginning of your code.</p>
 </div>
 </div>

@@ -5,6 +5,14 @@ Getting started
 ---------------
 
 The primary way of using ``rdflib-hdt`` is the :py:class:`rdflib_hdt.HDTStore` class.
+Upon creation, it search for an index file in the same dicrectory than the HDT file you wish to load.
+
+For example, if you load a file */home/awesome-user/test.hdt*, :py:class:`rdflib_hdt.HDTDocument` will look for the index file
+*/home/awesome-user/test.hdt.index.v1-1*.
+
+.. warning:: By default, an HDTStore discards RDF Terms with invalid UTF-8 encoding. You can change this behavior with the `safe_mode` parameter of the constructor.
+
+.. note:: Missing indexes are generated automatically, but be careful, as it requires to load all HDT triples in memory!
 
 .. code-block:: python
 

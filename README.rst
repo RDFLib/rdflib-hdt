@@ -31,10 +31,10 @@ PyPi installation (recommended)
 .. code-block:: bash
 
    # you can install using pip
-   pip install rdflib_hdt
+   pip install rdflib-hdt
 
    # or you can use pipenv
-   pipenv install rdflib_hdt
+   pipenv install rdflib-hdt
 
 Manual installation
 -------------------

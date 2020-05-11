@@ -25,10 +25,10 @@ Installation using [pipenv](https://github.com/pypa/pipenv) or a [virtualenv](ht
 
 ```bash
 # you can install using pip
-pip install rdflib_hdt
+pip install rdflib-hdt
 
 # or you can use pipenv
-pipenv install rdflib_hdt
+pipenv install rdflib-hdt
 ```
 
 ## Manual installation

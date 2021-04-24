@@ -1,0 +1,27 @@
+name: ⏳ Tests
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }} 🐍
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Setup pipenv
+      uses: dschep/install-pipenv-action@v1
+    - name: Install package
+      run: |
+        pipenv install --dev
+        ./install.sh 
+    - name: Test with pytest 
+      run: |
+        pipenv run pytest

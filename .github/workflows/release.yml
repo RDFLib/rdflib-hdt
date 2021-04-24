@@ -1,0 +1,30 @@
+name: 🚀 Publish of PyPi
+on:
+  release:
+    types: [created]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }} 🐍
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Setup pipenv
+      uses: dschep/install-pipenv-action@v1
+    - name: Install package
+      run: |
+        pipenv install --dev
+        ./install.sh 
+    - name: Prepare release for PyPi
+      run: |
+        ./build-release.sh
+    - name: Publish package on PyPi
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        user: __token__
+        password: ${{ secrets.pypi_password }}

@@ -1,0 +1,31 @@
+name: 🚀 Deploy documentation on gh-pages
+on:
+  release:
+    types: [created]
+jobs:
+  doc:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }} 🐍
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Setup pipenv
+      uses: dschep/install-pipenv-action@v1
+    - name: Install package
+      run: |
+        pipenv install --dev
+        ./install.sh 
+    - name: Build documentation
+      run: |
+        cd docs && pipenv run make html
+    - name: Deploy documentation on Github pages
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: docs/build/html

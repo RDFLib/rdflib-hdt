@@ -30,7 +30,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         hdt-tag: ${{ matrix.hdt-version }}
-        source-path: ./hdt-cpp-1.3.3
+        source-path: ./
     - name: Install dependencies
       # if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: pipenv install --dev

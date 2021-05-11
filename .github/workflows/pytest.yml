@@ -19,12 +19,12 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Setup pipenv
       uses: dschep/install-pipenv-action@v1
-    # - name: Cache pipenv dependencies
-    #   uses: actions/cache@v2
-    #   id: cache-pipenv
-    #   with:
-    #     path: ~/.local/share/virtualenvs
-    #     key: ${{ runner.os }}-${{ matrix.python-version }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+    - name: Cache pipenv dependencies
+      uses: actions/cache@v2
+      id: cache-pipenv
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-${{ matrix.python-version }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
     - name: Setup HDT ${{ matrix.hdt-version }}
       uses: Callidon/setup-hdt-action@v1
       with:
@@ -32,11 +32,9 @@ jobs:
         hdt-tag: ${{ matrix.hdt-version }}
         source-path: ./
     - name: Install dependencies
-      # if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: pipenv install --dev
     - name: Compile & install package
-      run: |
-        ls ./
-        pipenv run python setup.py install
+      run: pipenv run python setup.py install
     - name: Test with pytest
       run: pipenv run pytest

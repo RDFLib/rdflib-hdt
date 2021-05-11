@@ -11,15 +11,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }} 🐍
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
     - name: Setup pipenv
       uses: dschep/install-pipenv-action@v1
-    - name: Install package
-      run: |
-        pipenv install --dev
-        ./install.sh 
+    - name: Setup HDT v1.3.3
+      uses: Callidon/setup-hdt-action@v1.2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        hdt-tag: v1.3.3
+        source-path: ./
+    - name: Install dependencies
+      run: pipenv install --dev
+    - name: Compile & install package
+      run: pipenv run python setup.py install
     - name: Build documentation
       run: |
         cd docs && pipenv run make html

@@ -22,6 +22,7 @@ jobs:
       matrix:
         language: [ 'cpp', 'python' ]
         python-version: [3.7]
+        hdt-version: ['v1.3.3']
 
     steps:
     - name: Checkout repository
@@ -37,14 +38,20 @@ jobs:
         # Prefix the list here with "+" to use these queries and those in the config file.
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
     - name: Set up Python ${{ matrix.python-version }} 🐍
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
     - name: Setup pipenv
       uses: dschep/install-pipenv-action@v1
-    - name: Install package
-      run: |
-        pipenv install --dev
-        ./install.sh 
+    - name: Setup HDT ${{ matrix.hdt-version }}
+      uses: Callidon/setup-hdt-action@v1.2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        hdt-tag: ${{ matrix.hdt-version }}
+        source-path: ./
+    - name: Install dependencies
+      run: pipenv install --dev
+    - name: Compile & install package
+      run: pipenv run python setup.py install
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1

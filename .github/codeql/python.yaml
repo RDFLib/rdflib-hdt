@@ -1,0 +1,7 @@
+name: "rdflib-hdt CodeQL Python config"
+
+queries:
+  - uses: security-and-quality
+
+paths:
+  - rdflib_hdt

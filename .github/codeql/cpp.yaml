@@ -1,0 +1,8 @@
+name: "rdflib-hdt CodeQL C++ config"
+
+queries:
+  - uses: security-and-quality
+
+paths:
+  - src
+  - include

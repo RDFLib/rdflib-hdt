@@ -2,14 +2,11 @@
 # Author: Thomas MINIER - MIT License 2017-2019
 from setuptools import find_packages, setup, Extension
 from os import listdir, remove
-from shutil import unpack_archive, move,rmtree
+from shutil import unpack_archive, move, rmtree
 import urllib.request
 import pybind11
 
 __rdflib_hdt_version__ = "3.0"
-
-with open('README.rst') as file:
-    long_description = file.read()
 
 def download_hdt_and_unzip():
     print("Downloading HDT...")

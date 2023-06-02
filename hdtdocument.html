@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Low-level Usage &mdash; rdflib-hdt 1.0.0 documentation</title>
@@ -163,9 +164,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="low-level-usage">
+  <section id="low-level-usage">
 <h1>Low-level Usage<a class="headerlink" href="#low-level-usage" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="loading-hdt-files">
+<section id="loading-hdt-files">
 <h2>Loading HDT files<a class="headerlink" href="#loading-hdt-files" title="Permalink to this headline">¶</a></h2>
 <p>The main class for directly manipulating HDT document using rdflib_hdt is <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="rdflib_hdt.HDTDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument</span></code></a>.
 Upon creation, it searches for an index file in the same directory than the HDT file you wish to load.
@@ -193,8 +194,8 @@ For example, if you load a file <em>/home/awesome-user/test.hdt</em>, <a class="
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of shared subject-object: </span><span class="si">{</span><span class="n">document</span><span class="o">.</span><span class="n">nb_shared</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="searching-for-triples">
+</section>
+<section id="searching-for-triples">
 <h2>Searching for triples<a class="headerlink" href="#searching-for-triples" title="Permalink to this headline">¶</a></h2>
 <p>You can search for all RDF triples in the HDT file matching a triple pattern using <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument.search" title="rdflib_hdt.HDTDocument.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rdflib_hdt.HDTDocument.search()</span></code></a>.
 It returns a 2-element tuple: an <a class="reference internal" href="api.html#rdflib_hdt.HDTIterator" title="rdflib_hdt.HDTIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTIterator</span></code></a> over the matching RDF triples and the estimated triple pattern <em>cardinality</em>.</p>
@@ -219,8 +220,8 @@ It returns a 2-element tuple: an <a class="reference internal" href="api.html#rd
 <span class="c1"># etc ...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="searching-for-triple-ids">
+</section>
+<section id="searching-for-triple-ids">
 <h2>Searching for triple IDs<a class="headerlink" href="#searching-for-triple-ids" title="Permalink to this headline">¶</a></h2>
 <p>A typical HDT document encodes a triple’s subject, predicate, and object as unique integers, named <strong>TripleID</strong>.
 For example, the triple <code class="docutils literal notranslate"><span class="pre">(&quot;ex:Toto&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code> can be encoded as <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.
@@ -244,8 +245,8 @@ An <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="r
   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ID </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2"> = Term </span><span class="si">{</span><span class="n">document</span><span class="o">.</span><span class="n">id_to_term</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="join-evaluation">
+</section>
+<section id="join-evaluation">
 <h2>Join evaluation<a class="headerlink" href="#join-evaluation" title="Permalink to this headline">¶</a></h2>
 <p>An HDT document also provides support for evaluating joins over a set of triples patterns.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdflib_hdt</span> <span class="kn">import</span> <span class="n">HDTDocument</span>
@@ -268,16 +269,16 @@ An <a class="reference internal" href="api.html#rdflib_hdt.HDTDocument" title="r
  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> knows </span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">friend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ordering">
+</section>
+<section id="ordering">
 <h2>Ordering<a class="headerlink" href="#ordering" title="Permalink to this headline">¶</a></h2>
 <p>When searching for triples (either in a string or TripleID format), results are ordered by (subject, predicate, object).
 However, this order is <strong>not</strong> an order on string values, but an order on <strong>triple ids</strong>.
 For example, <code class="docutils literal notranslate"><span class="pre">(&quot;ex:2&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span> <span class="pre">&lt;</span> <span class="pre">(&quot;ex:1&quot;,</span> <span class="pre">&quot;ex:type&quot;,</span> <span class="pre">&quot;ex:Person&quot;)</span></code>,
 because their triple ids counterparts are <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code> and <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>.</p>
 <p>For more details about this topic, please refer to the <a class="reference external" href="http://www.imap.websemanticsjournal.org/preprints/index.php/ps/article/viewFile/328/333">HDT journal article</a>.</p>
-</div>
-<div class="section" id="handling-non-utf-8-strings-in-python">
+</section>
+<section id="handling-non-utf-8-strings-in-python">
 <h2>Handling non UTF-8 strings in Python<a class="headerlink" href="#handling-non-utf-8-strings-in-python" title="Permalink to this headline">¶</a></h2>
 <p>If the HDT document is encoded without valid UTF-8 encoding and it does not run in <em>safe mode</em>, querying the document may raise an
 <code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code>. More details on how to convert string
@@ -306,8 +307,8 @@ from C++ to Python <a class="reference external" href="https://pybind11.readthed
     <span class="k">pass</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Querying HDT documents &mdash; rdflib-hdt 1.0.0 documentation</title>
@@ -159,9 +160,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="querying-hdt-documents">
+  <section id="querying-hdt-documents">
 <h1>Querying HDT documents<a class="headerlink" href="#querying-hdt-documents" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="getting-started">
+<section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>The primary way of using <code class="docutils literal notranslate"><span class="pre">rdflib-hdt</span></code> is the <a class="reference internal" href="api.html#rdflib_hdt.HDTStore" title="rdflib_hdt.HDTStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">rdflib_hdt.HDTStore</span></code></a> class.
 Upon creation, it searches for an index file in the same directory than the HDT file you wish to load.
@@ -191,8 +192,8 @@ For example, if you load a file <em>/home/awesome-user/test.hdt</em>, <a class="
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of shared subject-object: </span><span class="si">{</span><span class="n">store</span><span class="o">.</span><span class="n">nb_shared</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="executing-sparql-queries">
+</section>
+<section id="executing-sparql-queries">
 <h2>Executing SPARQL queries<a class="headerlink" href="#executing-sparql-queries" title="Permalink to this headline">¶</a></h2>
 <p>Using the RDFlib API, you can also <a class="reference external" href="https://rdflib.readthedocs.io/en/stable/intro_to_sparql.html">execute SPARQL queries</a> over an HDT document.
 If you do so, we recommend that you first call the <a class="reference internal" href="api.html#rdflib_hdt.optimize_sparql" title="rdflib_hdt.optimize_sparql"><code class="xref py py-func docutils literal notranslate"><span class="pre">rdflib_hdt.optimize_sparql()</span></code></a> function, which optimize
@@ -224,8 +225,8 @@ the RDFlib SPARQL query engine in the context of HDT documents.</p>
 However, executing SPARQL queries using other RDFlib stores will continue to work as before,
 so you can safely call this function at the beginning of your code.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

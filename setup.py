@@ -1,14 +1,21 @@
 # setup.py
 # Author: Thomas MINIER - MIT License 2017-2019
 from setuptools import find_packages, setup, Extension
-from os import listdir
+from os import listdir, remove
+from shutil import unpack_archive, move, rmtree
+import urllib.request
 import pybind11
 
 __rdflib_hdt_version__ = "3.0"
 
-with open('README.rst') as file:
-    long_description = file.read()
+def download_hdt_and_unzip():
+    print("Downloading HDT...")
+    urllib.request.urlretrieve("https://github.com/rdfhdt/hdt-cpp/archive/v1.3.3.zip", "v1.3.3.zip")
+    unpack_archive("v1.3.3.zip", "tmp")
+    move("tmp/hdt-cpp-1.3.3", "hdt-cpp-1.3.3")
+    rmtree("tmp")
 
+download_hdt_and_unzip()
 
 def list_files(path: str, extension=".cpp", exclude="S.cpp"):
     """List paths to all files that ends with a given extension"""
@@ -75,15 +82,11 @@ hdt_extension = Extension("hdt",
                           language='c++')
 
 setup(
-    name="rdflib_hdt",
     version=__rdflib_hdt_version__,
-    author="Thomas Minier",
-    author_email="tminier01@gmail.com",
-    url="https://github.com/RDFLib/rdflib-hdt",
-    description="A Store back-end for rdflib to allow for reading and querying HDT documents",
-    long_description=long_description,
-    keywords=["rdflib", "hdt", "rdf", "semantic web", "search"],
-    license="MIT",
     packages=find_packages(exclude=["tests"]),
     ext_modules=[hdt_extension]
 )
+
+print("Cleaning up...")
+rmtree("hdt-cpp-1.3.3")
+remove("v1.3.3.zip")

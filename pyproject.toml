@@ -1,0 +1,17 @@
+[project]
+name = "rdflib_hdt"
+authors = [{ name = "Thomas Minier", email = "tminier01@gmail.com" }]
+description = "A Store back-end for rdflib to allow for reading and querying HDT documents"
+keywords = ["rdflib", "hdt", "rdf", "semantic web", "search"]
+readme = "README.rst"
+license = { text = "MIT License" }
+dynamic = ["version"]
+dependencies = ["rdflib>=4.2", "pybind11>=2.2.4"]
+
+[project.urls]
+homepage = "https://rdflib.dev/rdflib-hdt"
+repository = "https://github.com/RDFLib/rdflib-hdt.git"
+
+[build-system]
+requires = ["pybind11", "setuptools >= 40.8.0", "wheel"]
+build-backend = "setuptools.build_meta"

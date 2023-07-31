@@ -4,14 +4,14 @@ Low-level Usage
 Loading HDT files
 ^^^^^^^^^^^^^^^^^
 
-The main class for directly manipulating HDT document using rdflib_hdt is :py:class:`rdflib_hdt.HDTDocument`.
+The main class for directly manipulating an HDT document using rdflib_hdt is :py:class:`rdflib_hdt.HDTDocument`.
 Upon creation, it searches for an index file in the same directory than the HDT file you wish to load.
 For example, if you load a file */home/awesome-user/test.hdt*, :py:class:`rdflib_hdt.HDTDocument` will look for the index file
 */home/awesome-user/test.hdt.index.v1-1*.
 
 .. warning:: By default, an HDTDocument discards RDF Terms with invalid UTF-8 encoding. You can change this behavior with the `safe_mode` parameter of the constructor.
 
-.. note:: Missing indexes are generated automatically, but be careful, as it requires to load all HDT triples in memory!
+.. note:: Missing indexes are generated automatically, but be careful, as it requires loading all HDT triples in memory!
 
 
 .. code-block:: python
@@ -36,7 +36,7 @@ Searching for triples
 You can search for all RDF triples in the HDT file matching a triple pattern using :py:meth:`rdflib_hdt.HDTDocument.search`.
 It returns a 2-element tuple: an :py:class:`rdflib_hdt.HDTIterator` over the matching RDF triples and the estimated triple pattern *cardinality*.
 
-.. note:: The :py:meth:`rdflib_hdt.HDTDocument.search` method also accepts ``limit`` and ``offset`` parameters, to perform range queries over the matchinf RDF triples.
+.. note:: The :py:meth:`rdflib_hdt.HDTDocument.search` method also accepts ``limit`` and ``offset`` parameters, to perform range queries over the matching RDF triples.
 
 .. code-block:: python
 

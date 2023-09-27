@@ -182,7 +182,7 @@ For example, if you load a file <em>/home/awesome-user/test.hdt</em>, <a class="
 
 <span class="c1"># Load an HDT file. Missing indexes are generated automatically</span>
 <span class="c1"># You can provide the index file by putting them in the same directory than the HDT file.</span>
-<span class="n">store</span> <span class="o">=</span> <span class="n">HDTGraph</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">HDTStore</span><span class="p">(</span><span class="s2">&quot;test.hdt&quot;</span><span class="p">)</span>
 
 <span class="c1"># Display some metadata about the HDT document itself</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of RDF triples: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">store</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

@@ -21,7 +21,7 @@ For example, if you load a file */home/awesome-user/test.hdt*, :py:class:`rdflib
 
    # Load an HDT file. Missing indexes are generated automatically
    # You can provide the index file by putting them in the same directory than the HDT file.
-   store = HDTGraph("test.hdt")
+   store = HDTStore("test.hdt")
 
    # Display some metadata about the HDT document itself
    print(f"Number of RDF triples: {len(store)}")

@@ -6,7 +6,7 @@ from shutil import unpack_archive, move, rmtree
 import urllib.request
 import pybind11
 
-__rdflib_hdt_version__ = "3.1"
+__rdflib_hdt_version__ = "3.2"
 
 def download_hdt_and_unzip():
     print("Downloading HDT...")

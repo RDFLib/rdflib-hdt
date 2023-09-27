@@ -36,7 +36,7 @@ class HDTStore(Store):
         """Return True if the HDT store ignores Unicode errors, False otherwise."""
         return self._hdt_document.is_safe()
 
-    def __len__(self) -> int:
+    def __len__(self, context) -> int:
         """The number of RDF triples in the HDT store."""
         return self._hdt_document.total_triples
 

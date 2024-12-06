@@ -2,7 +2,7 @@
 
 |Build Status| |PyPI version|
 
-A Store back-end for `rdflib <https://github.com/RDFLib>`_ to allow for reading and querying HDT documents.
+A Store back-end for `rdflib <https://github.com/RDFLib>`_ to allow for reading and querying `HDT <https://en.wikipedia.org/wiki/HDT_(data_format)>`_ documents.
 
 `Online Documentation <https://rdflib.dev/rdflib-hdt/>`_
 

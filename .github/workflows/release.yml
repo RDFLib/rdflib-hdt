@@ -1,36 +1,93 @@
-name: 🚀 Publish to PyPi
-on:
-  release:
-    types: [created]
+name: Publish Python 🐍 distribution 📦 to PyPI
+on: push
 jobs:
-  publish:
+  build:
+    name: Build distribution 📦
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.7]
-        hdt-version: ['v1.3.3']
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }} 🐍
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
       with:
-        python-version: ${{ matrix.python-version }}
-    - name: Setup pipenv
-      uses: dschep/install-pipenv-action@v1
-    - name: Setup HDT ${{ matrix.hdt-version }}
-      uses: Callidon/setup-hdt-action@v1.2
+        persist-credentials: false
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        hdt-tag: ${{ matrix.hdt-version }}
-        source-path: ./
-    - name: Install dependencies
-      run: pipenv install --dev
-    - name: Compile & install package
-      run: pipenv run python setup.py install
-    - name: Prepare release for PyPi
-      run: pipenv run python setup.py sdist
-    - name: Publish package on PyPi
+        python-version: "3.x"
+    - name: Install pypa/build
+      run: >-
+        python3 -m
+        pip install
+        build
+        --user
+    - name: Build a binary wheel and a source tarball
+      run: python3 -m build
+    - name: Store the distribution packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
+  publish-to-pypi:
+    name: >-
+      Publish Python 🐍 distribution 📦 to PyPI
+    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
+    needs:
+    - build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/rdflib-hdt
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    name: >-
+      Sign the Python 🐍 distribution 📦 with Sigstore
+      and upload them to GitHub Release
+    needs:
+    - publish-to-pypi
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # IMPORTANT: mandatory for making GitHub Releases
+      id-token: write  # IMPORTANT: mandatory for sigstore
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
       with:
-        user: __token__
-        password: ${{ secrets.pypi_password }}
+        name: python-package-distributions
+        path: dist/
+    - name: Sign the dists with Sigstore
+      uses: sigstore/gh-action-sigstore-python@v3.0.0
+      with:
+        inputs: >-
+          ./dist/*.tar.gz
+          ./dist/*.whl
+    - name: Create GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: >-
+        gh release create
+        "$GITHUB_REF_NAME"
+        --repo "$GITHUB_REPOSITORY"
+        --notes ""
+    - name: Upload artifact signatures to GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      # Upload to GitHub Release using the `gh` CLI.
+      # `dist/` contains the built packages, and the
+      # sigstore-produced signatures and certificates.
+      run: >-
+        gh release upload
+        "$GITHUB_REF_NAME" dist/**
+        --repo "$GITHUB_REPOSITORY"

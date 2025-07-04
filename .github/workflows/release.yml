@@ -13,6 +13,10 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
+    - name: Setup C++
+      uses: aminya/setup-cpp@v1
+      with:
+        compiler: llvm
     - name: Install pypa/build
       run: >-
         python3 -m
@@ -21,6 +25,9 @@ jobs:
         --user
     - name: Build a binary wheel and a source tarball
       run: python3 -m build
+      env:
+        # use llvm as compiler, as github actions uses g++ by default
+        CC: llvm
     - name: Store the distribution packages
       uses: actions/upload-artifact@v4
       with:

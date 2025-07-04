@@ -16,7 +16,7 @@ jobs:
     - name: Setup C++
       uses: aminya/setup-cpp@v1
       with:
-        compiler: llvm apple-clang
+        compiler: llvm
     - name: Install pypa/build
       run: >-
         python3 -m

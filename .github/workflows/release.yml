@@ -16,7 +16,7 @@ jobs:
     - name: Setup C++
       uses: aminya/setup-cpp@v1
       with:
-        compiler: apple-clang
+        compiler: gcc
     - name: Install pypa/build
       run: >-
         python3 -m
@@ -25,9 +25,6 @@ jobs:
         --user
     - name: Build a binary wheel and a source tarball
       run: python3 -m build
-      env:
-        # use clang++ as compiler, as github actions uses g++ by default
-        CC: clang++
     - name: Store the distribution packages
       uses: actions/upload-artifact@v4
       with:

@@ -17,6 +17,9 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install pybind11 dependencies
+      run: sudo apt install -y python3-dev cmake
+
     - name: Setup pipenv
       uses: dschep/install-pipenv-action@v1
     - name: Cache pipenv dependencies
@@ -25,12 +28,14 @@ jobs:
       with:
         path: ~/.local/share/virtualenvs
         key: ${{ runner.os }}-${{ matrix.python-version }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+
     - name: Setup HDT ${{ matrix.hdt-version }}
       uses: Callidon/setup-hdt-action@v1.2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         hdt-tag: ${{ matrix.hdt-version }}
         source-path: ./
+
     - name: Install dependencies
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: pipenv install --dev

@@ -35,6 +35,6 @@ jobs:
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: pipenv install --dev
     - name: Compile & install package
-      run: pipenv run python -m pip install build --user
+      run: pipenv run python -m pip install build
     - name: Test with pytest
       run: pipenv run pytest

@@ -1,45 +1,39 @@
 name: ⏳ Tests
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.12]
-        hdt-version: ['v1.3.3']
+        hdt-version: ["v1.3.3"]
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }} 🐍
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install pybind11 dependencies
-      run: sudo apt install -y python3-dev cmake
+      - uses: actions/checkout@v5
+      - name: Set up Python ${{ matrix.python-version }} 🐍
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pybind11 dependencies
+        run: sudo apt install -y python3-dev cmake
 
-    - name: Setup pipenv
-      uses: dschep/install-pipenv-action@v1
-    - name: Cache pipenv dependencies
-      uses: actions/cache@v4
-      id: cache-pipenv
-      with:
-        path: ~/.local/share/virtualenvs
-        key: ${{ runner.os }}-${{ matrix.python-version }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+      - name: Setup HDT ${{ matrix.hdt-version }}
+        uses: Callidon/setup-hdt-action@v1.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          hdt-tag: ${{ matrix.hdt-version }}
+          source-path: ./
 
-    - name: Setup HDT ${{ matrix.hdt-version }}
-      uses: Callidon/setup-hdt-action@v1.2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        hdt-tag: ${{ matrix.hdt-version }}
-        source-path: ./
-
-    - name: Install dependencies
-      if: steps.cache-pipenv.outputs.cache-hit != 'true'
-      run: pipenv install --dev
-    - name: Compile & install package
-      run: pipenv run python -m pip install build
-    - name: Test with pytest
-      run: pipenv run pytest
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - name: Build package
+        run: uv build
+      - name: Check that package is correctly built
+        run: uv run --with rdflib_hdt --no-project -- python -c "import rdflib_hdt"
+      - name: Test with pytest
+        run: uv run pytest

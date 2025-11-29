@@ -8,7 +8,7 @@ command -v curl >/dev/null 2>&1 || { echo >&2 "curl is required for the installa
 command -v unzip >/dev/null 2>&1 || { echo >&2 "unzip is required for the installation of rdflib_hdt! Aborting installation..."; exit 1; }
 
 echo "Installing dependencies..."
-pipenv install
+uv sync --locked
 
 echo "Installing pyHDT..."
-pipenv run python setup.py install
+uv run build

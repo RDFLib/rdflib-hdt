@@ -10,7 +10,7 @@ A Store back-end for [rdflib](https://github.com/RDFLib) to allow for reading an
 
 # Requirements
 
-* Python *version 3.6.4 or higher*
+* Python *version 3.11 or higher*
 * [pip](https://pip.pypa.io/en/stable/)
 * **gcc/clang** with **c++11 support**
 * **Python Development headers**
@@ -24,16 +24,14 @@ Installation using [pipenv](https://github.com/pypa/pipenv) or a [virtualenv](ht
 ## PyPi installation (recommended)
 
 ```bash
-# you can install using pip
+# you can install using pip, uv, or your favorite package manager
 pip install rdflib-hdt
-
-# or you can use pipenv
-pipenv install rdflib-hdt
+uv add rdflib-hdt
 ```
 
 ## Manual installation
 
-**Requirement:** [pipenv](https://github.com/pypa/pipenv) 
+**Requirement:** [uv](https://docs.astral.sh/uv/) 
 
 ```
 git clone https://github.com/Callidon/pyHDT

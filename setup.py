@@ -74,6 +74,11 @@ include_dirs = [
 # TODO add a check to use c++14 or c++17 if available
 extra_compile_args = ["-std=c++11"]
 
+# These flags are necessary to compile hdt-cpp 1.3.3 with GCC 13+. They can be
+# removed when a new version of hdt-cpp is released that lands this patch:
+# <https://github.com/rdfhdt/hdt-cpp/commit/eb613b68557d27c056bdc5e78318df6c7bd27f55>
+extra_compile_args += ["-include", "cstdint"]
+
 # build HDT extension
 hdt_extension = Extension("hdt",
                           sources=sources,

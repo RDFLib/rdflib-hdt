@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: pipenv install --dev
     - name: Compile & install package
-      run: pipenv run python setup.py install
+      run: pipenv run pip install .
     - name: Build documentation
       run: |
         cd docs && pipenv run make html

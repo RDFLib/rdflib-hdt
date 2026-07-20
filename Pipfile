@@ -4,11 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-pybind11 = "==2.2.4"
-rdflib = "==5.0.0"
+pybind11 = ">=2.2.4"
+rdflib = ">=5.0.0"
 
 [dev-packages]
-pytest = "==5.4.1"
+pytest = "*"
 flake8 = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
